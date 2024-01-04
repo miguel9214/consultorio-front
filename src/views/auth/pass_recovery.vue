@@ -5,8 +5,8 @@
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
-                            <h1 class="">Password Recovery</h1>
-                            <p class="signup-link">Enter your email and instructions will sent to you!</p>
+                            <h1 class="">Recuperar Contraseña</h1>
+                            <p class="signup-link">Ingresa tu correo electrónico y te enviaremos las instrucciones!</p>
                             <form class="text-start">
                                 <div class="form">
                                     <div id="email-field" class="field-wrapper input">
@@ -25,18 +25,18 @@
                                             <circle cx="12" cy="12" r="4"></circle>
                                             <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
                                         </svg>
-                                        <input type="email" class="form-control" placeholder="Email" />
+                                        <input type="email" class="form-control" placeholder="Correo" />
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper">
-                                            <button type="submit" class="btn btn-primary">Reset</button>
+                                            <button type="submit" class="btn btn-primary">Reiniciar</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                             <p class="terms-conditions">
-                                © 2020 All Rights Reserved. <router-link to="/">CORK</router-link> is a product of Arrangic Solutions LLP. <a href="javascript:void(0);">Cookie Preferences</a>, <a href="javascript:void(0);">Privacy</a>, and
-                                <a href="javascript:void(0);">Terms</a>.
+                                © 2024 Todos los derechos reservados. <router-link to="/">CORK</router-link> es un producto de Arrangic Solutions LLP. <a href="javascript:void(0);">Preferencias de cookies</a>, <a href="javascript:void(0);">Privacidad</a>, y
+                                <a href="javascript:void(0);">Terminos</a>.
                             </p>
                         </div>
                     </div>
