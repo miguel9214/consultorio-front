@@ -31,13 +31,17 @@
                                                     <line x1="9" y1="2" x2="9" y2="22"></line>
                                                     <line x1="15" y1="2" x2="15" y2="22"></line>
                                                 </svg>
-                                            
-                                                <select class="form-control">
-                                                    <option value="TI">TI</option>
-                                                    <option value="CC">CC</option>
-                                                    <option value="RC">RC</option>
-                                                    <option value="EX">EX</option>
-                                                </select>
+                                                <div style="margin-top: 1px">
+                                                    <select class="form-control form-control-sm p-2 border-0" style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 9px 16px 15px 16px;">
+                                                        <option style="margin: 1px" value="RC" disabled selected>Tipo de Documento</option>
+                                                        <option value="RC">RC</option>
+                                                        <option value="TI">TI</option>
+                                                        <option value="CC">CC</option>
+                                                        <option value="EX">EX</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <hr class="m-0 border-top-0" style="border: 0.8px solid #bfc9d4; height: 0.8px;">
                                             </div>                                            
                                             <!-- Nombre -->
                                             <div id="username-field" class="field-wrapper input">
@@ -208,7 +212,15 @@
                                                     <line x1="12" y1="2" x2="12" y2="22"></line>
                                                     <line x1="2" y1="12" x2="22" y2="12"></line>
                                                 </svg>
-                                                <input type="text" class="form-control" placeholder="Género" />
+                                                <div style="margin-top: 1px">
+                                                    <select class="form-control form-control-sm p-2 border-0" style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 9px 16px 15px 16px;">
+                                                        <option style="margin: 1px" value="RC" disabled selected>Genero</option>
+                                                        <option value="1">Masculino</option>
+                                                        <option value="2">Femenino</option>
+                                                    </select>
+                                                </div>
+                                                <hr class="m-0 border-top-0" style="border: 0.8px solid #bfc9d4; height: 0.8px;">
+
                                             </div>
                                             <!-- Correo -->
                                             <div id="email-field" class="field-wrapper input">
