@@ -32,7 +32,7 @@
                                                     <line x1="15" y1="2" x2="15" y2="22"></line>
                                                 </svg>
                                                 <div style="margin-top: 1px">
-                                                    <select class="form-control form-control-sm border-0 pt-0" style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px;">
+                                                    <select class="form-control form-control-sm border-0 pt-0" style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 8px;">
                                                         <option style="margin: 1px" value="RC" disabled selected>Tipo de Documento</option>
                                                         <option value="RC">RC</option>
                                                         <option value="TI">TI</option>
