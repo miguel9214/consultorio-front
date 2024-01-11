@@ -148,7 +148,7 @@
                                                     <rect x="3" y="6" width="18" height="14"></rect>
                                                     <path d="M9 6v8m0-8l6 4.5M3 6l6 4.5"></path>
                                                 </svg>
-                                                <input v-model="formData.address" type="text" class="form-control" placeholder="Dirección" tabindex="9" />
+                                                <input v-model="formData.address" type="text" class="form-control" placeholder="Dirección" tabindex="11" />
                                             </div>
                                             <!-- Tipo de Afiliacion -->
                                             <div id="affiliation-type-field" class="field-wrapper input">
@@ -174,7 +174,7 @@
                                                         v-model="formData.affilliate_type"
                                                         class="form-control form-control-sm p-2 border-0 pt-0"
                                                         style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                                        tabindex="11"
+                                                        tabindex="13"
                                                     >
                                                         <option style="margin: 1px" value="" disabled selected>Tipo de Afiliación</option>
                                                         <option value="1">Contributivo</option>
@@ -200,7 +200,7 @@
                                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password" type="password" class="form-control" placeholder="Contraseña" tabindex="13" />
+                                                <input v-model="formData.password" type="password" class="form-control" placeholder="Contraseña" tabindex="15" />
                                             </div>
                                         </div>
                                     </form>
@@ -340,7 +340,7 @@
                                                     <rect x="3" y="6" width="18" height="14"></rect>
                                                     <path d="M9 6v8m0-8l6 4.5M3 6l6 4.5"></path>
                                                 </svg>
-                                                <input v-model="formData.neighborhood" type="text" class="form-control" placeholder="Barrio" tabindex="9" />
+                                                <input v-model="formData.neighborhood" type="text" class="form-control" placeholder="Barrio" tabindex="12" />
                                             </div>
                                             <!-- EPS -->
                                             <div id="gender-field" class="field-wrapper input">
@@ -365,7 +365,7 @@
                                                         v-model="formData.eps_id"
                                                         class="form-control form-control-sm p-2 border-0 pt-0"
                                                         style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                                        tabindex="12"
+                                                        tabindex="14"
                                                     >
                                                         <option style="margin: 1px" value="" disabled selected>EPS</option>
                                                         <option value="1">EPS Sanitas</option>
@@ -393,7 +393,7 @@
                                                     <circle cx="9" cy="8" r="4"></circle>
                                                     <path d="M17 11V7a5 5 0 0 0-10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password_confirmed" type="password" class="form-control" placeholder="Confirmar Contraseña" tabindex="14" />
+                                                <input v-model="formData.password_confirmed" type="password" class="form-control" placeholder="Confirmar Contraseña" tabindex="16" />
                                             </div>
                                         </div>
                                     </form>
@@ -401,7 +401,7 @@
                             </div>
                             <div class="field-wrapper terms_condition">
                                 <div class="checkbox-outline-primary custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" value="true" id="chkTerms" tabindex="15" />
+                                    <input type="checkbox" class="custom-control-input" value="true" id="chkTerms" tabindex="16" />
                                     <label class="custom-control-label" for="chkTerms">Estoy de acuerdo con los <a href="javascript:void(0);"> terminos y condiciones </a></label>
                                 </div>
                             </div>
@@ -461,6 +461,16 @@
     });
 
     const registerUser = async () => {
+
+        if (!formData.value.type_document || !formData.value.document || !formData.value.first_name
+            || !formData.value.last_name || !formData.value.sex || !formData.value.phone
+            || !formData.value.birthdate || !formData.value.address || !formData.value.city
+            || !formData.value.state || !formData.value.neighborhood || !formData.value.email
+            || !formData.value.password || !formData.value.password_confirmed || !formData.value.affilliate_type || !formData.value.eps_id ) {
+            alert('Por favor, llene todos los campos son obligatorios.');
+            return;
+        }
+
         try {
             const response = await axios.post('http://consultorio.test/api/register', formData.value);
 
@@ -471,6 +481,8 @@
             }
         } catch (error) {
             console.error('Error de red', error);
-        }
+        }        
+
     };
+
 </script>
