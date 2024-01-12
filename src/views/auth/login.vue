@@ -18,7 +18,7 @@
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
-                                        <input v-model="formData.email" type="text" class="form-control"
+                                        <input v-model="formData.email" type="email" class="form-control"
                                             placeholder="Correo" />
                                     </div>
 
@@ -106,15 +106,21 @@ const loginUser = async (event) => {
     }
 
     try {
-        const response = axios.post('http://consultorio.test/api/login', formData.value);
+        const response = await axios.post('http://consultorio.test/api/login', formData.value);
+        Swal.fire({
+            title: response.data.message,
+            icon: 'success',
+            confirmButtonText: '¡Entendido!'
+        });
 
-        if (response.status === 200) {
-            console.log('Incio con éxito');
-        } else {
-            console.error('Error al iniciar sesion');
-        }
+        // se debe redirigir
     } catch (error) {
-        console.error('Error de red', error);
+        Swal.fire({
+            title: 'Error!',
+            text: error.response.data.message,
+            icon: 'error',
+            confirmButtonText: '¡Entendido!'
+        });
     }
 
 };

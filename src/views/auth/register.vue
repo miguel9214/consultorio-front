@@ -38,6 +38,12 @@
 
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
+                                                    
+                                                    <template v-if="errors.type_document.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.type_document" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Nombre -->
                                             <div id="username-field" class="field-wrapper input">
@@ -50,6 +56,12 @@
                                                 </svg>
                                                 <input v-model="formData.first_name" type="text" class="form-control"
                                                     placeholder="Nombre(s)" tabindex="3" />
+                                                                                                        
+                                                    <template v-if="errors.first_name.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.first_name" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Telefono -->
                                             <div id="username-field" class="field-wrapper input">
@@ -62,8 +74,14 @@
                                                         d="M22 6.6c0-1.07-.18-2.12-.47-3.13a1 1 0 0 0-1.62-.67c-2.6 2.25-5.61 3.41-8.72 3.52-1.11.04-2.18-.17-3.14-.56-.41-.17-.85-.32-1.29-.45a1 1 0 0 0-1.25.63l-1.85 5.55a1 1 0 0 0 .64 1.25c.18.07.36.1.54.1.41 0 .81-.16 1.11-.45.06-.05.12-.11.17-.17 1.67-1.67 3.65-2.92 5.8-3.67a1 1 0 0 0 .63-1.25l-1.89-5.66a1 1 0 0 0-1.25-.63c-.41.17-.85.32-1.29.45-1.05.42-2.14.6-3.23.56C4.89 4.88 2 7.87 2 11.4c0 3.5 2.89 6.5 6.5 6.5 3.44 0 6.31-2.73 6.48-6.13a13.77 13.77 0 0 0 1.97.14c.74 0 1.47-.07 2.2-.2a1 1 0 0 0 .93-1.05V7.62a1 1 0 0 0-.47-.84z">
                                                     </path>
                                                 </svg>
-                                                <input v-model="formData.phone" type="text" class="form-control"
+                                                <input v-model="formData.phone" type="number" class="form-control"
                                                     placeholder="Teléfono" tabindex="5" />
+
+                                                    <template v-if="errors.phone.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Fecha de Nacimiento -->
                                             <div id="username-field" class="field-wrapper input">
@@ -79,8 +97,14 @@
                                                     <line x1="16" y1="2" x2="16" y2="6"></line>
                                                     <circle cx="12" cy="15" r="2"></circle>
                                                 </svg>
-                                                <input v-model="formData.birthdate" type="text" class="form-control"
+                                                <input v-model="formData.birthdate" type="date" class="form-control"
                                                     placeholder="Fecha de Nacimiento" tabindex="7" />
+
+                                                    <template v-if="errors.birthdate.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.birthdate" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Ciudad -->
                                             <div id="city-field" class="field-wrapper input">
@@ -94,6 +118,12 @@
                                                 </svg>
                                                 <input v-model="formData.city" type="text" class="form-control"
                                                     placeholder="Ciudad" tabindex="9" />
+
+                                                    <template v-if="errors.city.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.city" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Direccion -->
                                             <div id="city-field" class="field-wrapper input">
@@ -107,6 +137,12 @@
                                                 </svg>
                                                 <input v-model="formData.address" type="text" class="form-control"
                                                     placeholder="Dirección" tabindex="11" />
+                                                    
+                                                    <template v-if="errors.address.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.address" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Tipo de Afiliacion -->
                                             <div id="affiliation-type-field" class="field-wrapper input">
@@ -132,6 +168,12 @@
                                                 </div>
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
+
+                                                    <template v-if="errors.affilliate_type.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.affilliate_type" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Contraseña -->
                                             <div id="password-field" class="field-wrapper input mb-2">
@@ -144,6 +186,12 @@
                                                 </svg>
                                                 <input v-model="formData.password" type="password" class="form-control"
                                                     placeholder="Contraseña" tabindex="15" />
+                                                    
+                                                    <template v-if="errors.password.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.password" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                         </div>
                                     </form>
@@ -164,8 +212,14 @@
                                                     <line x1="6" y1="15" x2="18" y2="15"></line>
                                                     <line x1="6" y1="18" x2="18" y2="18"></line>
                                                 </svg>
-                                                <input v-model="formData.document" type="text" class="form-control"
+                                                <input v-model="formData.document" type="number" class="form-control"
                                                     placeholder="Documento" tabindex="2" />
+
+                                                    <template v-if="errors.document.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.document" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Apellidos -->
                                             <div id="username-field" class="field-wrapper input">
@@ -178,6 +232,12 @@
                                                 </svg>
                                                 <input v-model="formData.last_name" type="text" class="form-control"
                                                     placeholder="Apellido(s)" tabindex="4" />
+
+                                                    <template v-if="errors.last_name.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.last_name" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Sexo -->
                                             <div id="gender-field" class="field-wrapper input">
@@ -203,6 +263,12 @@
                                                 </div>
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
+
+                                                    <template v-if="errors.sex.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.sex" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Correo -->
                                             <div id="email-field" class="field-wrapper input">
@@ -215,6 +281,12 @@
                                                 </svg>
                                                 <input v-model="formData.email" type="email" class="form-control"
                                                     placeholder="Correo" tabindex="8" />
+
+                                                    <template v-if="errors.email.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.email" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Departamento -->
                                             <div id="region-field" class="field-wrapper input">
@@ -230,6 +302,13 @@
                                                 </svg>
                                                 <input v-model="formData.state" type="text" class="form-control"
                                                     placeholder="Región" tabindex="10" />
+
+                                                    
+                                                    <template v-if="errors.state.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.state" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Barrio -->
                                             <div id="city-field" class="field-wrapper input">
@@ -243,6 +322,12 @@
                                                 </svg>
                                                 <input v-model="formData.neighborhood" type="text" class="form-control"
                                                     placeholder="Barrio" tabindex="12" />
+
+                                                    <template v-if="errors.neighborhood.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- EPS -->
                                             <div id="gender-field" class="field-wrapper input">
@@ -267,6 +352,12 @@
                                                 </div>
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
+                                                    
+                                                    <template v-if="errors.eps_id.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.eps_id" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                             <!-- Confirmar Contraseña -->
                                             <div id="confirm-password-field" class="field-wrapper input">
@@ -281,6 +372,12 @@
                                                 </svg>
                                                 <input v-model="formData.password_confirmed" type="password"
                                                     class="form-control" placeholder="Confirmar Contraseña" tabindex="16" />
+
+                                                    <template v-if="errors.password_confirmed.length> 0 " >
+                                                        <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
+                                                            {{ e }}
+                                                        </b>
+                                                    </template>
                                             </div>
                                         </div>
                                     </form>
@@ -353,34 +450,84 @@ const formData = ref({
     eps_id: 1,
 });
 
-const registerUser = async () => {
+const errors = ref({
+        type_document: [ ],
+        document: [ ],
+        first_name: [ ],
+        last_name: [ ],
+        sex: [ ],
+        phone: [ ],
+        birthdate: [ ],
+        address: [ ],
+        city: [ ],
+        state: [ ],
+        neighborhood: [ ],
+        email: [ ],
+        password: [ ],
+        password_confirmed: [ ],
+        affilliate_type: [ ],
+        eps_id: [ ],
+    });
 
-    if (!formData.value.type_document || !formData.value.document || !formData.value.first_name
-        || !formData.value.last_name || !formData.value.sex || !formData.value.phone
-        || !formData.value.birthdate || !formData.value.address || !formData.value.city
-        || !formData.value.state || !formData.value.neighborhood || !formData.value.email
-        || !formData.value.password || !formData.value.password_confirmed || !formData.value.affilliate_type || !formData.value.eps_id) {
-            Swal.fire({
-        title: 'Error!',
-        text: 'Debe llenar todos los campos',
-        icon: 'error',
-        confirmButtonText: '¡Entendido!'
-      });
-        return;
-    }
+const registerUser = async () => {
+    errorsClear()
+
+    let has_error = false;
+    Object.entries(formData.value).forEach(f => {
+        const elemento = f[0]
+        const value =f[1]
+        if(value==""){
+            has_error = true
+            errors.value[elemento] = "Este campo es obligatorio"
+        }
+    });
+
+    if(has_error) return;
 
     try {
         const response = await axios.post('http://consultorio.test/api/register', formData.value);
 
-        if (response.status === 200) {
-            console.log('Usuario registrado con éxito');
-        } else {
-            console.error('Error al registrar usuario');
-        }
-    } catch (error) {
-        console.error('Error de red', error);
-    }
+            Swal.fire({
+                title: 'Éxito!',
+                text: 'Usuario registrado correctamente!',
+                icon: 'success',
+                confirmButtonText: '¡Entendido!'
+            });
 
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.errors) {
+            const errors_api = error.response.data.errors;
+            Object.entries(errors_api).forEach(e => {
+                const elemento = e[0]
+                const mensaje =e[1]
+                errors.value[elemento] = mensaje
+            });
+        }else {
+            alert("server error")
+        }
+    }
 };
+
+
+const errorsClear = () =>{
+    errors.value = {
+        type_document: [ ],
+        document: [ ],
+        first_name: [ ],
+        last_name: [ ],
+        sex: [ ],
+        phone: [ ],
+        birthdate: [ ],
+        address: [ ],
+        city: [ ],
+        state: [ ],
+        neighborhood: [ ],
+        email: [ ],
+        password: [ ],
+        password_confirmed: [ ],
+        affilliate_type: [ ],
+        eps_id: [ ],
+    }
+}
 
 </script>
