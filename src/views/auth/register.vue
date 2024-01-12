@@ -425,7 +425,9 @@
 import '/src/assets/sass/authentication/auth.scss';
 
 import { useMeta } from '/src/composables/use-meta';
+import {useRouter} from 'vue-router';
 useMeta({ title: 'Register Cover' });
+const router = useRouter();
 
 import { ref, onBeforeMount } from 'vue';
 import axios from 'axios';
@@ -493,6 +495,9 @@ const registerUser = async () => {
                 icon: 'success',
                 confirmButtonText: '¡Entendido!'
             });
+
+            // window.location.href = '/login'
+            router.push({name: 'login'})
 
     } catch (error) {
         if (error.response && error.response.data && error.response.data.errors) {
