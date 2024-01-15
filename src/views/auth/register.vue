@@ -38,12 +38,12 @@
 
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
-                                                    
-                                                    <template v-if="errors.type_document.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.type_document" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+
+                                                <template v-if="errors.type_document.length > 0">
+                                                    <b :key="e" v-for="e in errors.type_document" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Nombre -->
                                             <div id="username-field" class="field-wrapper input">
@@ -56,12 +56,12 @@
                                                 </svg>
                                                 <input v-model="formData.first_name" type="text" class="form-control"
                                                     placeholder="Nombre(s)" tabindex="3" />
-                                                                                                        
-                                                    <template v-if="errors.first_name.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.first_name" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+
+                                                <template v-if="errors.first_name.length > 0">
+                                                    <b :key="e" v-for="e in errors.first_name" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Telefono -->
                                             <div id="username-field" class="field-wrapper input">
@@ -77,11 +77,11 @@
                                                 <input v-model="formData.phone" type="number" class="form-control"
                                                     placeholder="Teléfono" tabindex="5" />
 
-                                                    <template v-if="errors.phone.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.phone" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.phone.length > 0">
+                                                    <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Fecha de Nacimiento -->
                                             <div id="username-field" class="field-wrapper input">
@@ -100,11 +100,11 @@
                                                 <input v-model="formData.birthdate" type="date" class="form-control"
                                                     placeholder="Fecha de Nacimiento" tabindex="7" />
 
-                                                    <template v-if="errors.birthdate.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.birthdate" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.birthdate.length > 0">
+                                                    <b :key="e" v-for="e in errors.birthdate" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Ciudad -->
                                             <div id="city-field" class="field-wrapper input">
@@ -119,11 +119,11 @@
                                                 <input v-model="formData.city" type="text" class="form-control"
                                                     placeholder="Ciudad" tabindex="9" />
 
-                                                    <template v-if="errors.city.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.city" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.city.length > 0">
+                                                    <b :key="e" v-for="e in errors.city" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Direccion -->
                                             <div id="city-field" class="field-wrapper input">
@@ -137,12 +137,12 @@
                                                 </svg>
                                                 <input v-model="formData.address" type="text" class="form-control"
                                                     placeholder="Dirección" tabindex="11" />
-                                                    
-                                                    <template v-if="errors.address.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.address" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+
+                                                <template v-if="errors.address.length > 0">
+                                                    <b :key="e" v-for="e in errors.address" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Tipo de Afiliacion -->
                                             <div id="affiliation-type-field" class="field-wrapper input">
@@ -169,11 +169,11 @@
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
 
-                                                    <template v-if="errors.affilliate_type.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.affilliate_type" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.affilliate_type.length > 0">
+                                                    <b :key="e" v-for="e in errors.affilliate_type" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Contraseña -->
                                             <div id="password-field" class="field-wrapper input mb-2">
@@ -186,12 +186,12 @@
                                                 </svg>
                                                 <input v-model="formData.password" type="password" class="form-control"
                                                     placeholder="Contraseña" tabindex="15" />
-                                                    
-                                                    <template v-if="errors.password.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.password" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+
+                                                <template v-if="errors.password.length > 0">
+                                                    <b :key="e" v-for="e in errors.password" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                         </div>
                                     </form>
@@ -215,11 +215,11 @@
                                                 <input v-model="formData.document" type="number" class="form-control"
                                                     placeholder="Documento" tabindex="2" />
 
-                                                    <template v-if="errors.document.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.document" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.document.length > 0">
+                                                    <b :key="e" v-for="e in errors.document" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Apellidos -->
                                             <div id="username-field" class="field-wrapper input">
@@ -233,11 +233,11 @@
                                                 <input v-model="formData.last_name" type="text" class="form-control"
                                                     placeholder="Apellido(s)" tabindex="4" />
 
-                                                    <template v-if="errors.last_name.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.last_name" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.last_name.length > 0">
+                                                    <b :key="e" v-for="e in errors.last_name" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Sexo -->
                                             <div id="gender-field" class="field-wrapper input">
@@ -264,11 +264,11 @@
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
 
-                                                    <template v-if="errors.sex.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.sex" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.sex.length > 0">
+                                                    <b :key="e" v-for="e in errors.sex" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Correo -->
                                             <div id="email-field" class="field-wrapper input">
@@ -282,11 +282,11 @@
                                                 <input v-model="formData.email" type="email" class="form-control"
                                                     placeholder="Correo" tabindex="8" />
 
-                                                    <template v-if="errors.email.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.email" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.email.length > 0">
+                                                    <b :key="e" v-for="e in errors.email" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Departamento -->
                                             <div id="region-field" class="field-wrapper input">
@@ -303,12 +303,11 @@
                                                 <input v-model="formData.state" type="text" class="form-control"
                                                     placeholder="Región" tabindex="10" />
 
-                                                    
-                                                    <template v-if="errors.state.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.state" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.state.length > 0">
+                                                    <b :key="e" v-for="e in errors.state" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Barrio -->
                                             <div id="city-field" class="field-wrapper input">
@@ -323,11 +322,11 @@
                                                 <input v-model="formData.neighborhood" type="text" class="form-control"
                                                     placeholder="Barrio" tabindex="12" />
 
-                                                    <template v-if="errors.neighborhood.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.neighborhood.length > 0">
+                                                    <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- EPS -->
                                             <div id="gender-field" class="field-wrapper input">
@@ -347,17 +346,16 @@
                                                         tabindex="14">
                                                         <option style="margin: 1px" value="" disabled selected>EPS</option>
                                                         <option value="1">EPS Sanitas</option>
-                                                        <option value="2">Nueva EPS</option>
                                                     </select>
                                                 </div>
                                                 <hr class="m-0 border-top-0"
                                                     style="border: 0.8px solid #bfc9d4; height: 0.8px" />
-                                                    
-                                                    <template v-if="errors.eps_id.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.eps_id" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+
+                                                <template v-if="errors.eps_id.length > 0">
+                                                    <b :key="e" v-for="e in errors.eps_id" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                             <!-- Confirmar Contraseña -->
                                             <div id="confirm-password-field" class="field-wrapper input">
@@ -373,22 +371,132 @@
                                                 <input v-model="formData.password_confirmed" type="password"
                                                     class="form-control" placeholder="Confirmar Contraseña" tabindex="16" />
 
-                                                    <template v-if="errors.password_confirmed.length> 0 " >
-                                                        <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
-                                                            {{ e }}
-                                                        </b>
-                                                    </template>
+                                                <template v-if="errors.password_confirmed.length > 0">
+                                                    <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
+                                                        {{ e }}
+                                                    </b>
+                                                </template>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="field-wrapper terms_condition">
-                                <div class="checkbox-outline-primary custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" value="true" id="chkTerms"
-                                        tabindex="16" />
-                                    <label class="custom-control-label" for="chkTerms">Estoy de acuerdo con los <a
-                                            href="javascript:void(0);"> terminos y condiciones </a></label>
+                            <div>
+                                <!-- Otros elementos de tu componente Vue aquí -->
+                                <div class="field-wrapper terms_condition">
+                                    <div class="checkbox-outline-primary custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" value="" id="chkTerms"
+                                            v-model="formData.termsAccepted" required tabindex="16" />
+                                        <label class="custom-control-label" for="chkTerms">
+                                            Estoy de acuerdo con los <a href="#" @click="openTermsModal()" class="fw-bold"
+                                                style="color: #0d6efd;">términos y
+                                                condiciones</a>
+                                        </label>
+                                        <div>
+                                            <span v-if="errors.termsAccepted" class="text-danger fw-bold">{{
+                                                errors.termsAccepted }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal de Términos y Condiciones -->
+                                <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="font-monospace">
+                                                    <p class="fw-bold">Términos y Condiciones del Consultorio Médico</p>
+
+                                                    <p>
+                                                        Bienvenido a nuestro consultorio médico. Antes de utilizar nuestros
+                                                        servicios, te pedimos que leas detenidamente estos términos y
+                                                        condiciones.
+                                                    </p>
+
+                                                    <p class="fw-bold">1. Aceptación de los Términos</p>
+
+                                                    <p>
+                                                        Al acceder y utilizar los servicios de nuestro consultorio médico,
+                                                        aceptas cumplir con estos términos y condiciones. Si no estás de acuerdo
+                                                        con alguno de estos términos, te instamos a que no utilices nuestros
+                                                        servicios.
+                                                    </p>
+
+                                                    <p class="fw-bold">2. Uso Responsable</p>
+
+                                                    <p>
+                                                        Debes utilizar nuestros servicios de manera responsable y ética. No se
+                                                        permite el uso indebido de la información proporcionada ni la violación
+                                                        de la privacidad de otros usuarios.
+                                                    </p>
+
+                                                    <p class="fw-bold">3. Citas y Cancelaciones</p>
+
+                                                    <p>
+                                                        Te comprometes a cumplir con las citas programadas y a notificar con
+                                                        anticipación si necesitas cancelar o reprogramar. Podrían aplicarse
+                                                        cargos por cancelaciones tardías o falta de asistencia.
+                                                    </p>
+
+                                                    <p class="fw-bold">4. Información del Paciente</p>
+
+                                                    <p>
+                                                        Toda la información proporcionada al consultorio, ya sea personal o
+                                                        médica, se manejará de acuerdo con nuestra política de privacidad. Nos
+                                                        comprometemos a proteger la confidencialidad de tus datos.
+                                                    </p>
+
+                                                    <p class="fw-bold">5. Pago de Servicios</p>
+
+                                                    <p>
+                                                        Los servicios prestados por el consultorio están sujetos a tarifas y
+                                                        pagos específicos. Asegúrate de comprender y aceptar las tarifas antes
+                                                        de recibir los servicios. Los pagos deben realizarse según las políticas
+                                                        establecidas.
+                                                    </p>
+
+                                                    <p class="fw-bold">6. Derechos de Propiedad Intelectual</p>
+
+                                                    <p>
+                                                        Todos los contenidos y materiales proporcionados por el consultorio,
+                                                        incluyendo pero no limitado a textos, imágenes y logotipos, son
+                                                        propiedad intelectual del consultorio y no pueden ser utilizados sin
+                                                        autorización.
+                                                    </p>
+
+                                                    <p class="fw-bold">7. Cambios en los Términos</p>
+
+                                                    <p>
+                                                        El consultorio se reserva el derecho de modificar estos términos y
+                                                        condiciones en cualquier momento. Las modificaciones entrarán en
+                                                        vigencia tan pronto como se publiquen en nuestro sitio web.
+                                                    </p>
+
+                                                    <p class="fw-bold">8. Jurisdicción y Ley Aplicable</p>
+
+                                                    <p>
+                                                        Estos términos y condiciones están sujetos a las leyes de [jurisdicción]
+                                                        y cualquier disputa se resolverá mediante arbitraje de conformidad con
+                                                        dichas leyes.
+                                                    </p>
+
+                                                    <p>
+                                                        Gracias por elegir nuestro consultorio médico. Si tienes alguna pregunta
+                                                        o inquietud, no dudes en contactarnos.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer mt-lg-2">
+                                                <button type="button" class="btn btn-primary"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-sm-flex justify-content-between">
@@ -407,8 +515,8 @@
                             <p class="terms-conditions">
                                 © 2024 Todos los derechos reservados. <router-link to="/">CORK</router-link> es un producto
                                 de Arrangic Solutions LLP.
-                                <a href="javascript:void(0);">Preferencias de cookies</a>, <a
-                                    href="javascript:void(0);">Privacidad</a>, y <a href="javascript:void(0);">Terminos</a>.
+                                <a href="javascript:void(0);">Preferencias de cookies</a>,
+                                <a href="javascript:void(0);">Privacidad</a>, y <a href="javascript:void(0);">Terminos</a>.
                             </p>
                         </div>
                     </div>
@@ -425,7 +533,7 @@
 import '/src/assets/sass/authentication/auth.scss';
 
 import { useMeta } from '/src/composables/use-meta';
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
 useMeta({ title: 'Register Cover' });
 const router = useRouter();
 
@@ -450,26 +558,28 @@ const formData = ref({
     password_confirmed: '',
     affilliate_type: '',
     eps_id: 1,
+    termsAccepted: '',
 });
 
 const errors = ref({
-        type_document: [ ],
-        document: [ ],
-        first_name: [ ],
-        last_name: [ ],
-        sex: [ ],
-        phone: [ ],
-        birthdate: [ ],
-        address: [ ],
-        city: [ ],
-        state: [ ],
-        neighborhood: [ ],
-        email: [ ],
-        password: [ ],
-        password_confirmed: [ ],
-        affilliate_type: [ ],
-        eps_id: [ ],
-    });
+    type_document: [],
+    document: [],
+    first_name: [],
+    last_name: [],
+    sex: [],
+    phone: [],
+    birthdate: [],
+    address: [],
+    city: [],
+    state: [],
+    neighborhood: [],
+    email: [],
+    password: [],
+    password_confirmed: [],
+    affilliate_type: [],
+    eps_id: [],
+    termsAccepted: '',
+});
 
 const registerUser = async () => {
     errorsClear()
@@ -477,62 +587,71 @@ const registerUser = async () => {
     let has_error = false;
     Object.entries(formData.value).forEach(f => {
         const elemento = f[0]
-        const value =f[1]
-        if(value==""){
+        const value = f[1]
+        if (value == "") {
             has_error = true
             errors.value[elemento] = "Este campo es obligatorio"
         }
     });
 
-    if(has_error) return;
+    if (has_error) return;
 
     try {
         const response = await axios.post('http://consultorio.test/api/register', formData.value);
 
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'Usuario registrado correctamente!',
-                icon: 'success',
-                confirmButtonText: '¡Entendido!'
-            });
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Usuario registrado correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!'
+        });
 
-            // window.location.href = '/login'
-            router.push({name: 'login'})
+        router.push({ name: 'login' })
 
     } catch (error) {
         if (error.response && error.response.data && error.response.data.errors) {
             const errors_api = error.response.data.errors;
             Object.entries(errors_api).forEach(e => {
                 const elemento = e[0]
-                const mensaje =e[1]
+                const mensaje = e[1]
                 errors.value[elemento] = mensaje
             });
-        }else {
+        } else {
             alert("server error")
         }
     }
 };
 
 
-const errorsClear = () =>{
+const errorsClear = () => {
     errors.value = {
-        type_document: [ ],
-        document: [ ],
-        first_name: [ ],
-        last_name: [ ],
-        sex: [ ],
-        phone: [ ],
-        birthdate: [ ],
-        address: [ ],
-        city: [ ],
-        state: [ ],
-        neighborhood: [ ],
-        email: [ ],
-        password: [ ],
-        password_confirmed: [ ],
-        affilliate_type: [ ],
-        eps_id: [ ],
+        type_document: [],
+        document: [],
+        first_name: [],
+        last_name: [],
+        sex: [],
+        phone: [],
+        birthdate: [],
+        address: [],
+        city: [],
+        state: [],
+        neighborhood: [],
+        email: [],
+        password: [],
+        password_confirmed: [],
+        affilliate_type: [],
+        eps_id: [],
+        termsAccepted: '',
     }
 }
+
+const openTermsModal = () => {
+    // Abre el modal usando Bootstrap
+    const modal = new bootstrap.Modal(document.getElementById('termsModal'), {
+        keyboard: false,
+        backdrop: 'static'
+    });
+    modal.show();
+};
 
 </script>
