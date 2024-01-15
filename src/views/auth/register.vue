@@ -184,7 +184,7 @@
                                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password" type="password" class="form-control"
+                                                <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" class="form-control"
                                                     placeholder="Contraseña" tabindex="15" />
 
                                                 <template v-if="errors.password.length > 0">
@@ -368,7 +368,7 @@
                                                     <circle cx="9" cy="8" r="4"></circle>
                                                     <path d="M17 11V7a5 5 0 0 0-10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password_confirmed" type="password"
+                                                <input v-model="formData.password_confirmed" :type="showPassword ? 'text' : 'password'"
                                                     class="form-control" placeholder="Confirmar Contraseña" tabindex="16" />
 
                                                 <template v-if="errors.password_confirmed.length > 0">
@@ -382,19 +382,16 @@
                                 </div>
                             </div>
                             <div>
-                                <!-- Otros elementos de tu componente Vue aquí -->
                                 <div class="field-wrapper terms_condition">
                                     <div class="checkbox-outline-primary custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" value="" id="chkTerms"
                                             v-model="formData.termsAccepted" required tabindex="16" />
                                         <label class="custom-control-label" for="chkTerms">
                                             Estoy de acuerdo con los <a href="#" @click="openTermsModal()" class="fw-bold"
-                                                style="color: #0d6efd;">términos y
-                                                condiciones</a>
+                                                style="color: #0d6efd;">términos y condiciones</a>
                                         </label>
                                         <div>
-                                            <span v-if="errors.termsAccepted" class="text-danger fw-bold">{{
-                                                errors.termsAccepted }}</span>
+                                            <span v-if="errors.termsAccepted" class="text-danger fw-bold">{{ errors.termsAccepted }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -503,7 +500,7 @@
                                 <div class="field-wrapper toggle-pass d-flex align-items-center">
                                     <p class="d-inline-block">Mostrar Contraseña</p>
                                     <label class="switch s-primary mx-2">
-                                        <input type="checkbox" class="custom-control-input" checked="" tabindex="16" />
+                                        <input type="checkbox" class="custom-control-input" v-model="showPassword" tabindex="16" />
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -540,6 +537,8 @@ const router = useRouter();
 import { ref, onBeforeMount } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+
+const showPassword = ref(false);
 
 const formData = ref({
     type_document: '',
