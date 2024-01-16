@@ -184,7 +184,8 @@
                                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" class="form-control"
+                                                <input v-model="formData.password"
+                                                    :type="showPassword ? 'text' : 'password'" class="form-control"
                                                     placeholder="Contraseña" tabindex="15" />
 
                                                 <template v-if="errors.password.length > 0">
@@ -345,7 +346,7 @@
                                                         style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
                                                         tabindex="14">
                                                         <option style="margin: 1px" value="" disabled selected>EPS</option>
-                                                        <option value="1">EPS Sanitas</option>
+                                                        <option :value="eps.id" :key="eps.id" v-for="eps in epsList">{{ eps.name }}</option>
                                                     </select>
                                                 </div>
                                                 <hr class="m-0 border-top-0"
@@ -368,8 +369,9 @@
                                                     <circle cx="9" cy="8" r="4"></circle>
                                                     <path d="M17 11V7a5 5 0 0 0-10 0v4"></path>
                                                 </svg>
-                                                <input v-model="formData.password_confirmed" :type="showPassword ? 'text' : 'password'"
-                                                    class="form-control" placeholder="Confirmar Contraseña" tabindex="16" />
+                                                <input v-model="formData.password_confirmed"
+                                                    :type="showPassword ? 'text' : 'password'" class="form-control"
+                                                    placeholder="Confirmar Contraseña" tabindex="16" />
 
                                                 <template v-if="errors.password_confirmed.length > 0">
                                                     <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
@@ -391,7 +393,8 @@
                                                 style="color: #0d6efd;">términos y condiciones</a>
                                         </label>
                                         <div>
-                                            <span v-if="errors.termsAccepted" class="text-danger fw-bold">{{ errors.termsAccepted }}</span>
+                                            <span v-if="errors.termsAccepted" class="text-danger fw-bold">{{
+                                                errors.termsAccepted }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -419,7 +422,8 @@
 
                                                     <p>
                                                         Al acceder y utilizar los servicios de nuestro consultorio médico,
-                                                        aceptas cumplir con estos términos y condiciones. Si no estás de acuerdo
+                                                        aceptas cumplir con estos términos y condiciones. Si no estás de
+                                                        acuerdo
                                                         con alguno de estos términos, te instamos a que no utilices nuestros
                                                         servicios.
                                                     </p>
@@ -427,8 +431,10 @@
                                                     <p class="fw-bold">2. Uso Responsable</p>
 
                                                     <p>
-                                                        Debes utilizar nuestros servicios de manera responsable y ética. No se
-                                                        permite el uso indebido de la información proporcionada ni la violación
+                                                        Debes utilizar nuestros servicios de manera responsable y ética. No
+                                                        se
+                                                        permite el uso indebido de la información proporcionada ni la
+                                                        violación
                                                         de la privacidad de otros usuarios.
                                                     </p>
 
@@ -444,7 +450,8 @@
 
                                                     <p>
                                                         Toda la información proporcionada al consultorio, ya sea personal o
-                                                        médica, se manejará de acuerdo con nuestra política de privacidad. Nos
+                                                        médica, se manejará de acuerdo con nuestra política de privacidad.
+                                                        Nos
                                                         comprometemos a proteger la confidencialidad de tus datos.
                                                     </p>
 
@@ -452,8 +459,10 @@
 
                                                     <p>
                                                         Los servicios prestados por el consultorio están sujetos a tarifas y
-                                                        pagos específicos. Asegúrate de comprender y aceptar las tarifas antes
-                                                        de recibir los servicios. Los pagos deben realizarse según las políticas
+                                                        pagos específicos. Asegúrate de comprender y aceptar las tarifas
+                                                        antes
+                                                        de recibir los servicios. Los pagos deben realizarse según las
+                                                        políticas
                                                         establecidas.
                                                     </p>
 
@@ -477,13 +486,16 @@
                                                     <p class="fw-bold">8. Jurisdicción y Ley Aplicable</p>
 
                                                     <p>
-                                                        Estos términos y condiciones están sujetos a las leyes de [jurisdicción]
-                                                        y cualquier disputa se resolverá mediante arbitraje de conformidad con
+                                                        Estos términos y condiciones están sujetos a las leyes de
+                                                        [jurisdicción]
+                                                        y cualquier disputa se resolverá mediante arbitraje de conformidad
+                                                        con
                                                         dichas leyes.
                                                     </p>
 
                                                     <p>
-                                                        Gracias por elegir nuestro consultorio médico. Si tienes alguna pregunta
+                                                        Gracias por elegir nuestro consultorio médico. Si tienes alguna
+                                                        pregunta
                                                         o inquietud, no dudes en contactarnos.
                                                     </p>
                                                 </div>
@@ -500,7 +512,8 @@
                                 <div class="field-wrapper toggle-pass d-flex align-items-center">
                                     <p class="d-inline-block">Mostrar Contraseña</p>
                                     <label class="switch s-primary mx-2">
-                                        <input type="checkbox" class="custom-control-input" v-model="showPassword" tabindex="16" />
+                                        <input type="checkbox" class="custom-control-input" v-model="showPassword"
+                                            tabindex="16" />
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -538,6 +551,10 @@ import { ref, onBeforeMount } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+onBeforeMount(() => {
+    showEPS();
+});
+
 const showPassword = ref(false);
 
 const formData = ref({
@@ -556,7 +573,7 @@ const formData = ref({
     password: '',
     password_confirmed: '',
     affilliate_type: '',
-    eps_id: 1,
+    eps_id: '',
     termsAccepted: '',
 });
 
@@ -579,6 +596,39 @@ const errors = ref({
     eps_id: [],
     termsAccepted: '',
 });
+
+const epsList = ref([]);
+
+const errorsClear = () => {
+    errors.value = {
+        type_document: [],
+        document: [],
+        first_name: [],
+        last_name: [],
+        sex: [],
+        phone: [],
+        birthdate: [],
+        address: [],
+        city: [],
+        state: [],
+        neighborhood: [],
+        email: [],
+        password: [],
+        password_confirmed: [],
+        affilliate_type: [],
+        eps_id: [],
+        termsAccepted: '',
+    }
+}
+
+const openTermsModal = () => {
+    // Abre el modal usando Bootstrap
+    const modal = new bootstrap.Modal(document.getElementById('termsModal'), {
+        keyboard: false,
+        backdrop: 'static'
+    });
+    modal.show();
+};
 
 const registerUser = async () => {
     errorsClear()
@@ -621,36 +671,14 @@ const registerUser = async () => {
     }
 };
 
-
-const errorsClear = () => {
-    errors.value = {
-        type_document: [],
-        document: [],
-        first_name: [],
-        last_name: [],
-        sex: [],
-        phone: [],
-        birthdate: [],
-        address: [],
-        city: [],
-        state: [],
-        neighborhood: [],
-        email: [],
-        password: [],
-        password_confirmed: [],
-        affilliate_type: [],
-        eps_id: [],
-        termsAccepted: '',
+const showEPS = async () => {
+    try {
+        const response = await axios.get('http://consultorio.test/api/epsPublic');
+        epsList.value = response.data.data;
+    } catch (error) {
+        console.error('Error al obtener las EPS', error);
     }
-}
-
-const openTermsModal = () => {
-    // Abre el modal usando Bootstrap
-    const modal = new bootstrap.Modal(document.getElementById('termsModal'), {
-        keyboard: false,
-        backdrop: 'static'
-    });
-    modal.show();
 };
+
 
 </script>
