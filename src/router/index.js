@@ -18,6 +18,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "index2" */ '../views/index2.vue'),
     },
 
+    //eps
+    {
+        path: '/eps',
+        name: 'eps',
+        component: () => import(/* webpackChunkName: "eps" */ '../views/eps.vue'),
+    },
+
     //components
     {
         path: '/components/tabs',

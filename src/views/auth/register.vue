@@ -384,6 +384,7 @@
                                 </div>
                             </div>
                             <div>
+                                <!-- Terminos y Condiciones -->
                                 <div class="field-wrapper terms_condition">
                                     <div class="checkbox-outline-primary custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" value="" id="chkTerms"
@@ -508,6 +509,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Mostrar Contraseña -->
                             <div class="d-sm-flex justify-content-between">
                                 <div class="field-wrapper toggle-pass d-flex align-items-center">
                                     <p class="d-inline-block">Mostrar Contraseña</p>
