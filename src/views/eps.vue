@@ -12,6 +12,7 @@
                             <template #actions="data">
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3"
+                                    data-bs-toggle="modal" data-bs-target="#modalEditarEPS"
                                         @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger"
                                         @click="deleteUser(data.value)">Eliminar</button>
@@ -24,13 +25,13 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modallg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal fade" id="modallg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Crear EPS</h5>
                     <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"
-                        class="btn-close"></button>
+                        class="btn-close" @click="resetFormData"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -61,8 +62,10 @@
                                     </div>
                                     <!-- Fecha de Inicial Contrato -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial Contrato</label>
-                                        <input v-model="formData.contract_start_date" type="date" class="form-control" tabindex="5" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
+                                            Contrato</label>
+                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
+                                            tabindex="5" />
 
                                         <template v-if="errors.contract_start_date.length > 0">
                                             <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
@@ -100,8 +103,10 @@
                                     </div>
                                     <!-- Fecha de Final Contrato -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final Contrato</label>
-                                        <input v-model="formData.contract_end_date" type="date" class="form-control" tabindex="6" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
+                                            Contrato</label>
+                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
+                                            tabindex="6" />
 
                                         <template v-if="errors.contract_end_date.length > 0">
                                             <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
@@ -115,15 +120,122 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:void(0)" data-bs-dismiss="modal">                       
-                        <button type="button" class="btn btn-danger" >
-                            Descartar</button>
+                    <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" @click="resetFormData">
+                            Descartar
+                        </button>
                     </a>
                     <button type="button" class="btn btn-success" @click="CreateEPS">Crear</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalEditarEPS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar EPS</h5>
+                <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"
+                    class="btn-close" @click="resetFormData"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="text-start">
+                            <div class="form">
+                                <!-- Nombre EPS -->
+                                <div id="username-field" class="field-wrapper input">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre EPS</label>
+                                    <input v-model="formData.name" type="text" class="form-control" tabindex="1" />
+
+                                    <template v-if="errors.name.length > 0">
+                                        <b :key="e" v-for="e in errors.name" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                                <!-- Telefono -->
+                                <div id="username-field" class="field-wrapper input mt-2">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
+                                    <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+
+                                    <template v-if="errors.phone.length > 0">
+                                        <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                                <!-- Fecha de Inicial Contrato -->
+                                <div id="username-field" class="field-wrapper input mt-2">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
+                                        Contrato</label>
+                                    <input v-model="formData.contract_start_date" type="date" class="form-control"
+                                        tabindex="5" />
+
+                                    <template v-if="errors.contract_start_date.length > 0">
+                                        <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form class="text-start">
+                            <div class="form">
+                                <!-- Direccion -->
+                                <div id="username-field" class="field-wrapper input">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                    <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
+
+                                    <template v-if="errors.address.length > 0">
+                                        <b :key="e" v-for="e in errors.address" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                                <!-- Codigo -->
+                                <div id="username-field" class="field-wrapper input mt-2">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
+                                    <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
+
+                                    <template v-if="errors.code.length > 0">
+                                        <b :key="e" v-for="e in errors.code" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                                <!-- Fecha de Final Contrato -->
+                                <div id="username-field" class="field-wrapper input mt-2">
+                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
+                                        Contrato</label>
+                                    <input v-model="formData.contract_end_date" type="date" class="form-control"
+                                        tabindex="6" />
+
+                                    <template v-if="errors.contract_end_date.length > 0">
+                                        <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
+                                            {{ e }}
+                                        </b>
+                                    </template>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-danger" @click="resetFormData">
+                        Descartar
+                    </button>
+                </a>
+                <button type="button" class="btn btn-success" @click="EditarEPS">Crear</button>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script setup>
@@ -135,7 +247,7 @@ import { useMeta } from '/src/composables/use-meta';
 useMeta({ title: 'EPS' });
 
 const cols = ref([
-    { field: 'id', title: '#Id', isUnique: true },
+    { field: 'index', title: '#Id', isUnique: true },
     { field: 'name', title: 'Nombre' },
     { field: 'address', title: 'Dirección' },
     { field: 'phone', title: 'Teleono' },
@@ -184,16 +296,29 @@ const errorsClear = () => {
     }
 }
 
+const resetFormData = () => {
+    formData.value = {
+        name: '',
+        address: '',
+        phone: '',
+        code: '',
+        contract_start_date: '',
+        contract_end_date: '',
+    };
+};
+
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
         const response = await axios.get('http://consultorio.test/api/epsPublic');
-        rows.value = response.data.data.map((item) => ({ ...item, id: currentId++ }));
+        rows.value = response.data.data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = response.data.data.length;
     } catch (error) {
         console.error('Error fetching data from API:', error);
     }
 };
+
+const discardButton = ref(null);
 
 const CreateEPS = async () => {
     errorsClear()
@@ -218,10 +343,14 @@ const CreateEPS = async () => {
             text: 'EPS creada correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!'
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
+
+            }// Cerrar el modal después de mostrar la alerta
+            resetFormData();
         });
 
-    router.push({ name: 'eps' });
-        
     } catch (error) {
         if (error.response && error.response.data && error.response.data.errors) {
             const errors_api = error.response.data.errors;
@@ -236,8 +365,18 @@ const CreateEPS = async () => {
     }
 };
 
-const viewUser = (user) => {
-    alert('View User \n' + user.id + ', ' + user.firstName + ', ' + user.lastName + ', ' + user.email);
+const viewUser = async (user) => {
+
+        const response = await axios.get('http://consultorio.test/api/eps/'+ user.id);
+        if(response.data.message == "EPS found"){
+            formData.value.name = response.data.data.name
+            formData.value.address = response.data.data.address
+            formData.value.phone = response.data.data.phone
+            formData.value.code = response.data.data.code
+            formData.value.contract_start_date = response.data.data.contract_start_date
+            formData.value.contract_end_date = response.data.data.contract_end_date                        
+        };
+
 };
 
 const deleteUser = (user) => {
