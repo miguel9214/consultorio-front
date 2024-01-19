@@ -390,12 +390,7 @@ const EditEPS = async (user) => {
 
         console.log(datosActualizados)
 
-        if (user.id) {
-            const response = await axios.put('http://consultorio.test/api/eps/' + user.id, datosActualizados);
-            console.log(response)
-        } else {
-            console.error("El ID del usuario no está definido");
-        }
+        const response = await axios.put('http://consultorio.test/api/eps/' + user.id, datosActualizados);            
         
         console.log(response);
 
@@ -415,10 +410,6 @@ const deleteUser = (user) => {
     if (confirm('Are you sure want to delete selected row ?')) {
         rows.value = rows.value.filter((d) => d.id != user.id);
     }
-};
-
-const rowClick = (user) => {
-    alert('User Details \n' + user.id + ', ' + user.firstName + ', ' + user.lastName + ', ' + user.email);
 };
 
 </script>
