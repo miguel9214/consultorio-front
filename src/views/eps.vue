@@ -231,11 +231,11 @@
                         Descartar
                     </button>
                 </a>
-                <button type="button" class="btn btn-success" @click="EditarEPS">Crear</button>
+                <button type="button" class="btn btn-success" @click="EditEPS">Crear</button>
             </div>
         </div>
     </div>
-</div>
+    </div>
 </template>
 
 <script setup>
@@ -259,7 +259,6 @@ const cols = ref([
 
 const rows = ref([]);
 const totalRows = ref(0);
-
 
 onMounted(async () => {
     await fetchDataFromApi();
@@ -346,8 +345,7 @@ const CreateEPS = async () => {
         }).then(() => {
             if (discardButton.value) {
                 discardButton.value.click();
-
-            }// Cerrar el modal después de mostrar la alerta
+            }
             resetFormData();
         });
 
@@ -376,6 +374,40 @@ const viewUser = async (user) => {
             formData.value.contract_start_date = response.data.data.contract_start_date
             formData.value.contract_end_date = response.data.data.contract_end_date                        
         };
+};
+
+const EditEPS = async (user) => {
+
+    try {
+        const datosActualizados = {
+            name: formData.value.name,
+            address: formData.value.address,
+            phone: formData.value.phone,
+            code: formData.value.code,
+            contract_start_date: formData.value.contract_start_date,
+            contract_end_date: formData.value.contract_end_date
+        };
+
+        console.log(datosActualizados)
+
+        if (user.id) {
+            const response = await axios.put('http://consultorio.test/api/eps/' + user.id, datosActualizados);
+            console.log(response)
+        } else {
+            console.error("El ID del usuario no está definido");
+        }
+        
+        console.log(response);
+
+        if (response.data.message == "EPS update successfully") {
+            console.log("EPS actualizada exitosamente");
+        } else {
+            console.error("Error al actualizar la EPS");
+        }
+
+    } catch (error) {
+        console.error("Error al actualizar la EPS:", error);
+    }
 
 };
 
