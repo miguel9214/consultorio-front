@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="form-image">
-                <div class="l-image"></div>
+                <div class="l-image" ></div>
             </div>
         </div>
     </div>
@@ -106,7 +106,15 @@ const loginUser = async (event) => {
     }
 
     try {
-        const response = await axios.post('http://consultorio.test/api/login', formData.value);
+        const response = await axios.post('http://consultorio.test/api/login', formData.value,{
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`, 
+            },
+        }
+        );
+        console.log(response);
         Swal.fire({
             title: response.data.message,
             icon: 'success',
@@ -117,7 +125,7 @@ const loginUser = async (event) => {
     } catch (error) {
         Swal.fire({
             title: 'Error!',
-            text: error.response.data.message,
+            // text: error.response.data.message,
             icon: 'error',
             confirmButtonText: '¡Entendido!'
         });
