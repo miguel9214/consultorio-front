@@ -15,7 +15,7 @@
                                     data-bs-toggle="modal" data-bs-target="#modalEditarEPS"
                                         @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger"
-                                        @click="deleteUser(data.value)">Eliminar</button>
+                                        @click="deleteUser(data.value.id)">Eliminar</button>
                                 </div>
                             </template>
                         </vue3-datatable>
@@ -120,12 +120,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
+                    <a href="javascript:void(0)"  data-bs-dismiss="modal">
                         <button type="button" class="btn btn-danger" @click="resetFormData">
                             Descartar
                         </button>
                     </a>
-                    <button type="button" class="btn btn-success" @click="CreateEPS">Crear</button>
+                    <a href="javascript:void(0)"  data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-success" @click="CreateEPS">Crear</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -231,7 +233,9 @@
                         Descartar
                     </button>
                 </a>
-                <button type="button" class="btn btn-success" @click="EditEPS">Crear</button>
+                <a href="javascript:void(0)" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-success" @click="EditEPS">Crear</button>
+                </a>
             </div>
         </div>
     </div>
@@ -363,10 +367,13 @@ const CreateEPS = async () => {
     }
 };
 
-const viewUser = async (user) => {
+let id; 
+
+const viewUser = async (user) => {   
 
         const response = await axios.get('http://consultorio.test/api/eps/'+ user.id);
         if(response.data.message == "EPS found"){
+            id = user.id
             formData.value.name = response.data.data.name
             formData.value.address = response.data.data.address
             formData.value.phone = response.data.data.phone
@@ -374,6 +381,7 @@ const viewUser = async (user) => {
             formData.value.contract_start_date = response.data.data.contract_start_date
             formData.value.contract_end_date = response.data.data.contract_end_date                        
         };
+        console.log(id)
 };
 
 const EditEPS = async (user) => {
@@ -390,15 +398,19 @@ const EditEPS = async (user) => {
 
         console.log(datosActualizados)
 
-        const response = await axios.put('http://consultorio.test/api/eps/' + user.id, datosActualizados);            
+        const response = await axios.put('http://consultorio.test/api/eps/' + id, datosActualizados);            
         
-        console.log(response);
-
-        if (response.data.message == "EPS update successfully") {
-            console.log("EPS actualizada exitosamente");
-        } else {
-            console.error("Error al actualizar la EPS");
-        }
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'EPS editada correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!'
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
+            }
+            resetFormData();
+        });
 
     } catch (error) {
         console.error("Error al actualizar la EPS:", error);
@@ -406,10 +418,16 @@ const EditEPS = async (user) => {
 
 };
 
-const deleteUser = (user) => {
+const deleteUser = async (id) => {
     if (confirm('Are you sure want to delete selected row ?')) {
-        rows.value = rows.value.filter((d) => d.id != user.id);
-    }
+        try {
+            
+            const response = await axios.delete('http://consultorio.test/api/eps/' + id);   
+            rows.value = rows.value.filter((d) => d.id != id);
+        } catch (error) {
+            
+        }
+    } 
 };
 
 </script>
