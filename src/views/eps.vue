@@ -234,7 +234,7 @@
                     </button>
                 </a>
                 <a href="javascript:void(0)" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-success" @click="EditEPS">Crear</button>
+                    <button type="button" class="btn btn-success" @click="EditEPS">Editar</button>
                 </a>
             </div>
         </div>
@@ -365,6 +365,8 @@ const CreateEPS = async () => {
             alert("server error")
         }
     }
+
+    fetchDataFromApi();
 };
 
 let id; 
@@ -416,18 +418,39 @@ const EditEPS = async (user) => {
         console.error("Error al actualizar la EPS:", error);
     }
 
+    fetchDataFromApi();
+
 };
 
 const deleteUser = async (id) => {
-    if (confirm('Are you sure want to delete selected row ?')) {
+    const result = await Swal.fire({
+        title: 'Estas seguro?',
+        text: '¡No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borralo!'
+    });
+
+    if (result.isConfirmed) {
         try {
-            
-            const response = await axios.delete('http://consultorio.test/api/eps/' + id);   
+            const response = await axios.delete('http://consultorio.test/api/eps/' + id);
             rows.value = rows.value.filter((d) => d.id != id);
+
+            Swal.fire(
+                'Eliminar!',
+                'Tu archivo ha sido eliminado!.',
+                'success'
+            );
         } catch (error) {
-            
+            Swal.fire(
+                'Error!',
+                'An error occurred while deleting the record.',
+                'error'
+            );
         }
-    } 
+    }
 };
 
 </script>
