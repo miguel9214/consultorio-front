@@ -245,9 +245,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
-import axios from 'axios';
 
 import { useMeta } from '/src/composables/use-meta';
+import { useApi  } from '../composables/use-api';
 useMeta({ title: 'EPS' });
 
 const cols = ref([
@@ -313,9 +313,9 @@ const resetFormData = () => {
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
-        const response = await axios.get('http://consultorio.test/api/epsPublic');
-        rows.value = response.data.data.map((item) => ({ ...item, index: currentId++ }));
-        totalRows.value = response.data.data.length;
+        const data = await useApi("eps");
+        rows.value = data.map((item) => ({ ...item, index: currentId++ }));
+        totalRows.value = data.length;
     } catch (error) {
         console.error('Error fetching data from API:', error);
     }
@@ -339,8 +339,7 @@ const CreateEPS = async () => {
     if (has_error) return;
 
     try {
-        const response = await axios.post('http://consultorio.test/api/eps', formData.value);
-
+        await useApi("eps","POST", formData.value);
         Swal.fire({
             title: 'Éxito!',
             text: 'EPS creada correctamente!',
@@ -354,16 +353,12 @@ const CreateEPS = async () => {
         });
 
     } catch (error) {
-        if (error.response && error.response.data && error.response.data.errors) {
-            const errors_api = error.response.data.errors;
+            const errors_api = error.errors;
             Object.entries(errors_api).forEach(e => {
                 const elemento = e[0]
                 const mensaje = e[1]
                 errors.value[elemento] = mensaje
             });
-        } else {
-            alert("server error")
-        }
     }
 
     fetchDataFromApi();
@@ -373,15 +368,16 @@ let id;
 
 const viewUser = async (user) => {   
 
-        const response = await axios.get('http://consultorio.test/api/eps/'+ user.id);
-        if(response.data.message == "EPS found"){
+        const data = await useApi("eps"+user.id);
+
+        if(data.message == "EPS found"){
             id = user.id
-            formData.value.name = response.data.data.name
-            formData.value.address = response.data.data.address
-            formData.value.phone = response.data.data.phone
-            formData.value.code = response.data.data.code
-            formData.value.contract_start_date = response.data.data.contract_start_date
-            formData.value.contract_end_date = response.data.data.contract_end_date                        
+            formData.value.name = data.data.name
+            formData.value.address = data.data.address
+            formData.value.phone = data.data.phone
+            formData.value.code = data.data.code
+            formData.value.contract_start_date = data.data.contract_start_date
+            formData.value.contract_end_date = data.data.contract_end_date                        
         };
         console.log(id)
 };
@@ -398,9 +394,7 @@ const EditEPS = async (user) => {
             contract_end_date: formData.value.contract_end_date
         };
 
-        console.log(datosActualizados)
-
-        const response = await axios.put('http://consultorio.test/api/eps/' + id, datosActualizados);            
+        await useApi("eps"+id,"PUT",datosActualizados);
         
         Swal.fire({
             title: 'Éxito!',
@@ -435,7 +429,8 @@ const deleteUser = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            const response = await axios.delete('http://consultorio.test/api/eps/' + id);
+            await useApi("eps"+id,"DELETE");
+
             rows.value = rows.value.filter((d) => d.id != id);
 
             Swal.fire(
