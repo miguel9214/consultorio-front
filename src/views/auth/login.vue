@@ -29,14 +29,15 @@
                                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                         </svg>
-                                        <input v-model="formData.password" class="form-control"
-                                            placeholder="Contraseña" :type="showPassword ? 'text' : 'password'" />
+                                        <input v-model="formData.password" class="form-control" placeholder="Contraseña"
+                                            :type="showPassword ? 'text' : 'password'" />
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper toggle-pass d-flex align-items-center">
                                             <p class="d-inline-block">Mostrar Contraseña</p>
                                             <label class="switch s-primary mx-2">
-                                                <input type="checkbox" class="custom-control-input" checked="" v-model="showPassword"/>
+                                                <input type="checkbox" class="custom-control-input" checked=""
+                                                    v-model="showPassword" />
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -70,7 +71,7 @@
                 </div>
             </div>
             <div class="form-image">
-                <div class="l-image" ></div>
+                <div class="l-image"></div>
             </div>
         </div>
     </div>
@@ -80,9 +81,11 @@
 
 import "/src/assets/sass/authentication/auth.scss";
 import { ref, onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import { useMeta } from "/src/composables/use-meta";
 import axios from "axios";
+const router = useRouter();
 
 
 useMeta({ title: "Login Cover" });
@@ -108,26 +111,17 @@ const loginUser = async (event) => {
     }
 
     try {
-        const response = await axios.post('http://consultorio.test/api/login', formData.value,{
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`, 
-            },
-        }
-        );
-        console.log(response);
-        Swal.fire({
-            title: response.data.message,
-            icon: 'success',
-            confirmButtonText: '¡Entendido!'
-        });
+        const response = await axios.post('http://consultorio.test/api/login', formData.value);
 
-        // se debe redirigir
+        const token = response.data.access_token;
+
+        localStorage.setItem('token', token);
+
+        router.push({ name: 'Home' })
     } catch (error) {
         Swal.fire({
             title: 'Error!',
-            // text: error.response.data.message,
+            text: error.response.data.message,
             icon: 'error',
             confirmButtonText: '¡Entendido!'
         });
