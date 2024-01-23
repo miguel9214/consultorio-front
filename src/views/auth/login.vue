@@ -84,9 +84,9 @@ import { ref, onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import { useMeta } from "/src/composables/use-meta";
-import axios from "axios";
-const router = useRouter();
+import { useApi  } from '../../composables/use-api.js';
 
+const router = useRouter();
 
 useMeta({ title: "Login Cover" });
 
@@ -111,9 +111,9 @@ const loginUser = async (event) => {
     }
 
     try {
-        const response = await axios.post('http://consultorio.test/api/login', formData.value);
+        const data = await useApi("login","POST", formData.value);
 
-        const token = response.data.access_token;
+        const token = data.access_token;
 
         localStorage.setItem('token', token);
 
@@ -121,11 +121,11 @@ const loginUser = async (event) => {
     } catch (error) {
         Swal.fire({
             title: 'Error!',
-            text: error.response.data.message,
+            text: error.message,
             icon: 'error',
             confirmButtonText: '¡Entendido!'
         });
     }
-
+    console.log(error)
 };
 </script>

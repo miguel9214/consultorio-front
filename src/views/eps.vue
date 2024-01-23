@@ -313,7 +313,7 @@ const resetFormData = () => {
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
-        const data = await useApi("eps");
+        const {data,message} = await useApi("eps");
         rows.value = data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = data.length;
     } catch (error) {
@@ -368,16 +368,17 @@ let id;
 
 const viewUser = async (user) => {   
 
-        const data = await useApi("eps"+user.id);
+        const {data,message} = await useApi("eps/"+user.id);
+        console.log('data: ', data);
 
-        if(data.message == "EPS found"){
+        if(message == "EPS found"){
             id = user.id
-            formData.value.name = data.data.name
-            formData.value.address = data.data.address
-            formData.value.phone = data.data.phone
-            formData.value.code = data.data.code
-            formData.value.contract_start_date = data.data.contract_start_date
-            formData.value.contract_end_date = data.data.contract_end_date                        
+            formData.value.name = data.name
+            formData.value.address = data.address
+            formData.value.phone = data.phone
+            formData.value.code = data.code
+            formData.value.contract_start_date = data.contract_start_date
+            formData.value.contract_end_date = data.contract_end_date                        
         };
         console.log(id)
 };
@@ -394,7 +395,7 @@ const EditEPS = async (user) => {
             contract_end_date: formData.value.contract_end_date
         };
 
-        await useApi("eps"+id,"PUT",datosActualizados);
+        await useApi("eps/" + id,"PUT", datosActualizados);
         
         Swal.fire({
             title: 'Éxito!',
@@ -429,7 +430,7 @@ const deleteUser = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            await useApi("eps"+id,"DELETE");
+            await useApi("eps/" + id,"DELETE");
 
             rows.value = rows.value.filter((d) => d.id != id);
 

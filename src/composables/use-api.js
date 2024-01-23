@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const useApi= async function (url, method = 'GET', payload = {}) { 
+export const useApi = async function (url, method = 'GET', payload = {}) { 
 
     url = `http://consultorio.test/api/${url}`;
 
@@ -19,10 +19,13 @@ export const useApi= async function (url, method = 'GET', payload = {}) {
             data: payload,
             headers: headers,
         };
+
         const response = await axios(config);
-        return response.data.data
+        return response.data
+
     } catch (error) {
-       const {status, data} = error.response
+        
+        const {status, data} = error.response
         if(status == 401 || (status == 500 && data.message === "Token has expired")){
             localStorage.removeItem("token");
             window.location.href ="/auth/login";
