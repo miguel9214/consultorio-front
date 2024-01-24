@@ -432,8 +432,8 @@
                                     Lock Screen
                                 </router-link>
                             </li>
-                            <li role="presentation">
-                                <router-link to="/auth/login" class="dropdown-item">
+                            <li role="presentation" >
+                                <a href="javascript:void(0)" class="dropdown-item" @click="logout()">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -451,7 +451,7 @@
                                         <line x1="21" y1="12" x2="9" y2="12"></line>
                                     </svg>
                                     Sign Out
-                                </router-link>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -1152,4 +1152,9 @@
         i18n.locale = item.code;
         window.$appSetting.toggleLanguage(item);
     };
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        window.location.href ="/auth/login";
+    }
 </script>

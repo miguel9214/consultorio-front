@@ -10,12 +10,14 @@ import store from '../store';
 
 const routes = [
     //dashboard
-    { path: '/', name: 'Home', component: Home },
+    { path: '/', name: 'Home', component: Home, meta: { required_auth: true } },
 
     {
         path: '/index2',
         name: 'index2',
         component: () => import(/* webpackChunkName: "index2" */ '../views/index2.vue'),
+        meta: { required_auth: true },
+
     },
 
     //eps
@@ -23,6 +25,7 @@ const routes = [
         path: '/eps',
         name: 'eps',
         component: () => import(/* webpackChunkName: "eps" */ '../views/eps.vue'),
+        meta: { required_auth: true },
     },
 
     //components
@@ -622,6 +625,12 @@ router.beforeEach((to, from, next) => {
         store.commit('setLayout', 'auth');
     } else {
         store.commit('setLayout', 'app');
+    }
+
+    if (to.meta && to.meta.required_auth && !localStorage.getItem("token")) {
+    console.log('to.meta: ', to.meta);
+
+        router.push({name:"login"})
     }
     next(true);
 });

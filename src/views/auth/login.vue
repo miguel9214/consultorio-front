@@ -91,8 +91,8 @@ const router = useRouter();
 useMeta({ title: "Login Cover" });
 
 const formData = ref({
-    email: '',
-    password: '',
+    email: 'wirovi0798@hotmail.com',
+    password: '12345678',
 });
 
 const showPassword = ref(false);
@@ -126,6 +126,5 @@ const loginUser = async (event) => {
             confirmButtonText: '¡Entendido!'
         });
     }
-    console.log(error)
 };
 </script>
