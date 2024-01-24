@@ -5,6 +5,7 @@
             <div class="shadow-bottom"></div>
 
             <perfect-scrollbar class="list-unstyled menu-categories" tag="ul" :options="{ wheelSpeed: 0.5, swipeEasing: !0, minScrollbarLength: 40, maxScrollbarLength: 300, suppressScrollX: true }">
+                <!-- DASHBOARD -->
                 <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-controls="dashboard" aria-expanded="false">
                         <div class="">
@@ -56,12 +57,7 @@
                         </li>
                     </ul>
                 </li>
-
                 <!-- EPS -->
-                    <!-- <div class="flex">
-        <button type="button" class="btn btn-success me-3" @click="viewUser(data.value)">Editar</button>
-        <button type="button" class="btn btn-danger" @click="deleteUser(data.value)">Eliminar</button>
-    </div> -->
                 <li class="menu">
                     <router-link to="/eps" class="dropdown-toggle" @click="toggleMobileMenu">
                         <div class="">
@@ -82,6 +78,31 @@
                                 <line x1="7" y1="12" x2="17" y2="12"></line>
                             </svg>
                             <span>{{ $t('EPS') }}</span>
+                        </div>
+                    </router-link>
+                </li>
+                <!-- CONSULTATION_TYPE -->
+                <li class="menu">
+                    <router-link to="/consultation_type" class="dropdown-toggle" @click="toggleMobileMenu">
+                        <div class="">
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-query"
+                            >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="8" y1="15" x2="16" y2="15"></line>
+                                <line x1="9" y1="9" x2="9" y2="15"></line>
+                                <line x1="15" y1="9" x2="15" y2="15"></line>
+                            </svg>                        
+                            <span>{{ $t('Tipo Consulta') }}</span>
                         </div>
                     </router-link>
                 </li>

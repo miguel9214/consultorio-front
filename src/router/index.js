@@ -9,7 +9,7 @@ import store from '../store';
 // app.use(createRouter);
 
 const routes = [
-    //dashboard
+    //DASHBOARD
     { path: '/', name: 'Home', component: Home, meta: { required_auth: true } },
 
     {
@@ -17,14 +17,21 @@ const routes = [
         name: 'index2',
         component: () => import(/* webpackChunkName: "index2" */ '../views/index2.vue'),
         meta: { required_auth: true },
-
     },
 
-    //eps
+    //EPS
     {
         path: '/eps',
         name: 'eps',
         component: () => import(/* webpackChunkName: "eps" */ '../views/eps.vue'),
+        meta: { required_auth: true },
+    },
+
+    //CONSULTATION_TYPE
+    {
+        path: '/consultation_type',
+        name: 'consultation_type',
+        component: () => import(/* webpackChunkName: "CONSULTATION_TYPE" */ '../views/consultation_type.vue'),
         meta: { required_auth: true },
     },
 
@@ -627,10 +634,10 @@ router.beforeEach((to, from, next) => {
         store.commit('setLayout', 'app');
     }
 
-    if (to.meta && to.meta.required_auth && !localStorage.getItem("token")) {
-    console.log('to.meta: ', to.meta);
+    if (to.meta && to.meta.required_auth && !localStorage.getItem('token')) {
+        console.log('to.meta: ', to.meta);
 
-        router.push({name:"login"})
+        router.push({ name: 'login' });
     }
     next(true);
 });
