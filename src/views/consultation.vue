@@ -25,229 +25,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modallg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Crear Consulta</h5>
-                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"
-                        class="btn-close" @click="resetFormData"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form class="text-start">
-                                <div class="form">
-                                    <!-- Doctor Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
-                                    <select v-model="formData.doctor_id"
-                                        class="form-control form-control-sm p-2 border-0 pt-0"
-                                        style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                        tabindex="14">
-                                        <option style="margin: 1px" value="" disabled selected>EPS</option>
-                                        <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{ doctor.name }}</option>
-                                    </select>
-                                        <template v-if="errors.doctor.length > 0">
-                                            <b :key="e" v-for="e in errors.doctor" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                    <!-- Telefono -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
-
-                                        <template v-if="errors.phone.length > 0">
-                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                    <!-- Fecha de Inicial Contrato -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
-                                            Contrato</label>
-                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
-                                            tabindex="5" />
-
-                                        <template v-if="errors.contract_start_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="text-start">
-                                <div class="form">
-                                    <!-- Paciente Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
-                                        <select v-model="formData.pacient_id"
-                                            class="form-control form-control-sm p-2 border-0 pt-0"
-                                            style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                            tabindex="14">
-                                            <option style="margin: 1px" value="" disabled selected>EPS</option>
-                                            <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{ doctor.name }}</option>
-                                        </select>
-                                            <template v-if="errors.doctor.length > 0">
-                                                <b :key="e" v-for="e in errors.doctor" class="text-danger">
-                                                    {{ e }}
-                                                </b>
-                                            </template>
-                                        </div>
-                                    <!-- Codigo -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
-                                        <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
-
-                                        <template v-if="errors.code.length > 0">
-                                            <b :key="e" v-for="e in errors.code" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                    <!-- Fecha de Final Contrato -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
-                                            Contrato</label>
-                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
-                                            tabindex="6" />
-
-                                        <template v-if="errors.contract_end_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:void(0)"  data-bs-dismiss="modal">
-                        <button type="button" class="btn btn-danger" @click="resetFormData">
-                            Descartar
-                        </button>
-                    </a>
-                    <a href="javascript:void(0)"  data-bs-dismiss="modal">
-                        <button type="button" class="btn btn-success" @click="CreateEPS">Crear</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalEditarEPS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar EPS</h5>
-                <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"
-                    class="btn-close" @click="resetFormData"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form class="text-start">
-                            <div class="form">
-                                <!-- Nombre EPS -->
-                                <div id="username-field" class="field-wrapper input">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre EPS</label>
-                                    <input v-model="formData.name" type="text" class="form-control" tabindex="1" />
-
-                                    <template v-if="errors.name.length > 0">
-                                        <b :key="e" v-for="e in errors.name" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                                <!-- Telefono -->
-                                <div id="username-field" class="field-wrapper input mt-2">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                    <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
-
-                                    <template v-if="errors.phone.length > 0">
-                                        <b :key="e" v-for="e in errors.phone" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                                <!-- Fecha de Inicial Contrato -->
-                                <div id="username-field" class="field-wrapper input mt-2">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
-                                        Contrato</label>
-                                    <input v-model="formData.contract_start_date" type="date" class="form-control"
-                                        tabindex="5" />
-
-                                    <template v-if="errors.contract_start_date.length > 0">
-                                        <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <form class="text-start">
-                            <div class="form">
-                                <!-- Direccion -->
-                                <div id="username-field" class="field-wrapper input">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                    <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
-
-                                    <template v-if="errors.address.length > 0">
-                                        <b :key="e" v-for="e in errors.address" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                                <!-- Codigo -->
-                                <div id="username-field" class="field-wrapper input mt-2">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
-                                    <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
-
-                                    <template v-if="errors.code.length > 0">
-                                        <b :key="e" v-for="e in errors.code" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                                <!-- Fecha de Final Contrato -->
-                                <div id="username-field" class="field-wrapper input mt-2">
-                                    <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
-                                        Contrato</label>
-                                    <input v-model="formData.contract_end_date" type="date" class="form-control"
-                                        tabindex="6" />
-
-                                    <template v-if="errors.contract_end_date.length > 0">
-                                        <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
-                                            {{ e }}
-                                        </b>
-                                    </template>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-danger" @click="resetFormData">
-                        Descartar
-                    </button>
-                </a>
-                <a href="javascript:void(0)" data-bs-dismiss="modal">
-                    <button type="button" class="btn btn-success" @click="EditEPS">Editar</button>
-                </a>
-            </div>
-        </div>
-    </div>
-    </div>
 </template>
 
 <script setup>
@@ -256,16 +33,16 @@ import Vue3Datatable from '@bhplugin/vue3-datatable';
 
 import { useMeta } from '/src/composables/use-meta';
 import { useApi  } from '../composables/use-api';
-useMeta({ title: 'EPS' });
+useMeta({ title: 'Consultas' });
 
 const cols = ref([
     { field: 'index', title: '#Id', isUnique: true },
-    { field: 'name', title: 'Nombre' },
-    { field: 'address', title: 'Dirección' },
-    { field: 'phone', title: 'Teleono' },
-    { field: 'code', title: 'NIT' },
-    { field: 'contract_start_date', title: 'Inicio de Contrato' },
-    { field: 'contract_end_date', title: 'Final de Contrato' },
+    { field: 'pacient_id', title: 'Paciente' },
+    { field: 'doctor_id', title: 'Medicos' },
+    { field: 'consultation_type_id', title: 'Tipo de Consulta' },
+    { field: 'date', title: 'Fecha' },
+    { field: 'observation', title: 'Observacion' },
+    { field: 'status', title: 'Estado' },
     { field: 'actions', title: 'Acciones' },
 ]);
 
@@ -277,51 +54,49 @@ onMounted(async () => {
 });
 
 const formData = ref({
-    name: '',
-    address: '',
-    phone: '',
-    code: '',
-    contract_start_date: '',
-    contract_end_date: '',
+    pacient_id: '',
+    doctor_id: '',
+    consultation_type_id: '',
+    date: '',
+    observation: '',
+    status: '',
 });
 
 const errors = ref({
-    name: [],
-    address: [],
-    phone: [],
-    code: [],
-    sex: [],
-    contract_start_date: [],
-    contract_end_date: [],
+    pacient_id: [],
+    doctor_id: [],
+    consultation_type_id: [],
+    date: [],
+    observation: [],
+    status: [],
 });
 
 const errorsClear = () => {
     errors.value = {
-        name: [],
-        address: [],
-        phone: [],
-        code: [],
-        sex: [],
-        contract_start_date: [],
-        contract_end_date: [],
+        pacient_id: [],
+        doctor_id: [],
+        consultation_type_id: [],
+        date: [],
+        observation: [],
+        status: [],
     }
 }
 
 const resetFormData = () => {
     formData.value = {
-        name: '',
-        address: '',
-        phone: '',
-        code: '',
-        contract_start_date: '',
-        contract_end_date: '',
+        pacient_id: '',
+        doctor_id: '',
+        consultation_type_id: '',
+        date: '',
+        observation: '',
+        status: '',
     };
 };
 
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
-        const {data,message} = await useApi("eps");
+        const {data,message} = await useApi("consultation");
         rows.value = data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = data.length;
     } catch (error) {

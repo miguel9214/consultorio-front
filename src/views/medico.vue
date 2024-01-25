@@ -1,4 +1,4 @@
-<template>
+<!-- <template> -->
     <div class="layout-px-spacing">
         <div class="seperator-header layout-top-spacing mb-4">
             <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
@@ -242,7 +242,7 @@
     </div>
 </template>
 
-<script setup>
+<!-- <script setup> -->
 import { onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 

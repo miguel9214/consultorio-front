@@ -42,6 +42,14 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //CONSULTATION
+    {
+        path: '/consultation',
+        name: 'consultation',
+        component: () => import(/* webpackChunkName: "consultation" */ '../views/consultation.vue'),
+        meta: { required_auth: true },
+    },
+
     //components
     {
         path: '/components/tabs',
