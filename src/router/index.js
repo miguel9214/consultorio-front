@@ -27,6 +27,13 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //MEDICO
+    {
+        path: '/medico',
+        name: 'medico',
+        component: () => import(/* webpackChunkName: "eps" */ '../views/medico.vue'),
+    },
+
     //CONSULTATION_TYPE
     {
         path: '/consultation_type',

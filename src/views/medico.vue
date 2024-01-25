@@ -1,0 +1,493 @@
+<template>
+    <div class="layout-px-spacing">
+        <div class="seperator-header layout-top-spacing mb-4">
+            <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
+                data-bs-target="#modallg">Crear</button>
+        </div>
+        <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+                <div class="panel br-6 p-0">
+                    <div class="vue3-datatable">
+                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows">
+                            <template #actions="data">
+                                <div class="flex">
+                                    <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
+                                        data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
+                                    <button type="button" class="btn btn-danger"
+                                        @click="deleteUser(data.value.id)">Eliminar</button>
+                                </div>
+                            </template>
+                        </vue3-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modallg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear medico</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"
+                        @click="resetFormData"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- T. Documento -->
+                                    <div id="type_document-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">T. documento</label>
+                                        <input v-model="formData.type_document" type="text" class="form-control" tabindex="1" />
+
+                                        <template v-if="errors.type_document.length > 0">
+                                            <b :key="e" v-for="e in errors.type_document" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Telefono -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
+                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.phone.length > 0">
+                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de Inicial Contrato -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
+                                            Contrato</label>
+                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
+                                            tabindex="5" />
+
+                                        <template v-if="errors.contract_start_date.length > 0">
+                                            <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Direccion -->
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
+
+                                        <template v-if="errors.address.length > 0">
+                                            <b :key="e" v-for="e in errors.address" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Codigo -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
+                                        <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
+
+                                        <template v-if="errors.code.length > 0">
+                                            <b :key="e" v-for="e in errors.code" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de Final Contrato -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
+                                            Contrato</label>
+                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
+                                            tabindex="6" />
+
+                                        <template v-if="errors.contract_end_date.length > 0">
+                                            <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" @click="resetFormData">
+                            Descartar
+                        </button>
+                    </a>
+                    <a href="javascript:void(0)" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-success" @click="createMedico">Crear</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditarEPS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar EPS</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"
+                        @click="resetFormData"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Nombre EPS -->
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre EPS</label>
+                                        <input v-model="formData.name" type="text" class="form-control" tabindex="1" />
+
+                                        <template v-if="errors.name.length > 0">
+                                            <b :key="e" v-for="e in errors.name" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Telefono -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
+                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.phone.length > 0">
+                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de Inicial Contrato -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
+                                            Contrato</label>
+                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
+                                            tabindex="5" />
+
+                                        <template v-if="errors.contract_start_date.length > 0">
+                                            <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Direccion -->
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
+
+                                        <template v-if="errors.address.length > 0">
+                                            <b :key="e" v-for="e in errors.address" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Codigo -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
+                                        <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
+
+                                        <template v-if="errors.code.length > 0">
+                                            <b :key="e" v-for="e in errors.code" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de Final Contrato -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
+                                            Contrato</label>
+                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
+                                            tabindex="6" />
+
+                                        <template v-if="errors.contract_end_date.length > 0">
+                                            <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" @click="resetFormData">
+                            Descartar
+                        </button>
+                    </a>
+                    <a href="javascript:void(0)" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-success" @click="EditMedico">Editar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { onMounted, ref } from 'vue';
+import Vue3Datatable from '@bhplugin/vue3-datatable';
+
+import { useMeta } from '/src/composables/use-meta';
+import { useApi } from '../composables/use-api';
+useMeta({ title: 'Medicos' });
+
+const cols = ref([
+    { field: 'index', title: '#Id', isUnique: true },
+    { field: 'type_document', title: 'T. documento' },
+    { field: 'document', title: 'Documento' },
+    { field: 'first_name', title: 'Nombre' },
+    { field: 'last_name', title: 'Apellido' },
+    { field: 'sex', title: 'Sexo' },
+    { field: 'phone', title: 'Telefono' },
+    { field: 'birthdate', title: 'Cumpleaños' },
+    { field: 'address', title: 'Direccion' },
+    { field: 'sex', title: 'Sexo' },
+    { field: 'city', title: 'Telefono' },
+    { field: 'state', title: 'Departamento' },
+    { field: 'neighborhood', title: 'Barrio' },
+    { field: 'speciality', title: 'Especialidad' },
+    { field: 'email', title: 'Correo' },
+    { field: 'password', title: 'Contraseña' },
+]);
+
+const rows = ref([]);
+const totalRows = ref(0);
+
+onMounted(async () => {
+    await fetchDataFromApi();
+});
+
+
+const formData = ref({
+    type_document: '',
+    document: '',
+    first_name: '',
+    last_name: '',
+    sex: '',
+    phone: '',
+    birthdate: '',
+    address: '',
+    sex: '',
+    city: '',
+    state: '',
+    neighborhood: '',
+    speciality: '',
+    email: '',
+    password: ''
+});
+
+const errorsClear = () => {
+    errors.value = {
+        type_document: [],
+        document: [],
+        first_name: [],
+        last_name: [],
+        sex: [],
+        phone: [],
+        birthdate: [],
+        address: [],
+        sex: [],
+        city: [],
+        state: [],
+        neighborhood: [],
+        speciality: [],
+        email: [],
+        password: []
+    }
+}
+
+const resetFormData = () => {
+    formData.value = {
+        type_document: '',
+        document: '',
+        first_name: '',
+        last_name: '',
+        sex: '',
+        phone: '',
+        birthdate: '',
+        address: '',
+        sex: '',
+        city: '',
+        state: '',
+        neighborhood: '',
+        speciality: '',
+        email: '',
+        password: ''
+    };
+};
+
+const fetchDataFromApi = async () => {
+    try {
+        let currentId = 1;
+        const data = await useApi("medico");
+        rows.value = data.map((item) => ({ ...item, index: currentId++ }));
+        totalRows.value = data.length;
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching data from API:', error);
+    }
+};
+
+const discardButton = ref(null);
+
+const createMedico = async () => {
+    errorsClear()
+
+    let has_error = false;
+    Object.entries(formData.value).forEach(f => {
+        const elemento = f[0]
+        const value = f[1]
+        if (value == "") {
+            has_error = true
+            errors.value[elemento] = "Este campo es obligatorio"
+        }
+    });
+
+    if (has_error) return;
+
+    try {
+        await useApi("medicos", "POST", formData.value);
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Medico creado correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!'
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
+            }
+            resetFormData();
+        });
+
+    } catch (error) {
+        const errors_api = error.errors;
+        Object.entries(errors_api).forEach(e => {
+            const elemento = e[0]
+            const mensaje = e[1]
+            errors.value[elemento] = mensaje
+        });
+    }
+
+    fetchDataFromApi();
+};
+
+let id;
+
+const viewUser = async (user) => {
+
+    const data = await useApi("medicos" + user.id);
+
+    if (data.message == "Medico found") {
+        id = user.id
+        formData.value.type_document = data.data.type_document
+        formData.value.document = data.data.document
+        formData.value.first_name = data.data.first_name
+        formData.value.last_name = data.data.last_name
+        formData.value.speciality = data.data.speciality
+        formData.value.sex = data.data.sex
+        formData.value.phone = data.data.phone
+        formData.value.birthdate = data.data.birthdate
+        formData.value.email = data.data.email
+        formData.value.address = data.data.address
+        formData.value.city = data.data.city
+        formData.value.state = data.data.state
+        formData.value.neighborhood = data.data.neighborhood
+        formData.value.password = data.data.password
+    };
+    console.log(id)
+};
+
+const editMedico = async (user) => {
+
+    try {
+        const datosActualizados = {
+            type_document: formData.value.type_document,
+            document: formData.value.document,
+            first_name: formData.value.first_name,
+            last_name: formData.value.last_name,
+            speciality: formData.value.speciality,
+            sex: formData.value.sex,
+            phone: formData.value.phone,
+            birthdate: formData.value.birthdate,
+            email: formData.value.email,
+            address: formData.value.address,
+            city: formData.value.city,
+            state: formData.value.state,
+            neighborhood: formData.value.neighborhood,
+            password: formData.value.password
+        };
+
+        await useApi("medico" + id, "PUT", datosActualizados);
+
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'EPS editada correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!'
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
+            }
+            resetFormData();
+        });
+
+    } catch (error) {
+        console.error("Error al actualizar la EPS:", error);
+    }
+
+    fetchDataFromApi();
+
+};
+
+const deleteUser = async (id) => {
+    const result = await Swal.fire({
+        title: 'Estas seguro?',
+        text: '¡No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, borralo!'
+    });
+
+    if (result.isConfirmed) {
+        try {
+            await useApi("eps" + id, "DELETE");
+
+            rows.value = rows.value.filter((d) => d.id != id);
+
+            Swal.fire(
+                'Eliminar!',
+                'Tu archivo ha sido eliminado!.',
+                'success'
+            );
+        } catch (error) {
+            Swal.fire(
+                'Error!',
+                'An error occurred while deleting the record.',
+                'error'
+            );
+        }
+    }
+ };
+
+</script>
