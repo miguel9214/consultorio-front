@@ -46,7 +46,7 @@
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
-                                                    doctor.last_name }}</option>
+                                                    doctor.doctor }}</option>
                                             </select>
                                         </div>
 
@@ -104,7 +104,7 @@
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
-                                                    v-for="pacient in pacientList">{{ pacient.last_name }}</option>
+                                                    v-for="pacient in pacientList">{{ pacient.patient }}</option>
                                             </select>
                                         </div>
 
@@ -187,7 +187,7 @@
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
-                                                    doctor.last_name }}</option>
+                                                    doctor.doctor }}</option>
                                             </select>
                                         </div>
 
@@ -245,7 +245,7 @@
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
-                                                    v-for="pacient in pacientList">{{ pacient.last_name }}</option>
+                                                    v-for="pacient in pacientList">{{ pacient.patient }}</option>
                                             </select>
                                         </div>
 
@@ -316,6 +316,8 @@ useMeta({ title: 'Consultas' });
 
 onBeforeMount(() => {
     showConsultationType();
+    showDoctor();
+    showPatient();
 });
 
 
@@ -406,10 +408,10 @@ const CreateEPS = async () => {
     if (has_error) return;
 
     try {
-        await useApi("eps", "POST", formData.value);
+        await useApi("consultation", "POST", formData.value);
         Swal.fire({
             title: 'Éxito!',
-            text: 'EPS creada correctamente!',
+            text: 'Consulta creada correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!'
         }).then(() => {
@@ -435,7 +437,7 @@ let id;
 
 const viewUser = async (user) => {
 
-    const { data, message } = await useApi("eps/" + user.id);
+    const { data, message } = await useApi("consultation/" + user.id);
     console.log('data: ', data);
 
     if (message == "EPS found") {
@@ -462,7 +464,7 @@ const EditEPS = async (user) => {
             contract_end_date: formData.value.contract_end_date
         };
 
-        await useApi("eps/" + id, "PUT", datosActualizados);
+        await useApi("consultation/" + id, "PUT", datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
@@ -497,7 +499,7 @@ const deleteUser = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            await useApi("eps/" + id, "DELETE");
+            await useApi("consultation/" + id, "DELETE");
 
             rows.value = rows.value.filter((d) => d.id != id);
 
@@ -520,12 +522,35 @@ const consultation_typeList = ref([]);
 
 const showConsultationType = async () => {
     try {
-        const response = await axios.get('http://consultorio.test/api/consultationType');
-        consultation_typeList.value = response.data.data;
+        const { data, message } = await useApi("consultationType");
+        consultation_typeList.value = data;
     } catch (error) {
         console.error('Error al obtener los Tipos de Consultas', error);
     }
 };
+
+const doctorList = ref([]);
+
+const showDoctor = async () => {
+    try {
+        const { data, message } = await useApi("personDoctor");
+        doctorList.value = data;
+    } catch (error) {
+        console.error('Error al obtener los Tipos de Consultas', error);
+    }
+};
+
+const pacientList = ref([]);
+
+const showPatient = async () => {
+    try {
+        const { data, message } = await useApi("personPatient");
+        pacientList.value = data;
+    } catch (error) {
+        console.error('Error al obtener los Tipos de Consultas', error);
+    }
+};
+
 
 
 </script>
