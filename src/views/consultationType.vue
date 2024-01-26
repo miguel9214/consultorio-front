@@ -195,7 +195,7 @@ const resetFormData = () => {
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
-        const { data, message } = await useApi("consultation_type");
+        const { data, message } = await useApi("consultationType");
         rows.value = data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = data.length;
     } catch (error) {
@@ -221,7 +221,7 @@ const CreateTypeConsultation = async () => {
     if (has_error) return;
 
     try {
-        await useApi("consultation_type", "POST", formData.value);
+        await useApi("consultationType", "POST", formData.value);
         Swal.fire({
             title: 'Éxito!',
             text: 'EPS creada correctamente!',
@@ -250,7 +250,7 @@ let id;
 
 const viewUser = async (user) => {
 
-    const { data, message } = await useApi("consultation_type/" + user.id);
+    const { data, message } = await useApi("consultationType/" + user.id);
     console.log('data: ', data);
 
     if (message == "Consultation Type found") {
@@ -269,7 +269,7 @@ const EditTypeConsultation = async (user) => {
             price: formData.value.price
         };
 
-        await useApi("consultation_type/" + id, "PUT", datosActualizados);
+        await useApi("consultationType/" + id, "PUT", datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
@@ -304,7 +304,7 @@ const deleteUser = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            await useApi("consultation_type/" + id, "DELETE");
+            await useApi("consultationType/" + id, "DELETE");
 
             rows.value = rows.value.filter((d) => d.id != id);
 

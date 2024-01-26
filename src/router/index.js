@@ -32,13 +32,14 @@ const routes = [
         path: '/medico',
         name: 'medico',
         component: () => import(/* webpackChunkName: "eps" */ '../views/medico.vue'),
-    },
+        meta: { required_auth: true },
+    },
 
     //CONSULTATION_TYPE
     {
-        path: '/consultation_type',
-        name: 'consultation_type',
-        component: () => import(/* webpackChunkName: "CONSULTATION_TYPE" */ '../views/consultation_type.vue'),
+        path: '/consultationType',
+        name: 'consultationType',
+        component: () => import(/* webpackChunkName: "consultation_type" */ '../views/consultationType.vue'),
         meta: { required_auth: true },
     },
 
