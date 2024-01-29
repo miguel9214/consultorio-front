@@ -39,16 +39,14 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Tipo de Documento -->
-                                    <div id="document-type-field" class="field-wrapper input mt-2">
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Documento</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.type_document"
-                                                class="form-control form-control-sm border-0 pt-0"
-                                                style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 8px"
-                                                tabindex="1">
+                                                class="form-select w-100"
+                                                tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Tipo de
                                                     Documento</option>
-                                                <option value="RC">RC</option>
-                                                <option value="TI">TI</option>
                                                 <option value="CC">CC</option>
                                                 <option value="EX">EX</option>
                                             </select>
@@ -73,18 +71,17 @@
                                     </div>
                                     <!-- Sexo -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Sexo</label>
-                                            <div style="margin-top: 1px">
-                                                <select v-model="formData.sex"
-                                                    class="form-control form-control-sm p-2 border-0 pt-0"
-                                                    style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                                    tabindex="6">
-                                                    <option style="margin: 1px" value="" disabled selected>Genero
-                                                    </option>
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
-                                                </select>
-                                            </div>
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Genero</label>
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.sex"
+                                                class="form-select w-100"
+                                                tabindex="14">
+                                                <option style="margin: 1px" value="" disabled selected>Genero</option>
+                                                <option value="1">Masculino</option>
+                                                <option value="2">Femenino</option>
+                                            </select>
+                                        </div>
+
                                         <template v-if="errors.sex.length > 0">
                                             <b :key="e" v-for="e in errors.sex" class="text-danger">
                                                 {{ e }}
@@ -105,7 +102,7 @@
                                     <!-- Ciudad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Ciudad</label>
-                                        <input v-model="formData.city" type="date" class="form-control" tabindex="3" />
+                                        <input v-model="formData.city" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.city.length > 0">
                                             <b :key="e" v-for="e in errors.city" class="text-danger">
@@ -116,7 +113,7 @@
                                     <!-- Barrio -->
                                     <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
-                                        <input v-model="formData.neighborhood" type="date" class="form-control" tabindex="3" />
+                                        <input v-model="formData.neighborhood" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.neighborhood.length > 0">
                                             <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
@@ -126,23 +123,24 @@
                                     </div>
                                     <!-- Email -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
-                                        <input v-model="formData.email" type="date" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Email</label>
+                                        <input v-model="formData.email" type="email" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.email.length > 0">
                                             <b :key="e" v-for="e in errors.email" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
-                                    </div>  
-                                    <!-- Contraseña -->
-                                    <div id="password-field" class="field-wrapper input mb-2">
-                                        <input v-model="formData.password"
+                                    </div>                                      
+                                    <!-- Confirmar Contraseña -->
+                                    <div id="confirm-password-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
+                                        <input v-model="formData.password_confirmed"
                                             :type="showPassword ? 'text' : 'password'" class="form-control"
-                                            placeholder="Contraseña" tabindex="15" />
+                                            placeholder="Confirmar Contraseña" tabindex="16" />
 
-                                        <template v-if="errors.password.length > 0">
-                                            <b :key="e" v-for="e in errors.password" class="text-danger">
+                                        <template v-if="errors.password_confirmed.length > 0">
+                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -155,8 +153,8 @@
                                 <div class="form">
                                     <!-- Documento -->
                                     <div id="username-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.document" type="text" class="form-control" tabindex="2" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Documento</label>
+                                        <input v-model="formData.document" type="number" class="form-control" tabindex="2" />
 
                                         <template v-if="errors.document.length > 0">
                                             <b :key="e" v-for="e in errors.document" class="text-danger">
@@ -175,24 +173,24 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Telefono -->
+                                    <!-- Especialidad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad Medica</label>
+                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.phone.length > 0">
-                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                        <template v-if="errors.speciality.length > 0">
+                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Direccion -->
+                                    <!-- Telefono -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
+                                        <input v-model="formData.phone" type="number" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.address.length > 0">
-                                            <b :key="e" v-for="e in errors.address" class="text-danger">
+                                        <template v-if="errors.phone.length > 0">
+                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -207,27 +205,27 @@
                                                 {{ e }}
                                             </b>
                                         </template>
-                                    </div>
-                                    <!-- Especialidad -->
+                                    </div>                           
+                                    <!-- Direccion -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad</label>
-                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.speciality.length > 0">
-                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
+                                        <template v-if="errors.address.length > 0">
+                                            <b :key="e" v-for="e in errors.address" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Confirmar Contraseña -->
-                                    <div id="confirm-password-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
-                                        <input v-model="formData.password_confirmed"
+                                    <!-- Contraseña -->
+                                    <div id="password-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Contraseña</label>
+                                        <input v-model="formData.password"
                                             :type="showPassword ? 'text' : 'password'" class="form-control"
-                                            placeholder="Confirmar Contraseña" tabindex="16" />
+                                            placeholder="Contraseña" tabindex="15" />
 
-                                        <template v-if="errors.password_confirmed.length > 0">
-                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
+                                        <template v-if="errors.password.length > 0">
+                                            <b :key="e" v-for="e in errors.password" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -266,16 +264,14 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Tipo de Documento -->
-                                    <div id="document-type-field" class="field-wrapper input mt-2">
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Documento</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.type_document"
-                                                class="form-control form-control-sm border-0 pt-0"
-                                                style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 8px"
-                                                tabindex="1">
+                                                class="form-select w-100"
+                                                tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Tipo de
                                                     Documento</option>
-                                                <option value="RC">RC</option>
-                                                <option value="TI">TI</option>
                                                 <option value="CC">CC</option>
                                                 <option value="EX">EX</option>
                                             </select>
@@ -300,18 +296,17 @@
                                     </div>
                                     <!-- Sexo -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Sexo</label>
-                                            <div style="margin-top: 1px">
-                                                <select v-model="formData.sex"
-                                                    class="form-control form-control-sm p-2 border-0 pt-0"
-                                                    style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
-                                                    tabindex="6">
-                                                    <option style="margin: 1px" value="" disabled selected>Genero
-                                                    </option>
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
-                                                </select>
-                                            </div>
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Genero</label>
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.sex"
+                                                class="form-select w-100"
+                                                tabindex="14">
+                                                <option style="margin: 1px" value="" disabled selected>Genero</option>
+                                                <option value="1">Masculino</option>
+                                                <option value="2">Femenino</option>
+                                            </select>
+                                        </div>
+
                                         <template v-if="errors.sex.length > 0">
                                             <b :key="e" v-for="e in errors.sex" class="text-danger">
                                                 {{ e }}
@@ -332,7 +327,7 @@
                                     <!-- Ciudad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Ciudad</label>
-                                        <input v-model="formData.city" type="date" class="form-control" tabindex="3" />
+                                        <input v-model="formData.city" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.city.length > 0">
                                             <b :key="e" v-for="e in errors.city" class="text-danger">
@@ -343,7 +338,7 @@
                                     <!-- Barrio -->
                                     <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
-                                        <input v-model="formData.neighborhood" type="date" class="form-control" tabindex="3" />
+                                        <input v-model="formData.neighborhood" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.neighborhood.length > 0">
                                             <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
@@ -353,23 +348,24 @@
                                     </div>
                                     <!-- Email -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
-                                        <input v-model="formData.email" type="date" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Email</label>
+                                        <input v-model="formData.email" type="email" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.email.length > 0">
                                             <b :key="e" v-for="e in errors.email" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
-                                    </div>  
-                                    <!-- Contraseña -->
-                                    <div id="password-field" class="field-wrapper input mb-2">
-                                        <input v-model="formData.password"
-                                            :type="showPassword ? 'text' : 'password'" class="form-control"
-                                            placeholder="Contraseña" tabindex="15" />
+                                    </div>                                      
+                                    <!-- Confirmar Contraseña -->
+                                    <div id="confirm-password-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
+                                        <input v-model="formData.password_confirmed"
+                                            type="password" class="form-control"
+                                            placeholder="Confirmar Contraseña" tabindex="16" />
 
-                                        <template v-if="errors.password.length > 0">
-                                            <b :key="e" v-for="e in errors.password" class="text-danger">
+                                        <template v-if="errors.password_confirmed.length > 0">
+                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -382,8 +378,8 @@
                                 <div class="form">
                                     <!-- Documento -->
                                     <div id="username-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.document" type="text" class="form-control" tabindex="2" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Documento</label>
+                                        <input v-model="formData.document" type="number" class="form-control" tabindex="2" />
 
                                         <template v-if="errors.document.length > 0">
                                             <b :key="e" v-for="e in errors.document" class="text-danger">
@@ -402,24 +398,24 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Telefono -->
+                                    <!-- Especialidad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad Medica</label>
+                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.phone.length > 0">
-                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
+                                        <template v-if="errors.speciality.length > 0">
+                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Direccion -->
+                                    <!-- Telefono -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
+                                        <input v-model="formData.phone" type="number" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.address.length > 0">
-                                            <b :key="e" v-for="e in errors.address" class="text-danger">
+                                        <template v-if="errors.phone.length > 0">
+                                            <b :key="e" v-for="e in errors.phone" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -434,27 +430,26 @@
                                                 {{ e }}
                                             </b>
                                         </template>
-                                    </div>
-                                    <!-- Especialidad -->
+                                    </div>                           
+                                    <!-- Direccion -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad</label>
-                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.speciality.length > 0">
-                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
+                                        <template v-if="errors.address.length > 0">
+                                            <b :key="e" v-for="e in errors.address" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Confirmar Contraseña -->
-                                    <div id="confirm-password-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
-                                        <input v-model="formData.password_confirmed"
-                                            :type="showPassword ? 'text' : 'password'" class="form-control"
-                                            placeholder="Confirmar Contraseña" tabindex="16" />
+                                    <!-- Contraseña -->
+                                    <div id="password-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Contraseña</label>
+                                        <input v-model="formData.password" type="password" class="form-control"
+                                            placeholder="Contraseña" tabindex="15" />
 
-                                        <template v-if="errors.password_confirmed.length > 0">
-                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
+                                        <template v-if="errors.password.length > 0">
+                                            <b :key="e" v-for="e in errors.password" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -514,6 +509,7 @@ onMounted(async () => {
     await fetchDataFromApi();
 });
 
+const showPassword = ref(false);
 
 const formData = ref({
     type_document: '',
@@ -620,7 +616,7 @@ const createMedico = async () => {
     if (has_error) return;
 
     try {
-        await useApi("medicos", "POST", formData.value);
+        await useApi("medico", "POST", formData.value);
         Swal.fire({
             title: 'Éxito!',
             text: 'Medico creado correctamente!',
@@ -649,25 +645,26 @@ let id;
 
 const viewUser = async (user) => {
 
-    const data = await useApi("medicos" + user.id);
+    const { data, message } = await useApi("medico/" + user.id);
 
-    if (data.message == "Medico found") {
+    if (data.message == "Doctors found") {
         id = user.id
-        formData.value.type_document = data.data.type_document
-        formData.value.document = data.data.document
-        formData.value.first_name = data.data.first_name
-        formData.value.last_name = data.data.last_name
-        formData.value.speciality = data.data.speciality
-        formData.value.sex = data.data.sex
-        formData.value.phone = data.data.phone
-        formData.value.birthdate = data.data.birthdate
-        formData.value.email = data.data.email
-        formData.value.address = data.data.address
-        formData.value.city = data.data.city
-        formData.value.state = data.data.state
-        formData.value.neighborhood = data.data.neighborhood
+        formData.value.type_document = data.type_document
+        formData.value.document = data.document
+        formData.value.first_name = data.first_name
+        formData.value.last_name = data.last_name
+        formData.value.speciality = data.speciality
+        formData.value.sex = data.sex
+        formData.value.phone = data.phone
+        formData.value.birthdate = data.birthdate
+        formData.value.email = data.email
+        formData.value.address = data.address
+        formData.value.city = data.city
+        formData.value.state = data.state
+        formData.value.neighborhood = data.neighborhood
+        formData.value.password = data.password
+        formData.value.password_confirmed = data.password_confirmed
     };
-    console.log(id)
 };
 
 const EditMedico = async (user) => {
@@ -689,7 +686,7 @@ const EditMedico = async (user) => {
             neighborhood: formData.value.neighborhood,
         };
 
-        await useApi("medico" + id, "PUT", datosActualizados);
+        await useApi("medico/" + id, "PUT", datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
@@ -724,7 +721,7 @@ const deleteUser = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            await useApi("eps" + id, "DELETE");
+            await useApi("medico/" + id, "DELETE");
 
             rows.value = rows.value.filter((d) => d.id != id);
 
