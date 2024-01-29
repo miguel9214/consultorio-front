@@ -1,4 +1,4 @@
-<!-- <template> -->
+<template>
     <div class="layout-px-spacing">
         <div class="seperator-header layout-top-spacing mb-4">
             <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
@@ -11,8 +11,9 @@
                         <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows">
                             <template #actions="data">
                                 <div class="flex">
-                                    <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
+                                    <button type="button" class="btn btn-success me-3"
+                                    data-bs-toggle="modal" data-bs-target="#modalEditarEPS"
+                                        @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger"
                                         @click="deleteUser(data.value.id)">Eliminar</button>
                                 </div>
@@ -37,13 +38,139 @@
                         <div class="col-md-6">
                             <form class="text-start">
                                 <div class="form">
-                                    <!-- T. Documento -->
-                                    <div id="type_document-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">T. documento</label>
-                                        <input v-model="formData.type_document" type="text" class="form-control" tabindex="1" />
+                                    <!-- Tipo de Documento -->
+                                    <div id="document-type-field" class="field-wrapper input mt-2">
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.type_document"
+                                                class="form-control form-control-sm border-0 pt-0"
+                                                style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 8px"
+                                                tabindex="1">
+                                                <option style="margin: 1px" value="" disabled selected>Tipo de
+                                                    Documento</option>
+                                                <option value="RC">RC</option>
+                                                <option value="TI">TI</option>
+                                                <option value="CC">CC</option>
+                                                <option value="EX">EX</option>
+                                            </select>
+                                        </div>
 
                                         <template v-if="errors.type_document.length > 0">
                                             <b :key="e" v-for="e in errors.type_document" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Nombre -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre</label>
+                                        <input v-model="formData.first_name" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.first_name.length > 0">
+                                            <b :key="e" v-for="e in errors.first_name" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Sexo -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Sexo</label>
+                                            <div style="margin-top: 1px">
+                                                <select v-model="formData.sex"
+                                                    class="form-control form-control-sm p-2 border-0 pt-0"
+                                                    style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
+                                                    tabindex="6">
+                                                    <option style="margin: 1px" value="" disabled selected>Genero
+                                                    </option>
+                                                    <option value="1">Masculino</option>
+                                                    <option value="2">Femenino</option>
+                                                </select>
+                                            </div>
+                                        <template v-if="errors.sex.length > 0">
+                                            <b :key="e" v-for="e in errors.sex" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de nacimiento -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Nacimientos</label>
+                                        <input v-model="formData.birthdate" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.birthdate.length > 0">
+                                            <b :key="e" v-for="e in errors.birthdate" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Ciudad -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Ciudad</label>
+                                        <input v-model="formData.city" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.city.length > 0">
+                                            <b :key="e" v-for="e in errors.city" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Barrio -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
+                                        <input v-model="formData.neighborhood" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.neighborhood.length > 0">
+                                            <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Email -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
+                                        <input v-model="formData.email" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.email.length > 0">
+                                            <b :key="e" v-for="e in errors.email" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>  
+                                    <!-- Contraseña -->
+                                    <div id="password-field" class="field-wrapper input mb-2">
+                                        <input v-model="formData.password"
+                                            :type="showPassword ? 'text' : 'password'" class="form-control"
+                                            placeholder="Contraseña" tabindex="15" />
+
+                                        <template v-if="errors.password.length > 0">
+                                            <b :key="e" v-for="e in errors.password" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Documento -->
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.document" type="text" class="form-control" tabindex="2" />
+
+                                        <template v-if="errors.document.length > 0">
+                                            <b :key="e" v-for="e in errors.document" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Apellido -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Apellido</label>
+                                        <input v-model="formData.last_name" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.last_name.length > 0">
+                                            <b :key="e" v-for="e in errors.last_name" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -59,29 +186,10 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Fecha de Inicial Contrato -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
-                                            Contrato</label>
-                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
-                                            tabindex="5" />
-
-                                        <template v-if="errors.contract_start_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="text-start">
-                                <div class="form">
                                     <!-- Direccion -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.address.length > 0">
                                             <b :key="e" v-for="e in errors.address" class="text-danger">
@@ -89,26 +197,37 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Codigo -->
+                                    <!-- Estado -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
-                                        <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado</label>
+                                        <input v-model="formData.state" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.code.length > 0">
-                                            <b :key="e" v-for="e in errors.code" class="text-danger">
+                                        <template v-if="errors.state.length > 0">
+                                            <b :key="e" v-for="e in errors.state" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Fecha de Final Contrato -->
+                                    <!-- Especialidad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
-                                            Contrato</label>
-                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
-                                            tabindex="6" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad</label>
+                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.contract_end_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
+                                        <template v-if="errors.speciality.length > 0">
+                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Confirmar Contraseña -->
+                                    <div id="confirm-password-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
+                                        <input v-model="formData.password_confirmed"
+                                            :type="showPassword ? 'text' : 'password'" class="form-control"
+                                            placeholder="Confirmar Contraseña" tabindex="16" />
+
+                                        <template v-if="errors.password_confirmed.length > 0">
+                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -146,13 +265,139 @@
                         <div class="col-md-6">
                             <form class="text-start">
                                 <div class="form">
-                                    <!-- Nombre EPS -->
-                                    <div id="username-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre EPS</label>
-                                        <input v-model="formData.name" type="text" class="form-control" tabindex="1" />
+                                    <!-- Tipo de Documento -->
+                                    <div id="document-type-field" class="field-wrapper input mt-2">
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.type_document"
+                                                class="form-control form-control-sm border-0 pt-0"
+                                                style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 8px"
+                                                tabindex="1">
+                                                <option style="margin: 1px" value="" disabled selected>Tipo de
+                                                    Documento</option>
+                                                <option value="RC">RC</option>
+                                                <option value="TI">TI</option>
+                                                <option value="CC">CC</option>
+                                                <option value="EX">EX</option>
+                                            </select>
+                                        </div>
 
-                                        <template v-if="errors.name.length > 0">
-                                            <b :key="e" v-for="e in errors.name" class="text-danger">
+                                        <template v-if="errors.type_document.length > 0">
+                                            <b :key="e" v-for="e in errors.type_document" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Nombre -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre</label>
+                                        <input v-model="formData.first_name" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.first_name.length > 0">
+                                            <b :key="e" v-for="e in errors.first_name" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Sexo -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Sexo</label>
+                                            <div style="margin-top: 1px">
+                                                <select v-model="formData.sex"
+                                                    class="form-control form-control-sm p-2 border-0 pt-0"
+                                                    style="margin-left: 25px; width: 220px; font-family: inherit; font-weight: 600; font-size: 16px; padding: 1px 16px 9px 16px"
+                                                    tabindex="6">
+                                                    <option style="margin: 1px" value="" disabled selected>Genero
+                                                    </option>
+                                                    <option value="1">Masculino</option>
+                                                    <option value="2">Femenino</option>
+                                                </select>
+                                            </div>
+                                        <template v-if="errors.sex.length > 0">
+                                            <b :key="e" v-for="e in errors.sex" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de nacimiento -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Nacimientos</label>
+                                        <input v-model="formData.birthdate" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.birthdate.length > 0">
+                                            <b :key="e" v-for="e in errors.birthdate" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Ciudad -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Ciudad</label>
+                                        <input v-model="formData.city" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.city.length > 0">
+                                            <b :key="e" v-for="e in errors.city" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Barrio -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
+                                        <input v-model="formData.neighborhood" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.neighborhood.length > 0">
+                                            <b :key="e" v-for="e in errors.neighborhood" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Email -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Barrio</label>
+                                        <input v-model="formData.email" type="date" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.email.length > 0">
+                                            <b :key="e" v-for="e in errors.email" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>  
+                                    <!-- Contraseña -->
+                                    <div id="password-field" class="field-wrapper input mb-2">
+                                        <input v-model="formData.password"
+                                            :type="showPassword ? 'text' : 'password'" class="form-control"
+                                            placeholder="Contraseña" tabindex="15" />
+
+                                        <template v-if="errors.password.length > 0">
+                                            <b :key="e" v-for="e in errors.password" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Documento -->
+                                    <div id="username-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
+                                        <input v-model="formData.document" type="text" class="form-control" tabindex="2" />
+
+                                        <template v-if="errors.document.length > 0">
+                                            <b :key="e" v-for="e in errors.document" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Apellido -->
+                                    <div id="username-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Apellido</label>
+                                        <input v-model="formData.last_name" type="text" class="form-control" tabindex="3" />
+
+                                        <template v-if="errors.last_name.length > 0">
+                                            <b :key="e" v-for="e in errors.last_name" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -168,29 +413,10 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Fecha de Inicial Contrato -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Inicial
-                                            Contrato</label>
-                                        <input v-model="formData.contract_start_date" type="date" class="form-control"
-                                            tabindex="5" />
-
-                                        <template v-if="errors.contract_start_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_start_date" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="text-start">
-                                <div class="form">
                                     <!-- Direccion -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Dirección</label>
-                                        <input v-model="formData.address" type="text" class="form-control" tabindex="2" />
+                                        <input v-model="formData.address" type="text" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.address.length > 0">
                                             <b :key="e" v-for="e in errors.address" class="text-danger">
@@ -198,26 +424,37 @@
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Codigo -->
+                                    <!-- Estado -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">NIT</label>
-                                        <input v-model="formData.code" type="text" class="form-control" tabindex="4" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado</label>
+                                        <input v-model="formData.state" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.code.length > 0">
-                                            <b :key="e" v-for="e in errors.code" class="text-danger">
+                                        <template v-if="errors.state.length > 0">
+                                            <b :key="e" v-for="e in errors.state" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
                                     </div>
-                                    <!-- Fecha de Final Contrato -->
+                                    <!-- Especialidad -->
                                     <div id="username-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha Final
-                                            Contrato</label>
-                                        <input v-model="formData.contract_end_date" type="date" class="form-control"
-                                            tabindex="6" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Especialidad</label>
+                                        <input v-model="formData.speciality" type="text" class="form-control" tabindex="3" />
 
-                                        <template v-if="errors.contract_end_date.length > 0">
-                                            <b :key="e" v-for="e in errors.contract_end_date" class="text-danger">
+                                        <template v-if="errors.speciality.length > 0">
+                                            <b :key="e" v-for="e in errors.speciality" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Confirmar Contraseña -->
+                                    <div id="confirm-password-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
+                                        <input v-model="formData.password_confirmed"
+                                            :type="showPassword ? 'text' : 'password'" class="form-control"
+                                            placeholder="Confirmar Contraseña" tabindex="16" />
+
+                                        <template v-if="errors.password_confirmed.length > 0">
+                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -242,7 +479,7 @@
     </div>
 </template>
 
-<!-- <script setup> -->
+<script setup>
 import { onMounted, ref } from 'vue';
 import Vue3Datatable from '@bhplugin/vue3-datatable';
 
@@ -252,22 +489,23 @@ useMeta({ title: 'Medicos' });
 
 const cols = ref([
     { field: 'index', title: '#Id', isUnique: true },
-    { field: 'type_document', title: 'T. documento' },
-    { field: 'document', title: 'Documento' },
-    { field: 'first_name', title: 'Nombre' },
-    { field: 'last_name', title: 'Apellido' },
-    { field: 'sex', title: 'Sexo' },
-    { field: 'phone', title: 'Telefono' },
-    { field: 'birthdate', title: 'Cumpleaños' },
-    { field: 'address', title: 'Direccion' },
-    { field: 'sex', title: 'Sexo' },
-    { field: 'city', title: 'Telefono' },
-    { field: 'state', title: 'Departamento' },
-    { field: 'neighborhood', title: 'Barrio' },
-    { field: 'speciality', title: 'Especialidad' },
+    { field: 'tipo_documento', title: 'T. documento' },
+    { field: 'documento', title: 'Documento' },
+    { field: 'nombre', title: 'Nombre' },
+    { field: 'apellido', title: 'Apellido' },
+    { field: 'sexo', title: 'Sexo' },
+    { field: 'telefono', title: 'Telefono' },
+    { field: 'fecha_nacimiento', title: 'Fecha Nacimiento' },
+    { field: 'direccion', title: 'Direccion' },
+    { field: 'ciudad', title: 'Telefono' },
+    { field: 'estado', title: 'Departamento' },
+    { field: 'barrio', title: 'Barrio' },
+    { field: 'especialidad', title: 'Especialidad' },
     { field: 'email', title: 'Correo' },
-    { field: 'password', title: 'Contraseña' },
+    { field: 'actions', title: 'Acciones' },
 ]);
+
+console.log("Columnas", cols)
 
 const rows = ref([]);
 const totalRows = ref(0);
@@ -286,13 +524,31 @@ const formData = ref({
     phone: '',
     birthdate: '',
     address: '',
-    sex: '',
     city: '',
     state: '',
     neighborhood: '',
     speciality: '',
     email: '',
-    password: ''
+    password: '',
+    password_confirmed: ''
+});
+
+const errors = ref({
+    type_document: [],
+    document: [],
+    first_name: [],
+    last_name: [],
+    sex: [],
+    phone: [],
+    birthdate: [],
+    address: [],
+    city: [],
+    state: [],
+    neighborhood: [],
+    speciality: [],
+    email: [],
+    password: [],
+    password_confirmed: []
 });
 
 const errorsClear = () => {
@@ -305,13 +561,13 @@ const errorsClear = () => {
         phone: [],
         birthdate: [],
         address: [],
-        sex: [],
         city: [],
         state: [],
         neighborhood: [],
         speciality: [],
         email: [],
-        password: []
+        password: [],
+        password_confirmed: []
     }
 }
 
@@ -325,23 +581,22 @@ const resetFormData = () => {
         phone: '',
         birthdate: '',
         address: '',
-        sex: '',
         city: '',
         state: '',
         neighborhood: '',
         speciality: '',
         email: '',
-        password: ''
+        password: '',
+        password_confirmed: ''        
     };
 };
 
 const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
-        const data = await useApi("medico");
+        const  { data, message } = await useApi("medico");
         rows.value = data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = data.length;
-        console.log(data);
     } catch (error) {
         console.error('Error fetching data from API:', error);
     }
@@ -411,12 +666,11 @@ const viewUser = async (user) => {
         formData.value.city = data.data.city
         formData.value.state = data.data.state
         formData.value.neighborhood = data.data.neighborhood
-        formData.value.password = data.data.password
     };
     console.log(id)
 };
 
-const editMedico = async (user) => {
+const EditMedico = async (user) => {
 
     try {
         const datosActualizados = {
@@ -433,7 +687,6 @@ const editMedico = async (user) => {
             city: formData.value.city,
             state: formData.value.state,
             neighborhood: formData.value.neighborhood,
-            password: formData.value.password
         };
 
         await useApi("medico" + id, "PUT", datosActualizados);
