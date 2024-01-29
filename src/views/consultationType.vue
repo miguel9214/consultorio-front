@@ -251,14 +251,12 @@ let id;
 const viewUser = async (user) => {
 
     const { data, message } = await useApi("consultationType/" + user.id);
-    console.log('data: ', data);
 
     if (message == "Consultation Type found") {
         id = user.id
         formData.value.name = data.name
         formData.value.price = data.price
     };
-    console.log(id)
 };
 
 const EditTypeConsultation = async (user) => {

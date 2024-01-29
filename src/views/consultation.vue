@@ -38,12 +38,12 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Nombre Medico -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Medico</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.doctor_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="1">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
                                                     doctor.doctor }}</option>
@@ -57,12 +57,12 @@
                                         </template>
                                     </div>
                                     <!-- Tipo de Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Consulta</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.consultation_type_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="3">
                                                 <option style="margin: 1px" value="" disabled selected>Tipo de Consulta</option>
                                                 <option :value="consultation_type.id" :key="consultation_type.id"
                                                     v-for="consultation_type in consultation_typeList">{{
@@ -77,7 +77,7 @@
                                         </template>
                                     </div>
                                     <!-- Fecha de Consulta -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Consulta</label>
                                         <input v-model="formData.date" type="date" class="form-control"
                                             tabindex="5" />
@@ -95,13 +95,13 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Nombre Paciente -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre
                                             Paciente</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.pacient_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="2">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
                                                     v-for="pacient in pacientList">{{ pacient.patient }}</option>
@@ -115,12 +115,12 @@
                                         </template>
                                     </div>
                                     <!-- Paciente Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <div class="field-wrapper input">
                                             <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del Paciente</label>
                                             <select v-model="formData.status"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="15">
+                                                tabindex="4">
                                                 <option value="" disabled selected>Seleccionar estado</option>
                                                 <option value="completado">Completado</option>
                                                 <option value="cancelado">Cancelado</option>
@@ -179,12 +179,12 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Nombre Medico -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Medico</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.doctor_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="1">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
                                                     doctor.doctor }}</option>
@@ -198,12 +198,12 @@
                                         </template>
                                     </div>
                                     <!-- Tipo de Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Consulta</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.consultation_type_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="3">
                                                 <option style="margin: 1px" value="" disabled selected>Tipo de Consulta</option>
                                                 <option :value="consultation_type.id" :key="consultation_type.id"
                                                     v-for="consultation_type in consultation_typeList">{{
@@ -218,7 +218,7 @@
                                         </template>
                                     </div>
                                     <!-- Fecha de Consulta -->
-                                    <div id="username-field" class="field-wrapper input mt-2">
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Consulta</label>
                                         <input v-model="formData.date" type="date" class="form-control"
                                             tabindex="5" />
@@ -236,13 +236,13 @@
                             <form class="text-start">
                                 <div class="form">
                                     <!-- Nombre Paciente -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre
                                             Paciente</label>
                                         <div style="margin-top: 1px">
                                             <select v-model="formData.pacient_id"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="14">
+                                                tabindex="2">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
                                                     v-for="pacient in pacientList">{{ pacient.patient }}</option>
@@ -256,12 +256,12 @@
                                         </template>
                                     </div>
                                     <!-- Paciente Consulta -->
-                                    <div id="username-field" class="field-wrapper input">
+                                    <div id="consultation-field" class="field-wrapper input">
                                         <div class="field-wrapper input">
                                             <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del Paciente</label>
                                             <select v-model="formData.status"
                                                 class="mb-4 form-select w-100"
-                                                tabindex="15">
+                                                tabindex="4">
                                                 <option value="" disabled selected>Seleccionar estado</option>
                                                 <option value="completado">Completado</option>
                                                 <option value="cancelado">Cancelado</option>
@@ -436,18 +436,19 @@ const CreateEPS = async () => {
 let id;
 
 const viewUser = async (user) => {
+    console.log('user: ', user);
 
     const { data, message } = await useApi("consultation/" + user.id);
     console.log('data: ', data);
 
-    if (message == "EPS found") {
+    if (message == "Consultation found") {
         id = user.id
-        formData.value.name = data.name
-        formData.value.address = data.address
-        formData.value.phone = data.phone
-        formData.value.code = data.code
-        formData.value.contract_start_date = data.contract_start_date
-        formData.value.contract_end_date = data.contract_end_date
+        formData.value.pacient_id = data.pacient_id
+        formData.value.doctor_id = data.doctor_id
+        formData.value.consultation_type_id = data.consultation_type_id
+        formData.value.date = data.date
+        formData.value.observation = data.observation
+        formData.value.status = data.status
     };
     console.log(id)
 };
@@ -456,19 +457,20 @@ const EditEPS = async (user) => {
 
     try {
         const datosActualizados = {
-            name: formData.value.name,
-            address: formData.value.address,
-            phone: formData.value.phone,
-            code: formData.value.code,
-            contract_start_date: formData.value.contract_start_date,
-            contract_end_date: formData.value.contract_end_date
+            pacient_id: formData.value.pacient_id,
+            doctor_id: formData.value.doctor_id,
+            consultation_type_id: formData.value.consultation_type_id,
+            date: formData.value.date,
+            observation: formData.value.observation,
+            status: formData.value.status
         };
+
 
         await useApi("consultation/" + id, "PUT", datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
-            text: 'EPS editada correctamente!',
+            text: 'Consulta editada correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!'
         }).then(() => {
@@ -479,7 +481,7 @@ const EditEPS = async (user) => {
         });
 
     } catch (error) {
-        console.error("Error al actualizar la EPS:", error);
+        console.error("Error al actualizar la Consulta:", error);
     }
 
     fetchDataFromApi();
@@ -533,10 +535,10 @@ const doctorList = ref([]);
 
 const showDoctor = async () => {
     try {
-        const { data, message } = await useApi("personDoctor");
+        const { data, message } = await useApi("doctor");
         doctorList.value = data;
     } catch (error) {
-        console.error('Error al obtener los Tipos de Consultas', error);
+        console.error('Error al obtener las Consultas', error);
     }
 };
 
@@ -544,13 +546,11 @@ const pacientList = ref([]);
 
 const showPatient = async () => {
     try {
-        const { data, message } = await useApi("personPatient");
+        const { data, message } = await useApi("pacient");
         pacientList.value = data;
     } catch (error) {
-        console.error('Error al obtener los Tipos de Consultas', error);
+        console.error('Error al obtener las Consultas', error);
     }
 };
-
-
 
 </script>
