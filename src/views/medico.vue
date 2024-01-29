@@ -272,8 +272,8 @@
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Tipo de
                                                     Documento</option>
-                                                <option value="CC">CC</option>
-                                                <option value="EX">EX</option>
+                                                <option value="cc">CC</option>
+                                                <option value="ex">EX</option>
                                             </select>
                                         </div>
 
@@ -302,8 +302,8 @@
                                                 class="form-select w-100"
                                                 tabindex="14">
                                                 <option style="margin: 1px" value="" disabled selected>Genero</option>
-                                                <option value="1">Masculino</option>
-                                                <option value="2">Femenino</option>
+                                                <option value="masculino">Masculino</option>
+                                                <option value="femenino">Femenino</option>
                                             </select>
                                         </div>
 
@@ -356,20 +356,7 @@
                                                 {{ e }}
                                             </b>
                                         </template>
-                                    </div>                                      
-                                    <!-- Confirmar Contraseña -->
-                                    <div id="confirm-password-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Confirmar Contraseña</label>
-                                        <input v-model="formData.password_confirmed"
-                                            type="password" class="form-control"
-                                            placeholder="Confirmar Contraseña" tabindex="16" />
-
-                                        <template v-if="errors.password_confirmed.length > 0">
-                                            <b :key="e" v-for="e in errors.password_confirmed" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
+                                    </div>  
                                 </div>
                             </form>
                         </div>
@@ -438,18 +425,6 @@
 
                                         <template v-if="errors.address.length > 0">
                                             <b :key="e" v-for="e in errors.address" class="text-danger">
-                                                {{ e }}
-                                            </b>
-                                        </template>
-                                    </div>
-                                    <!-- Contraseña -->
-                                    <div id="password-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Contraseña</label>
-                                        <input v-model="formData.password" type="password" class="form-control"
-                                            placeholder="Contraseña" tabindex="15" />
-
-                                        <template v-if="errors.password.length > 0">
-                                            <b :key="e" v-for="e in errors.password" class="text-danger">
                                                 {{ e }}
                                             </b>
                                         </template>
@@ -647,23 +622,21 @@ const viewUser = async (user) => {
 
     const { data, message } = await useApi("medico/" + user.id);
 
-    if (data.message == "Doctors found") {
+    if (message == "Doctors found") {
         id = user.id
-        formData.value.type_document = data.type_document
-        formData.value.document = data.document
-        formData.value.first_name = data.first_name
-        formData.value.last_name = data.last_name
-        formData.value.speciality = data.speciality
-        formData.value.sex = data.sex
-        formData.value.phone = data.phone
-        formData.value.birthdate = data.birthdate
+        formData.value.type_document = data.tipo_documento
+        formData.value.document = data.documento
+        formData.value.first_name = data.nombre
+        formData.value.last_name = data.apellido
+        formData.value.speciality = data.especialidad
+        formData.value.sex = data.sexo
+        formData.value.phone = data.telefono
+        formData.value.birthdate = data.fecha_nacimiento
         formData.value.email = data.email
-        formData.value.address = data.address
-        formData.value.city = data.city
-        formData.value.state = data.state
-        formData.value.neighborhood = data.neighborhood
-        formData.value.password = data.password
-        formData.value.password_confirmed = data.password_confirmed
+        formData.value.address = data.direccion
+        formData.value.city = data.ciudad
+        formData.value.state = data.estado
+        formData.value.neighborhood = data.barrio
     };
 };
 
