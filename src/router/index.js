@@ -51,11 +51,20 @@ const routes = [
         meta: { required_auth: true },
     },
 
+
     //SPECIALITY
     {
         path: '/speciality',
         name: 'speciality',
         component: () => import(/* webpackChunkName: "eps" */ '../views/speciality.vue'),
+    },
+
+    //FACTURA
+    {
+        path: '/factura',
+        name: 'factura',
+        component: () => import(/* webpackChunkName: "factura" */ '../views/factura.vue'),
+
         meta: { required_auth: true },
     },
 
