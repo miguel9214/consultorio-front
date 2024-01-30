@@ -57,7 +57,7 @@
                                     <!-- Precio -->
                                     <div id="username-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Precio</label>
-                                        <input v-model="formData.price" type="text" class="form-control" tabindex="2" />
+                                        <input v-model="formData.price" type="number" class="form-control" tabindex="2" />
 
                                         <template v-if="errors.price.length > 0">
                                             <b :key="e" v-for="e in errors.price" class="text-danger">
@@ -118,7 +118,7 @@
                                     <!-- Precio -->
                                     <div id="username-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Precio</label>
-                                        <input v-model="formData.price" type="text" class="form-control" tabindex="2" />
+                                        <input v-model="formData.price" type="number" class="form-control" tabindex="2" />
 
                                         <template v-if="errors.price.length > 0">
                                             <b :key="e" v-for="e in errors.price" class="text-danger">

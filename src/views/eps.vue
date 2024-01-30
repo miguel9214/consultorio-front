@@ -52,7 +52,7 @@
                                     <!-- Telefono -->
                                     <div id="username-field" class="field-wrapper input mt-2">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                        <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+                                        <input v-model="formData.phone" type="number" class="form-control" tabindex="3" />
 
                                         <template v-if="errors.phone.length > 0">
                                             <b :key="e" v-for="e in errors.phone" class="text-danger">
@@ -160,7 +160,7 @@
                                 <!-- Telefono -->
                                 <div id="username-field" class="field-wrapper input mt-2">
                                     <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Telefono</label>
-                                    <input v-model="formData.phone" type="text" class="form-control" tabindex="3" />
+                                    <input v-model="formData.phone" type="number" class="form-control" tabindex="3" />
 
                                     <template v-if="errors.phone.length > 0">
                                         <b :key="e" v-for="e in errors.phone" class="text-danger">
@@ -254,7 +254,7 @@ const cols = ref([
     { field: 'index', title: '#Id', isUnique: true },
     { field: 'name', title: 'Nombre' },
     { field: 'address', title: 'Dirección' },
-    { field: 'phone', title: 'Teleono' },
+    { field: 'phone', title: 'Telefono' },
     { field: 'code', title: 'NIT' },
     { field: 'contract_start_date', title: 'Inicio de Contrato' },
     { field: 'contract_end_date', title: 'Final de Contrato' },
@@ -336,7 +336,9 @@ const CreateEPS = async () => {
         }
     });
 
-    if (has_error) return;
+    if (has_error) {
+        return;
+    }
 
     try {
         await useApi("eps","POST", formData.value);
