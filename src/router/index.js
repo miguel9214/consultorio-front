@@ -51,6 +51,14 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //FACTURA
+    {
+        path: '/factura',
+        name: 'factura',
+        component: () => import(/* webpackChunkName: "factura" */ '../views/factura.vue'),
+        meta: { required_auth: true },
+    },
+
     //components
     {
         path: '/components/tabs',

@@ -327,6 +327,7 @@ const cols = ref([
     { field: 'doctor', title: 'Medicos' },
     { field: 'tipo_consulta', title: 'Tipo de Consulta' },
     { field: 'fecha', title: 'Fecha' },
+    { field: 'hora', title: 'Hora' },
     { field: 'observacion', title: 'Observacion' },
     { field: 'estado', title: 'Estado' },
     { field: 'actions', title: 'Acciones' },
