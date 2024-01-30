@@ -51,6 +51,14 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //SPECIALITY
+    {
+        path: '/speciality',
+        name: 'speciality',
+        component: () => import(/* webpackChunkName: "eps" */ '../views/speciality.vue'),
+        meta: { required_auth: true },
+    },
+
     //components
     {
         path: '/components/tabs',
