@@ -51,7 +51,6 @@ const routes = [
         meta: { required_auth: true },
     },
 
-
     //SPECIALITY
     {
         path: '/speciality',
@@ -61,10 +60,27 @@ const routes = [
 
     //FACTURA
     {
-        path: '/factura',
-        name: 'factura',
-        component: () => import(/* webpackChunkName: "factura" */ '../views/factura.vue'),
-
+        path: '/invoices/list',
+        name: 'invoices-list',
+        component: () => import(/* webpackChunkName: "apps-invoice-list" */ '../views/factura/listar.vue'),
+        meta: { required_auth: true },
+    },
+    {
+        path: '/invoices/preview',
+        name: 'invoices-preview',
+        component: () => import(/* webpackChunkName: "apps-invoice-preview" */ '../views/factura/avance.vue'),
+        meta: { required_auth: true },
+    },
+    {
+        path: '/invoices/add',
+        name: 'invoices-add',
+        component: () => import(/* webpackChunkName: "apps-invoice-add" */ '../views/factura/agregar.vue'),
+        meta: { required_auth: true },
+    },
+    {
+        path: '/invoices/edit',
+        name: 'invoices-edit',
+        component: () => import(/* webpackChunkName: "apps-invoice-edit" */ '../views/factura/editar.vue'),
         meta: { required_auth: true },
     },
 

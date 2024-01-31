@@ -203,6 +203,43 @@
                         </div>
                     </router-link>
                 </li>
+
+                <!-- FACTURA -->
+                <li class="menu">
+                    <a href="#Invoice" class="dropdown-toggle" data-bs-toggle="collapse" aria-controls="dashboard"
+                        aria-expanded="false">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V4C20 2.89543 19.1046 2 18 2ZM8 15H16M8 11H16M8 7H12" stroke-width="1"></path>
+                            </svg>
+                            
+                            <span>{{ $t('Factura') }}</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <ul id="Invoice" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+                        <li>
+                            <router-link to="/invoices/list" @click="toggleMobileMenu">Lista</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/invoices/preview" @click="toggleMobileMenu">Avance</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/invoices/add" @click="toggleMobileMenu">Agregar</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/invoices/edit" @click="toggleMobileMenu">Editar</router-link>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#apps" aria-controls="apps"
                         aria-expanded="false">
@@ -858,21 +895,22 @@
 
                 <li class="menu" @click="toggleMobileMenu">
                     <a target="_blank" href="https://cork-vue.sbthemes.com" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-book">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                        </svg>
-                        <span>{{ $t('documentation') }}</span>
-                    </div>
-                </a>
-            </li>
-        </perfect-scrollbar>
-    </nav>
-</div>
-<!--  END SIDEBAR  --></template>
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-book">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            <span>{{ $t('documentation') }}</span>
+                        </div>
+                    </a>
+                </li>
+            </perfect-scrollbar>
+        </nav>
+    </div>
+    <!--  END SIDEBAR  -->
+</template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
