@@ -28,7 +28,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Crear EPS</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Consultorio</h5>
                     <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"
                         @click="resetFormData"></button>
                 </div>
@@ -133,6 +133,18 @@
                                                 </b>
                                             </template>
                                         </div>
+                                    </div>
+                                    <!-- Hora de Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de Consulta</label>
+                                        <input v-model="formData.hour" type="time" class="form-control"
+                                            tabindex="5" />
+
+                                        <template v-if="errors.hour.length > 0">
+                                            <b :key="e" v-for="e in errors.hour" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
                                     </div>
                                 </div>
                             </form>
@@ -169,7 +181,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar EPS</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Consulta</h5>
                     <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"
                         @click="resetFormData"></button>
                 </div>
@@ -274,6 +286,18 @@
                                                 </b>
                                             </template>
                                         </div>
+                                    </div>
+                                    <!-- Hora de Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de Consulta</label>
+                                        <input v-model="formData.hour" type="time" class="form-control"
+                                            tabindex="5" />
+
+                                        <template v-if="errors.hour.length > 0">
+                                            <b :key="e" v-for="e in errors.hour" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
                                     </div>
                                 </div>
                             </form>
@@ -345,6 +369,7 @@ const formData = ref({
     doctor_id: '',
     consultation_type_id: '',
     date: '',
+    hour: '',
     observation: '',
     status: '',
 });
@@ -354,6 +379,7 @@ const errors = ref({
     doctor_id: [],
     consultation_type_id: [],
     date: [],
+    hour: [],
     observation: [],
     status: [],
 });
@@ -364,6 +390,7 @@ const errorsClear = () => {
         doctor_id: [],
         consultation_type_id: [],
         date: [],
+        hour: [],
         observation: [],
         status: [],
     }
@@ -375,6 +402,7 @@ const resetFormData = () => {
         doctor_id: '',
         consultation_type_id: '',
         date: '',
+        hour: '',
         observation: '',
         status: '',
     };
@@ -448,6 +476,7 @@ const viewUser = async (user) => {
         formData.value.doctor_id = data.doctor_id
         formData.value.consultation_type_id = data.consultation_type_id
         formData.value.date = data.date
+        formData.value.hour = data.hour
         formData.value.observation = data.observation
         formData.value.status = data.status
     };
@@ -462,6 +491,7 @@ const EditEPS = async (user) => {
             doctor_id: formData.value.doctor_id,
             consultation_type_id: formData.value.consultation_type_id,
             date: formData.value.date,
+            hour: formData.value.hour,
             observation: formData.value.observation,
             status: formData.value.status
         };
