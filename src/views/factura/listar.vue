@@ -223,8 +223,8 @@
         texts: {
             count: "Showing {from} to {to} of {count}",
             filter: "",
-            filterPlaceholder: "Search...",
-            limit: "Results:",
+            filterPlaceholder: "Buscar...",
+            limit: "Resultado:",
         },
         resizableColumns: false,
         sortable: ["invoice", "name", "email", "date", "amount", "status"],
@@ -236,134 +236,25 @@
     });
     const selected_rows = ref([]);
 
-    onMounted(() => {
-        bind_data();
-    });
 
-    const bind_data = () => {
-        items.value = [
-            {
-                id: 1,
-                invoice: "081451",
-                thumb: "profile-28.jpeg",
-                name: "Laurie Fox",
-                email: "lauriefox@company.com",
-                date: "15 Dec 2020",
-                amount: "2275.45",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 2,
-                invoice: "081452",
-                thumb: "profile-30.png",
-                name: "Alexander Gray",
-                email: "alexGray3188@gmail.com",
-                date: "20 Dec 2020",
-                amount: "1044.00",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 3,
-                invoice: "081681",
-                thumb: "profile-32.jpeg",
-                name: "James Taylor",
-                email: "jamestaylor468@gmail.com",
-                date: "27 Dec 2020",
-                amount: "20.00",
-                status: { key: "Pending", class: "danger" },
-            },
-            {
-                id: 4,
-                invoice: "082693",
-                thumb: "profile-24.jpeg",
-                name: "Grace Roberts",
-                email: "graceRoberts@company.com",
-                date: "31 Dec 2020",
-                amount: "344.00",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 5,
-                invoice: "084743",
-                thumb: "profile-18.jpeg",
-                name: "Donna Rogers",
-                email: "donnaRogers@hotmail.com",
-                date: "03 Jan 2021",
-                amount: "405.15",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 6,
-                invoice: "086643",
-                thumb: "profile-11.jpeg",
-                name: "Amy Diaz",
-                email: "amy968@gmail.com",
-                date: "14 Jan 2020",
-                amount: "100.00",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 7,
-                invoice: "086773",
-                thumb: "profile-14.jpeg",
-                name: "Nia Hillyer",
-                email: "niahillyer666@comapny.com",
-                date: "20 Jan 2021",
-                amount: "59.21",
-                status: { key: "Pending", class: "danger" },
-            },
-            {
-                id: 8,
-                invoice: "087916",
-                thumb: "profile-15.jpeg",
-                name: "Mary McDonald",
-                email: "maryDonald007@gamil.com",
-                date: "25 Jan 2021",
-                amount: "79.00",
-                status: { key: "Pending", class: "danger" },
-            },
-            {
-                id: 9,
-                invoice: "089472",
-                thumb: "profile-1.jpeg",
-                name: "Andy King",
-                email: "kingandy07@company.com",
-                date: "28 Jan 2021",
-                amount: "149.00",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 10,
-                invoice: "091768",
-                thumb: "profile-7.jpeg",
-                name: "Vincent Carpenter",
-                email: "vincentcarpenter@gmail.com",
-                date: "30 Jan 2021",
-                amount: "400",
-                status: { key: "Paid", class: "success" },
-            },
-            {
-                id: 11,
-                invoice: "095841",
-                thumb: "profile-8.jpeg",
-                name: "Kelly Young",
-                email: "youngkelly@hotmail.com",
-                date: "06 Feb 2021",
-                amount: "49.00",
-                status: { key: "Pending", class: "danger" },
-            },
-            {
-                id: 12,
-                invoice: "098424",
-                thumb: "profile-12.jpeg",
-                name: "Alma Clarke",
-                email: "alma.clarke@gmail.com",
-                date: "10 Feb 2021",
-                amount: "234.40",
-                status: { key: "Paid", class: "success" },
-            },
-        ];
-    };
+onMounted(async () => {
+    await bind_data();
+});
+
+
+const fetchDataFromApi = async () => {
+    try {
+        const { data, message } = await useApi("invoice");
+        rows.value = data;
+        console.log('data: ', data);
+        totalRows.value = data.length;
+    } catch (error) {
+        console.error('Error fetching data from API:', error);
+    }
+};
+
+console.log('fetchDataFromApi: ', fetchDataFromApi());
+
 
     const delete_row = (item) => {
         if (confirm("Are you sure want to delete selected row ?")) {
