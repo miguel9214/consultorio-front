@@ -67,21 +67,18 @@
                                     <label class="custom-control-label" :for="'chk' + props.row.id"></label>
                                 </div>
                             </template>
-                            <template #invoice="props">
+                            <template #factura="props">
                                 <router-link to="/invoices/preview">
-                                    <span class="inv-number">#{{ props.row.invoice }}</span>
+                                    <span class="factura-number">#{{ props.row.factura }}</span>
                                 </router-link>
                             </template>
-                            <template #name="props">
+                            <template #paciente="props">
                                 <div class="d-flex">
-                                    <div class="usr-img-frame me-2 rounded-circle">
-                                        <img :src="'/src/assets/images/' + props.row.thumb" class="img-fluid rounded-circle" alt="avatar" />
-                                    </div>
-                                    <p class="align-self-center mb-0 admin-name">{{ props.row.name }}</p>
+                                    <p class="align-self-center mb-0 paciente-name">{{ props.row.paciente }}</p>
                                 </div>
                             </template>
-                            <template #email="props">
-                                <span class="inv-email">
+                            <template #correo="props">
+                                <span class="correo-email">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -97,11 +94,11 @@
                                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                         <polyline points="22,6 12,13 2,6"></polyline>
                                     </svg>
-                                    {{ props.row.email }}
+                                    {{ props.row.correo }}
                                 </span>
                             </template>
-                            <template #date="props">
-                                <span class="inv-date">
+                            <template #fecha="props">
+                                <span class="fecha-date">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -119,14 +116,14 @@
                                         <line x1="8" y1="2" x2="8" y2="6"></line>
                                         <line x1="3" y1="10" x2="21" y2="10"></line>
                                     </svg>
-                                    {{ props.row.date }}
+                                    {{ props.row.fecha }}
                                 </span>
                             </template>
-                            <template #amount="props"> ${{ props.row.amount }} </template>
-                            <template #status="props">
-                                <span class="badge inv-status" :class="'badge-' + props.row.status.class">{{ props.row.status.key }}</span>
+                            <template #pagar="props"> ${{ props.row.pagar }} </template>
+                            <template #estado="props">
+                                <span class="estado-status">{{ props.row.estado }}</span>
                             </template>
-                            <template #actions="props">
+                            <template #acciones="props">
                                 <div class="mb-4 me-2 custom-dropdown dropdown btn-group">
                                     <a class="btn dropdown-toggle btn-icon-only" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <svg
@@ -150,7 +147,7 @@
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pendingTask">
                                         <li>
-                                            <router-link href="javascript:void(0);" to="/invoices/edit" class="dropdown-item action-edit"
+                                            <router-link href="javascript:void(0);" to="/invoices/edit" class="dropdown-item acciones-edit"
                                                 ><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     width="24"
@@ -170,7 +167,7 @@
                                             </router-link>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" @click="delete_row(props.row)" class="dropdown-item action-delete"
+                                            <a href="javascript:void(0);" @click="delete_row(props.row)" class="dropdown-item acciones-delete"
                                                 ><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     width="24"
@@ -205,10 +202,11 @@
     import "/src/assets/sass/apps/invoice-list.scss";
 
     import { useMeta } from "/src/composables/use-meta";
+    import { useApi } from '/src/composables/use-api';
     useMeta({ title: "Listado Factura" });
 
     const items = ref([]);
-    const columns = ref(["id", "invoice", "name", "email", "date", "amount", "status", "actions"]);
+    const columns = ref(["id", "factura", "paciente", "correo", "fecha", "pagar", "estado", "acciones"]);
     const table_option = ref({
         headings: {
             id: (h, row, index) => {
@@ -223,38 +221,32 @@
         texts: {
             count: "Showing {from} to {to} of {count}",
             filter: "",
-            filterPlaceholder: "Buscar...",
-            limit: "Resultado:",
+            filterPlaceholder: "Search...",
+            limit: "Results:",
         },
         resizableColumns: false,
-        sortable: ["invoice", "name", "email", "date", "amount", "status"],
+        sortable: ["factura", "paciente", "correo", "fecha", "pagar", "estado"],
         sortIcon: {
             base: "sort-icon-none",
             up: "sort-icon-asc",
             down: "sort-icon-desc",
         },
     });
+    
     const selected_rows = ref([]);
 
+    onMounted(async () => {
+        await fetchDataFromApi();
+    });
 
-onMounted(async () => {
-    await bind_data();
-});
-
-
-const fetchDataFromApi = async () => {
-    try {
-        const { data, message } = await useApi("invoice");
-        rows.value = data;
-        console.log('data: ', data);
-        totalRows.value = data.length;
-    } catch (error) {
-        console.error('Error fetching data from API:', error);
-    }
-};
-
-console.log('fetchDataFromApi: ', fetchDataFromApi());
-
+    const fetchDataFromApi = async () => {
+        try {
+            const { data, message } = await useApi("invoice");
+            items.value = data;
+        } catch (error) {
+            console.error('Error fetching data from API:', error);
+        }
+    };
 
     const delete_row = (item) => {
         if (confirm("Are you sure want to delete selected row ?")) {

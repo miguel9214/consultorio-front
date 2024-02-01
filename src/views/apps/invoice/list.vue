@@ -208,7 +208,7 @@
 
 <script setup>
     import { onMounted, ref } from "vue";
-    import "/src/assets/sass/apps/invoice-list.scss";
+    import "/src/assets/sass/apps/invoice-listar.scss";
 
     import { useMeta } from "/src/composables/use-meta";
     useMeta({ title: "Invoice List" });
