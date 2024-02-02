@@ -331,7 +331,7 @@
     const params = ref({
         title: "",
         invoice_no: "",
-        from: { name: "", email: "", address: "", phone: "" },
+        from: { name: "Consultorio SAS", email: "consultorio@company.com.co", address: "Cra 29 # 1 - 23", phone: "3143470843" },
         to: { name: "", email: "", address: "", phone: "" },
         invoice_date: "",
         due_date: "",
