@@ -13,8 +13,11 @@
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3" data-bs-toggle="modal"
                                         data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
-                                    <button type="button" class="btn btn-danger"
-                                        @click="deleteUser(data.value.id)">Eliminar</button>
+                                    <button type="button" class="btn btn-danger me-3"
+                                        @click="deleteUser(data.value.id)">Eliminar</button>                                
+                                    <router-link to="/invoices/list" class="btn me-2 btn-secondary"  @click="invoiceConsultation(data.value.id)">
+                                        Facturar
+                                    </router-link>
                                 </div>
                             </template>
                         </vue3-datatable>
@@ -41,8 +44,7 @@
                                     <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Medico</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.doctor_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.doctor_id" class="mb-4 form-select w-100"
                                                 tabindex="1">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
@@ -58,12 +60,13 @@
                                     </div>
                                     <!-- Tipo de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Consulta</label>
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de
+                                            Consulta</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.consultation_type_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.consultation_type_id" class="mb-4 form-select w-100"
                                                 tabindex="3">
-                                                <option style="margin: 1px" value="" disabled selected>Tipo de Consulta</option>
+                                                <option style="margin: 1px" value="" disabled selected>Tipo de Consulta
+                                                </option>
                                                 <option :value="consultation_type.id" :key="consultation_type.id"
                                                     v-for="consultation_type in consultation_typeList">{{
                                                         consultation_type.name }}</option>
@@ -78,9 +81,9 @@
                                     </div>
                                     <!-- Fecha de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Consulta</label>
-                                        <input v-model="formData.date" type="date" class="form-control"
-                                            tabindex="5" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de
+                                            Consulta</label>
+                                        <input v-model="formData.date" type="date" class="form-control" tabindex="5" />
 
                                         <template v-if="errors.date.length > 0">
                                             <b :key="e" v-for="e in errors.date" class="text-danger">
@@ -99,8 +102,7 @@
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre
                                             Paciente</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.pacient_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.pacient_id" class="mb-4 form-select w-100"
                                                 tabindex="2">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
@@ -117,10 +119,9 @@
                                     <!-- Paciente Consulta -->
                                     <div id="consultation-field" class="field-wrapper input">
                                         <div class="field-wrapper input">
-                                            <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del Paciente</label>
-                                            <select v-model="formData.status"
-                                                class="mb-4 form-select w-100"
-                                                tabindex="4">
+                                            <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del
+                                                Paciente</label>
+                                            <select v-model="formData.status" class="mb-4 form-select w-100" tabindex="4">
                                                 <option value="" disabled selected>Seleccionar estado</option>
                                                 <option value="completado">Completado</option>
                                                 <option value="cancelado">Cancelado</option>
@@ -136,9 +137,9 @@
                                     </div>
                                     <!-- Hora de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de Consulta</label>
-                                        <input v-model="formData.hour" type="time" class="form-control"
-                                            tabindex="5" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de
+                                            Consulta</label>
+                                        <input v-model="formData.hour" type="time" class="form-control" tabindex="5" />
 
                                         <template v-if="errors.hour.length > 0">
                                             <b :key="e" v-for="e in errors.hour" class="text-danger">
@@ -194,8 +195,7 @@
                                     <div id="consultation-field" class="field-wrapper input">
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Medico</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.doctor_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.doctor_id" class="mb-4 form-select w-100"
                                                 tabindex="1">
                                                 <option style="margin: 1px" value="" disabled selected>Medicos</option>
                                                 <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{
@@ -211,12 +211,13 @@
                                     </div>
                                     <!-- Tipo de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Consulta</label>
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de
+                                            Consulta</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.consultation_type_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.consultation_type_id" class="mb-4 form-select w-100"
                                                 tabindex="3">
-                                                <option style="margin: 1px" value="" disabled selected>Tipo de Consulta</option>
+                                                <option style="margin: 1px" value="" disabled selected>Tipo de Consulta
+                                                </option>
                                                 <option :value="consultation_type.id" :key="consultation_type.id"
                                                     v-for="consultation_type in consultation_typeList">{{
                                                         consultation_type.name }}</option>
@@ -231,9 +232,9 @@
                                     </div>
                                     <!-- Fecha de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Consulta</label>
-                                        <input v-model="formData.date" type="date" class="form-control"
-                                            tabindex="5" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de
+                                            Consulta</label>
+                                        <input v-model="formData.date" type="date" class="form-control" tabindex="5" />
 
                                         <template v-if="errors.date.length > 0">
                                             <b :key="e" v-for="e in errors.date" class="text-danger">
@@ -252,8 +253,7 @@
                                         <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre
                                             Paciente</label>
                                         <div style="margin-top: 1px">
-                                            <select v-model="formData.pacient_id"
-                                                class="mb-4 form-select w-100"
+                                            <select v-model="formData.pacient_id" class="mb-4 form-select w-100"
                                                 tabindex="2">
                                                 <option style="margin: 1px" value="" disabled selected>Pacientes</option>
                                                 <option :value="pacient.id" :key="pacient.id"
@@ -270,10 +270,9 @@
                                     <!-- Paciente Consulta -->
                                     <div id="consultation-field" class="field-wrapper input">
                                         <div class="field-wrapper input">
-                                            <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del Paciente</label>
-                                            <select v-model="formData.status"
-                                                class="mb-4 form-select w-100"
-                                                tabindex="4">
+                                            <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del
+                                                Paciente</label>
+                                            <select v-model="formData.status" class="mb-4 form-select w-100" tabindex="4">
                                                 <option value="" disabled selected>Seleccionar estado</option>
                                                 <option value="completado">Completado</option>
                                                 <option value="cancelado">Cancelado</option>
@@ -289,9 +288,9 @@
                                     </div>
                                     <!-- Hora de Consulta -->
                                     <div id="consultation-field" class="field-wrapper input mt-2">
-                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de Consulta</label>
-                                        <input v-model="formData.hour" type="time" class="form-control"
-                                            tabindex="5" />
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de
+                                            Consulta</label>
+                                        <input v-model="formData.hour" type="time" class="form-control" tabindex="5" />
 
                                         <template v-if="errors.hour.length > 0">
                                             <b :key="e" v-for="e in errors.hour" class="text-danger">
@@ -343,7 +342,6 @@ onBeforeMount(() => {
     showDoctor();
     showPatient();
 });
-
 
 const cols = ref([
     { field: 'index', title: '#Id', isUnique: true },
@@ -465,10 +463,8 @@ const CreateEPS = async () => {
 let id;
 
 const viewUser = async (user) => {
-    console.log('user: ', user);
 
     const { data, message } = await useApi("consultation/" + user.id);
-    console.log('data: ', data);
 
     if (message == "Consultation found") {
         id = user.id
@@ -480,7 +476,6 @@ const viewUser = async (user) => {
         formData.value.observation = data.observation
         formData.value.status = data.status
     };
-    console.log(id)
 };
 
 const EditEPS = async (user) => {
@@ -584,4 +579,10 @@ const showPatient = async () => {
     }
 };
 
+const invoiceConsultation = async (id) => {
+
+    const { data, message } = await useApi("consultation/" + id);
+
+    return data;
+};
 </script>
