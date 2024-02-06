@@ -110,7 +110,6 @@
                                                             <input type="text" v-model="params.to.email" id="client-email" class="form-control form-control-sm" placeholder="name@company.com" />
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group row">
                                                         <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Dirección</label>
                                                         <div class="col-sm-9">
@@ -305,6 +304,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <p>Hola a todos{{params.status}}</p>
                     </div>
                 </div>
             </div>
@@ -331,8 +332,9 @@
     const params = ref({
         title: "",
         invoice_no: "",
+        status: "",
         from: { name: "Consultorio SAS", email: "consultorio@company.com.co", address: "Cra 29 # 1 - 23", phone: "3143470843" },
-        to: { name: "", email: "", address: "", phone: "" },
+        to: { name: "", email: "", address: "", phone: ""},
         invoice_date: "",
         due_date: "",
         bank_info: { no: "", name: "", swift_code: "", country: "" },
@@ -379,7 +381,22 @@
             { key: "Flat Amount", value: 25, type: "amount" },
             { key: "None", value: null, type: "" },
         ];
+
     });
+
+    
+    const storedData = localStorage.getItem('invoiceData');
+        console.log("Impresion:", storedData);
+
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            params.value = { ...params.value, ...parsedData };
+        } else {
+            let dt = new Date();
+            params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+            dt.setDate(dt.getDate() + 5);
+            params.value.due_date = dt;
+        }
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);

@@ -15,7 +15,7 @@
                                         data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger me-3"
                                         @click="deleteUser(data.value.id)">Eliminar</button>                                
-                                    <router-link to="/invoices/list" class="btn me-2 btn-secondary"  @click="invoiceConsultation(data.value.id)">
+                                    <router-link to="/invoices/preview" class="btn me-2 btn-secondary"  @click="invoiceConsultation(data.value.id)">
                                         Facturar
                                     </router-link>
                                 </div>
@@ -583,6 +583,7 @@ const invoiceConsultation = async (id) => {
 
     const { data, message } = await useApi("consultation/" + id);
 
+    localStorage.setItem('invoiceData', JSON.stringify(data));
     return data;
 };
 </script>
