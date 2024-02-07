@@ -304,8 +304,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <p>Hola a todos{{params.status}}</p>
                     </div>
                 </div>
             </div>
@@ -383,20 +381,6 @@
         ];
 
     });
-
-    
-    const storedData = localStorage.getItem('invoiceData');
-        console.log("Impresion:", storedData);
-
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            params.value = { ...params.value, ...parsedData };
-        } else {
-            let dt = new Date();
-            params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-            dt.setDate(dt.getDate() + 5);
-            params.value.due_date = dt;
-        }
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);

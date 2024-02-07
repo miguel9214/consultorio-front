@@ -6,8 +6,8 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Invoice Preview</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Facturacion</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Revisar Factura</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -29,13 +29,15 @@
                                                     <div class="row">
                                                         <div class="col-sm-6 col-12 me-auto">
                                                             <div class="d-flex">
-                                                                <img class="company-logo" src="/src/assets/images/cork-logo.png" alt="company" />
+                                                                <img class="company-logo"
+                                                                    src="/src/assets/images/cork-logo.png" alt="company" />
                                                                 <h3 class="in-heading align-self-center">Cork Inc.</h3>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-6 text-sm-end">
-                                                            <p class="inv-list-number"><span class="inv-title">Invoice : </span> <span class="inv-number">#0001</span></p>
+                                                            <p class="inv-list-number"><span class="inv-title">Invoice :
+                                                                </span> <span class="inv-number">#0001</span></p>
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
@@ -44,8 +46,10 @@
                                                             <p class="inv-email-address">(120) 456 789</p>
                                                         </div>
                                                         <div class="col-sm-6 align-self-center mt-3 text-sm-end">
-                                                            <p class="inv-created-date"><span class="inv-title">Invoice Date : </span> <span class="inv-date">20 Aug 2020</span></p>
-                                                            <p class="inv-due-date"><span class="inv-title">Due Date : </span> <span class="inv-date">26 Aug 2020</span></p>
+                                                            <p class="inv-created-date"><span class="inv-title">Invoice Date
+                                                                    : </span> <span class="inv-date">20 Aug 2020</span></p>
+                                                            <p class="inv-due-date"><span class="inv-title">Due Date :
+                                                                </span> <span class="inv-date">26 Aug 2020</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -56,23 +60,30 @@
                                                             <p class="inv-to">Invoice To</p>
                                                         </div>
 
-                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
+                                                        <div
+                                                            class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
                                                             <h6 class="inv-title">Payment Info:</h6>
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
                                                             <p class="inv-customer-name">Jesse Cory</p>
-                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
+                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649
+                                                            </p>
                                                             <p class="inv-email-address">redq@company.com</p>
                                                             <p class="inv-email-address">(128) 666 070</p>
                                                         </div>
 
-                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
+                                                        <div
+                                                            class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
                                                             <div class="inv--payment-info">
-                                                                <p><span class="inv-subtitle">Bank Name:</span> <span>Bank of America</span></p>
-                                                                <p><span class="inv-subtitle">Account Number: </span> <span>1234567890</span></p>
-                                                                <p><span class="inv-subtitle">SWIFT code:</span> <span>VS70134</span></p>
-                                                                <p><span class="inv-subtitle">Country: </span> <span>United States</span></p>
+                                                                <p><span class="inv-subtitle">Bank Name:</span> <span>Bank
+                                                                        of America</span></p>
+                                                                <p><span class="inv-subtitle">Account Number: </span>
+                                                                    <span>1234567890</span></p>
+                                                                <p><span class="inv-subtitle">SWIFT code:</span>
+                                                                    <span>VS70134</span></p>
+                                                                <p><span class="inv-subtitle">Country: </span> <span>United
+                                                                        States</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -83,7 +94,8 @@
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th v-for="item in columns" :key="item.key" :class="[item.class]">
+                                                                    <th v-for="item in columns" :key="item.key"
+                                                                        :class="[item.class]">
                                                                         {{ item.label }}
                                                                     </th>
                                                                 </tr>
@@ -126,7 +138,8 @@
                                                                         <p class="">$700</p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="discount-rate">Discount : <span class="discount-percentage">5%</span></p>
+                                                                        <p class="discount-rate">Discount : <span
+                                                                                class="discount-percentage">5%</span></p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
                                                                         <p class="">$10</p>
@@ -165,18 +178,25 @@
                                             <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print"
+                                                @click="print()">Print</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-success btn-download">Download</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <router-link to="/apps/invoice/edit" class="btn btn-dark btn-edit">Edit</router-link>
+                                            <router-link to="/apps/invoice/edit"
+                                                class="btn btn-dark btn-edit">Edit</router-link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <p>Fecha de la consulta: {{ params.date }}</p>
+                            <p>Estado de la consulta: {{ params.status }}</p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -185,36 +205,91 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from "vue";
-    import "/src/assets/sass/apps/invoice-preview.scss";
+import { onMounted, ref } from "vue";
+import "/src/assets/sass/apps/invoice-preview.scss";
 
-    import { useMeta } from "/src/composables/use-meta";
-    useMeta({ title: "Invoice Preview" });
+import { useMeta } from "/src/composables/use-meta";
+useMeta({ title: "Revisar Factura" });
 
-    const items = ref([]);
-    const columns = ref([]);
+const items = ref([]);
+const columns = ref([]);
 
-    onMounted(() => {
-        bind_data();
-    });
+onMounted(() => {
+    bind_data();
+});
 
-    const bind_data = () => {
-        columns.value = [
-            { key: "id", label: "S.NO" },
-            { key: "title", label: "ITEMS" },
-            { key: "quantity", label: "QTY" },
-            { key: "price", label: "PRICE", class: "text-end" },
-            { key: "amount", label: "AMOUNT", class: "text-end" },
-        ];
-        items.value = [
-            { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
-            { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
-            { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
-            { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
-        ];
-    };
+const params = ref({
+    observation: "",
+    amount_paid: "",
+    email: "",
+    address: "",
+    discounts: "",
+    doctor: "",
+    due_date: "",
+    status: "",
+    date: "",
+    hour: "",
+    invoice_number: "",
+    observacion: "",
+    paciente: "",
+    start_date: "",
+    status: "",
+    taxes: "",
+    tipo_consulta: "",
+    total_amount: ""
+});
 
-    const print = () => {
-        window.print();
-    };
+const bind_data = () => {
+    columns.value = [
+        { key: "id", label: "S.NO" },
+        { key: "title", label: "ITEMS" },
+        { key: "quantity", label: "QTY" },
+        { key: "price", label: "PRICE", class: "text-end" },
+        { key: "amount", label: "AMOUNT", class: "text-end" },
+    ];
+    items.value = [
+        { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
+        { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
+        { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
+        { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
+    ];
+};
+
+
+const storedData = localStorage.getItem('invoiceData');
+console.log("Impresion:", storedData);
+
+if (storedData) {
+    const parsedData = JSON.parse(storedData);
+    console.log('parsedData: ', parsedData);
+
+    params.value.observation = parsedData[0].observacion;
+    params.value.amount_paid = parsedData[0].amount_paid;
+    params.value.email = parsedData[0].correo;
+    params.value.address = parsedData[0].direccion;
+    params.value.discounts = parsedData[0].discounts;
+    params.value.doctor = parsedData[0].doctor;
+    params.value.due_date = parsedData[0].due_date;
+    params.value.status = parsedData[0].estado;
+    params.value.date = parsedData[0].fecha;
+    params.value.hour = parsedData[0].hora;
+    params.value.invoice_number = parsedData[0].invoice_number;
+    params.value.observacion = parsedData[0].observacion;
+    params.value.paciente = parsedData[0].paciente;
+    params.value.start_date = parsedData[0].start_date;
+    params.value.status = parsedData[0].status;
+    params.value.taxes = parsedData[0].taxes;
+    params.value.tipo_consulta = parsedData[0].tipo_consulta;
+    params.value.total_amount = parsedData[0].total_amount;
+
+} else {
+    let dt = new Date();
+    params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+    dt.setDate(dt.getDate() + 5);
+    params.value.due_date = dt;
+}
+
+const print = () => {
+    window.print();
+};
 </script>

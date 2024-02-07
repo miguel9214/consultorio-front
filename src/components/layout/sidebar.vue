@@ -230,7 +230,7 @@
                             <router-link to="/invoices/list" @click="toggleMobileMenu">Lista</router-link>
                         </li>
                         <li>
-                            <router-link to="/invoices/preview" @click="toggleMobileMenu">Avance</router-link>
+                            <router-link to="/invoices/preview" @click="toggleMobileMenu">Revisar</router-link>
                         </li>
                         <li>
                             <router-link to="/invoices/add" @click="toggleMobileMenu">Crear</router-link>
