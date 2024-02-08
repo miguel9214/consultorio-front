@@ -240,24 +240,11 @@ onMounted(() => {
 
 const params = ref({
     observation: "",
-    amount_paid: "",
-    email: "",
-    address: "",
-    discounts: "",
     doctor: "",
-    due_date: "",
     status: "",
-    date: "",
     hour: "",
-    invoice_number: "",
-    observacion: "",
+    hour: "",
     paciente: "",
-    telefono: "",
-    start_date: "",
-    status: "",
-    taxes: "",
-    tipo_consulta: "",
-    total_amount: "",
 });
 
 const bind_data = () => {
@@ -276,41 +263,25 @@ const bind_data = () => {
     ];
 };
 
+// localStorage.clear();
+    const storedData = localStorage.getItem('invoiceData');
+    console.log("Impresion:", storedData);
 
-const storedData = localStorage.getItem('invoiceData');
-console.log("Impresion:", storedData);
+    if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        console.log('parsedData: ', parsedData);
 
-if (storedData) {
-    const parsedData = JSON.parse(storedData);
-    console.log('parsedData: ', parsedData);
-
-    params.value.observation = parsedData[0].observacion;
-    params.value.amount_paid = parsedData[0].amount_paid;
-    params.value.email = parsedData[0].correo;
-    params.value.address = parsedData[0].direccion;
-    params.value.discounts = parsedData[0].discounts;
-    params.value.doctor = parsedData[0].doctor;
-    params.value.due_date = parsedData[0].due_date;
-    params.value.telefono = parsedData[0].telefono;
-    params.value.status = parsedData[0].estado;
-    params.value.date = parsedData[0].fecha;
-    params.value.hour = parsedData[0].hora;
-    params.value.invoice_number = parsedData[0].invoice_number;
-    params.value.observacion = parsedData[0].observacion;
-    params.value.paciente = parsedData[0].paciente;
-    params.value.start_date = parsedData[0].start_date;
-    params.value.status = parsedData[0].status;
-    params.value.taxes = parsedData[0].taxes;
-    params.value.tipo_consulta = parsedData[0].tipo_consulta;
-    params.value.total_amount = parsedData[0].total_amount;
-    params.value.tipo_consulta = parsedData[0].tipo_consulta;
-
-} else {
-    let dt = new Date();
-    params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-    dt.setDate(dt.getDate() + 5);
-    params.value.due_date = dt;
-}
+        params.value.observation = parsedData.observation;
+        params.value.doctor = parsedData.doctor_id;
+        params.value.status = parsedData.status;
+        params.value.hour = parsedData.hour;
+        params.value.paciente = parsedData.pacient_id;
+    } else {
+        let dt = new Date();
+        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+        dt.setDate(dt.getDate() + 5);
+        params.value.due_date = dt;
+    }
 
 const print = () => {
     window.print();

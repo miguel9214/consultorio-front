@@ -580,9 +580,9 @@ const showPatient = async () => {
 };
 
 const invoiceConsultation = async (id) => {
-
+    
     const { data, message } = await useApi("consultation/" + id);
-
+    localStorage.removeItem('invoiceData');
     localStorage.setItem('invoiceData', JSON.stringify(data));
     return data;
 };
