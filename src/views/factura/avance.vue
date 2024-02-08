@@ -57,20 +57,19 @@
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
-                                                            <p class="inv-to">Invoice To</p>
+                                                            <p class="inv-to">Facturar a</p>
                                                         </div>
 
                                                         <div
                                                             class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
-                                                            <h6 class="inv-title">Payment Info:</h6>
+                                                            <h6 class="inv-title">Informacion de Pago:</h6>
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-customer-name">Jesse Cory</p>
-                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649
-                                                            </p>
-                                                            <p class="inv-email-address">redq@company.com</p>
-                                                            <p class="inv-email-address">(128) 666 070</p>
+                                                            <p class="inv-customer-name">{{params.paciente}}</p>
+                                                            <p class="inv-street-addr">{{params.address}}</p>
+                                                            <p class="inv-email-address">{{params.email}}</p>
+                                                            <p class="inv-email-address">{{params.telefono}}</p>
                                                         </div>
 
                                                         <div
@@ -88,7 +87,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+<!-- 
                                                 <div class="inv--product-table-section">
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
@@ -106,7 +105,7 @@
                                                                         {{ item.id }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ item.title }}
+                                                                        {{ params.tipo_consulta }}
                                                                     </td>
                                                                     <td>
                                                                         {{ item.quantity }}
@@ -117,7 +116,33 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                </div> -->
+
+                                                <div class="inv--product-table-section">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.NO</th>
+                                                                    <th>T. CONSULTA</th>
+                                                                    <th>CANTIDAD</th>
+                                                                    <th class="text-end">PRECIO</th>
+                                                                    <th class="text-end">CANTIDAD TOTAL</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>{{ params.invoice_number }}</td>
+                                                                    <td>{{ params.tipo_consulta }}</td>
+                                                                    <td>1</td>
+                                                                    <td class="text-end">${{ params.total_amount }}</td>
+                                                                    <td class="text-end">${{ params.total_amount }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
+                                                
 
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
@@ -175,28 +200,23 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
+                                            <a href="javascript:;" class="btn btn-primary btn-send">Enviar Factura</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
-                                                @click="print()">Print</a>
+                                                @click="print()">Imprimir</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-success btn-download">Download</a>
+                                            <a href="javascript:;" class="btn btn-success btn-download">Descargar</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <router-link to="/apps/invoice/edit"
-                                                class="btn btn-dark btn-edit">Edit</router-link>
+                                            <router-link to="/invoices/edit"
+                                                class="btn btn-dark btn-edit">Editar</router-link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <p>Fecha de la consulta: {{ params.date }}</p>
-                            <p>Estado de la consulta: {{ params.status }}</p>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -232,20 +252,21 @@ const params = ref({
     invoice_number: "",
     observacion: "",
     paciente: "",
+    telefono: "",
     start_date: "",
     status: "",
     taxes: "",
     tipo_consulta: "",
-    total_amount: ""
+    total_amount: "",
 });
 
 const bind_data = () => {
     columns.value = [
         { key: "id", label: "S.NO" },
-        { key: "title", label: "ITEMS" },
-        { key: "quantity", label: "QTY" },
-        { key: "price", label: "PRICE", class: "text-end" },
-        { key: "amount", label: "AMOUNT", class: "text-end" },
+        { key: "title", label: "T. CONSULTA" },
+        { key: "quantity", label: "CANTIDAD" },
+        { key: "price", label: "PRECIO", class: "text-end" },
+        { key: "amount", label: "CANTIDAD TOTAL", class: "text-end" },
     ];
     items.value = [
         { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
@@ -270,6 +291,7 @@ if (storedData) {
     params.value.discounts = parsedData[0].discounts;
     params.value.doctor = parsedData[0].doctor;
     params.value.due_date = parsedData[0].due_date;
+    params.value.telefono = parsedData[0].telefono;
     params.value.status = parsedData[0].estado;
     params.value.date = parsedData[0].fecha;
     params.value.hour = parsedData[0].hora;
@@ -281,6 +303,7 @@ if (storedData) {
     params.value.taxes = parsedData[0].taxes;
     params.value.tipo_consulta = parsedData[0].tipo_consulta;
     params.value.total_amount = parsedData[0].total_amount;
+    params.value.tipo_consulta = parsedData[0].tipo_consulta;
 
 } else {
     let dt = new Date();
