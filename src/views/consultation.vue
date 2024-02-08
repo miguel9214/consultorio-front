@@ -412,8 +412,6 @@ const fetchDataFromApi = async () => {
         const { data, message } = await useApi("consultation");
         rows.value = data.map((item) => ({ ...item, index: currentId++ }));
         totalRows.value = data.length;
-
-        // localStorage.removeItem('invoiceData');
     } catch (error) {
         console.error('Error fetching data from API:', error);
     }
@@ -581,12 +579,11 @@ const showPatient = async () => {
     }
 };
 
-// const invoiceConsultation = async (id) => {
+const invoiceConsultation = async (id) => {
 
-//     const { data, message } = await useApi("consultation/" + id);
+    const { data, message } = await useApi("consultation/" + id);
 
-//     localStorage.setItem('invoiceData', JSON.stringify(data));
-//     return data;
-// };
-
+    localStorage.setItem('invoiceData', JSON.stringify(data));
+    return data;
+};
 </script>
