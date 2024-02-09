@@ -263,26 +263,6 @@ const bind_data = () => {
     ];
 };
 
-// localStorage.clear();
-    const storedData = localStorage.getItem('invoiceData');
-    console.log("Impresion:", storedData);
-
-    if (storedData) {
-        const parsedData = JSON.parse(storedData);
-        console.log('parsedData: ', parsedData);
-
-        params.value.observation = parsedData.observation;
-        params.value.doctor = parsedData.doctor_id;
-        params.value.status = parsedData.status;
-        params.value.hour = parsedData.hour;
-        params.value.paciente = parsedData.pacient_id;
-    } else {
-        let dt = new Date();
-        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-        dt.setDate(dt.getDate() + 5);
-        params.value.due_date = dt;
-    }
-
 const print = () => {
     window.print();
 };
