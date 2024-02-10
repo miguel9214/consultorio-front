@@ -66,10 +66,7 @@
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-customer-name">{{params.paciente}}</p>
-                                                            <p class="inv-street-addr">{{params.address}}</p>
-                                                            <p class="inv-email-address">{{params.email}}</p>
-                                                            <p class="inv-email-address">{{params.telefono}}</p>
+                                                            <p class="inv-email-address">{{ params.observation }}</p>
                                                         </div>
 
                                                         <div
@@ -78,16 +75,18 @@
                                                                 <p><span class="inv-subtitle">Bank Name:</span> <span>Bank
                                                                         of America</span></p>
                                                                 <p><span class="inv-subtitle">Account Number: </span>
-                                                                    <span>1234567890</span></p>
+                                                                    <span>1234567890</span>
+                                                                </p>
                                                                 <p><span class="inv-subtitle">SWIFT code:</span>
-                                                                    <span>VS70134</span></p>
+                                                                    <span>VS70134</span>
+                                                                </p>
                                                                 <p><span class="inv-subtitle">Country: </span> <span>United
                                                                         States</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-<!-- 
+                                                <!-- 
                                                 <div class="inv--product-table-section">
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
@@ -117,32 +116,6 @@
                                                         </table>
                                                     </div>
                                                 </div> -->
-
-                                                <div class="inv--product-table-section">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>S.NO</th>
-                                                                    <th>T. CONSULTA</th>
-                                                                    <th>CANTIDAD</th>
-                                                                    <th class="text-end">PRECIO</th>
-                                                                    <th class="text-end">CANTIDAD TOTAL</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ params.invoice_number }}</td>
-                                                                    <td>{{ params.tipo_consulta }}</td>
-                                                                    <td>1</td>
-                                                                    <td class="text-end">${{ params.total_amount }}</td>
-                                                                    <td class="text-end">${{ params.total_amount }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                
 
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
@@ -224,18 +197,25 @@
     </div>
 </template>
 
+
 <script setup>
 import { onMounted, ref } from "vue";
 import "/src/assets/sass/apps/invoice-preview.scss";
+import { useRoute } from "vue-router";
 
 import { useMeta } from "/src/composables/use-meta";
+import { useApi } from '/src/composables/use-api';
 useMeta({ title: "Revisar Factura" });
 
 const items = ref([]);
 const columns = ref([]);
+const route = useRoute();
+
+const id = ref('');
 
 onMounted(() => {
-    bind_data();
+    id.value = route.params.id;
+    invoiceConsultation(id.value);
 });
 
 const params = ref({
@@ -266,4 +246,12 @@ const bind_data = () => {
 const print = () => {
     window.print();
 };
+
+const invoiceConsultation = async (id) => {
+    const { data, message } = await useApi('consultationInvoice/' +id);
+    console.log('data: ', data);
+    params.value.observation = data.observation
+    console.log(params.value)
+};
+
 </script>

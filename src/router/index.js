@@ -66,7 +66,7 @@ const routes = [
         meta: { required_auth: true },
     },
     {
-        path: '/invoices/preview',
+        path: '/invoices/preview/:id',
         name: 'invoices-preview',
         component: () => import(/* webpackChunkName: "apps-invoice-preview" */ '../views/factura/avance.vue'),
         meta: { required_auth: true },
