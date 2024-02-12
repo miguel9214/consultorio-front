@@ -36,8 +36,8 @@
                                                         </div>
 
                                                         <div class="col-sm-6 text-sm-end">
-                                                            <p class="inv-list-number"><span class="inv-title">Invoice :
-                                                                </span> <span class="inv-number">#0001</span></p>
+                                                            <p class="inv-list-number"><span class="inv-title">Fact :
+                                                                </span> <span class="inv-number">#{{ params.invoice_number }}</span></p>
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
@@ -46,10 +46,10 @@
                                                             <p class="inv-email-address">(120) 456 789</p>
                                                         </div>
                                                         <div class="col-sm-6 align-self-center mt-3 text-sm-end">
-                                                            <p class="inv-created-date"><span class="inv-title">Invoice Date
-                                                                    : </span> <span class="inv-date">20 Aug 2020</span></p>
-                                                            <p class="inv-due-date"><span class="inv-title">Due Date :
-                                                                </span> <span class="inv-date">26 Aug 2020</span></p>
+                                                            <p class="inv-created-date"><span class="inv-title">Fecha Inicial
+                                                                    : </span> <span class="inv-date">{{ params.start_date }}</span></p>
+                                                            <p class="inv-due-date"><span class="inv-title">Fecha Vencimiento :
+                                                                </span> <span class="inv-date">{{ params.due_date }}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -66,7 +66,10 @@
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-email-address">{{ params.observation }}</p>
+                                                            <p class="inv-customer-name">{{ params.pacient }}</p>
+                                                            <p class="inv-street-addr">{{ params.address }}</p>
+                                                            <p class="inv-email-address">{{ params.email }}</p>
+                                                            <p class="inv-email-address">{{ params.phone }}</p>
                                                         </div>
 
                                                         <div
@@ -86,36 +89,36 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- 
+                                                
                                                 <div class="inv--product-table-section">
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th v-for="item in columns" :key="item.key"
-                                                                        :class="[item.class]">
-                                                                        {{ item.label }}
+                                                                    <th v-for="params in columns" :key="params.key"
+                                                                        :class="[params.class]">
+                                                                        {{ params.label }}
                                                                     </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr v-for="item in items" :key="item.id">
+                                                                <tr v-for="param in params" :key="param.id">
                                                                     <td>
-                                                                        {{ item.id }}
+                                                                        {{ param.id }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ params.tipo_consulta }}
+                                                                        {{ param.type_consult }}
                                                                     </td>
                                                                     <td>
-                                                                        {{ item.quantity }}
+                                                                        1
                                                                     </td>
-                                                                    <td class="text-end">${{ item.price }}</td>
-                                                                    <td class="text-end">${{ item.amount }}</td>
+                                                                    <td class="text-end">${{ param.total_amount }}</td>
+                                                                    <td class="text-end">${{ param.amount_paid}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                </div> -->
+                                                </div>
 
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
@@ -124,29 +127,29 @@
                                                             <div class="text-sm-end">
                                                                 <div class="row">
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="">Sub Total:</p>
+                                                                        <p class="">Subtotal:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$3155</p>
+                                                                        <p class="">{{ params.total_amount }}</p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="">Tax Amount:</p>
+                                                                        <p class="">Impuestos:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$700</p>
+                                                                        <p class="">{{ params.taxes }}</p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="discount-rate">Discount : <span
-                                                                                class="discount-percentage">5%</span></p>
+                                                                        <p class="discount-rate">Descuento: <span
+                                                                                class="discount-percentage">{{ params.discounts }}</span></p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">$10</p>
+                                                                        <p class="">{{ params.taxes }}</p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
-                                                                        <h4 class="">Grand Total :</h4>
+                                                                        <h4 class="">Total:</h4>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5 grand-total-amount">
-                                                                        <h4 class="">$3845</h4>
+                                                                        <h4 class="">${{ params.amount_paid }}</h4>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -214,43 +217,77 @@ const route = useRoute();
 const id = ref('');
 
 onMounted(() => {
+    bind_data();
     id.value = route.params.id;
     invoiceConsultation(id.value);
 });
 
 const params = ref({
-    observation: "",
     doctor: "",
-    status: "",
+    pacient: "",
+    date_consult: "",
     hour: "",
-    hour: "",
-    paciente: "",
+    observation: "",
+    status_consult: "",
+    type_consult: "",
+    price: "",
+    address: "",
+    phone: "",
+    email: "",
+    invoice_number: "",
+    start_date: "",
+    due_date: "",
+    status_invoice: "",
+    total_amount: "",
+    discounts: "",
+    taxes: "",
+    amount_paid: "",
 });
 
+
 const bind_data = () => {
-    columns.value = [
-        { key: "id", label: "S.NO" },
-        { key: "title", label: "T. CONSULTA" },
-        { key: "quantity", label: "CANTIDAD" },
-        { key: "price", label: "PRECIO", class: "text-end" },
-        { key: "amount", label: "CANTIDAD TOTAL", class: "text-end" },
-    ];
-    items.value = [
-        { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
-        { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
-        { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
-        { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
-    ];
-};
+        columns.value = [
+            { key: "id", label: "S.NO" },
+            { key: "title", label: "ITEMS" },
+            { key: "quantity", label: "QTY" },
+            { key: "price", label: "PRICE", class: "text-end" },
+            { key: "amount", label: "AMOUNT", class: "text-end" },
+        ];
+        items.value = [
+            { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
+            { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
+            { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
+            { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
+        ];
+    };
+
 
 const print = () => {
     window.print();
 };
 
 const invoiceConsultation = async (id) => {
-    const { data, message } = await useApi('consultationInvoice/' +id);
+    const { data, message } = await useApi('consultation/Invoice/' +id);
     console.log('data: ', data);
+    params.value.doctor = data.doctor
+    params.value.pacient = data.pacient
+    params.value.date_consult = data.date_consult
+    params.value.hour = data.hour
     params.value.observation = data.observation
+    params.value.status_consult = data.status_consult
+    params.value.type_consult = data.type_consult
+    params.value.price = data.price
+    params.value.address = data.address
+    params.value.phone = data.phone
+    params.value.email = data.email
+    params.value.invoice_number = data.invoice_number
+    params.value.start_date = data.start_date
+    params.value.due_date = data.due_date
+    params.value.status_invoice = data.status_invoice
+    params.value.total_amount = data.total_amount
+    params.value.taxes = data.taxes
+    params.value.amount_paid = data.amount_paid
+
     console.log(params.value)
 };
 
