@@ -127,14 +127,14 @@
                                                                     <th>S.NO</th>
                                                                     <th>ITEMS</th>
                                                                     <th>QTY</th>
-                                                                    <th class="text-end">PRICE</th>
-                                                                    <th class="text-end">AMOUNT</th>
+                                                                    <th class="text-end">PRECIO</th>
+                                                                    <th class="text-end">TOTAL</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
                                                                     <td>1</td>
-                                                                    <td>Consulta con {{ params.doctor }}</td>
+                                                                    <td>{{ params.type_consult }}</td>
                                                                     <td>1</td>
                                                                     <td class="text-end">${{ params.price }}</td>
                                                                     <td class="text-end">${{ params.total_amount }}</td>
@@ -185,7 +185,7 @@
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                            <p>Note: Thank you for doing Business with us.</p>
+                                                            <p>Nota: El cuidado de la salud es la base para una vida plena y satisfactoria.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,7 +242,6 @@ const route = useRoute();
 const id = ref('');
 
 onMounted(() => {
-    bind_data();
     id.value = route.params.id;
     invoiceConsultation(id.value);
 });
@@ -268,24 +267,6 @@ const params = ref({
     taxes: "",
     amount_paid: "",
 });
-
-
-const bind_data = () => {
-    columns.value = [
-        { key: "id", label: "S.NO" },
-        { key: "title", label: "ITEMS" },
-        { key: "quantity", label: "QTY" },
-        { key: "price", label: "PRICE", class: "text-end" },
-        { key: "amount", label: "AMOUNT", class: "text-end" },
-    ];
-    items.value = [
-        { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
-        { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
-        { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
-        { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
-    ];
-};
-
 
 const print = () => {
     window.print();
