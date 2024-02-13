@@ -90,35 +90,60 @@
                                                     </div>
                                                 </div>
                                                 
+                                                <!-- <div class="inv--product-table-section">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th v-for="item in columns" :key="item.key" :class="[item.class]">
+                                                                        {{ item.label }}
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="item in items" :key="item.id">
+                                                                    <td>
+                                                                        {{ item.id }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ item.title }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ item.quantity }}
+                                                                    </td>
+                                                                    <td class="text-end">${{ item.price }}</td>
+                                                                    <td class="text-end">${{ item.amount }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div> -->
+
                                                 <div class="inv--product-table-section">
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th v-for="params in columns" :key="params.key"
-                                                                        :class="[params.class]">
-                                                                        {{ params.label }}
-                                                                    </th>
+                                                                    <th>S.NO</th>
+                                                                    <th>ITEMS</th>
+                                                                    <th>QTY</th>
+                                                                    <th class="text-end">PRICE</th>
+                                                                    <th class="text-end">AMOUNT</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr v-for="param in params" :key="param.id">
-                                                                    <td>
-                                                                        {{ param.id }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ param.type_consult }}
-                                                                    </td>
-                                                                    <td>
-                                                                        1
-                                                                    </td>
-                                                                    <td class="text-end">${{ param.total_amount }}</td>
-                                                                    <td class="text-end">${{ param.amount_paid}}</td>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Consulta con {{ params.doctor }}</td>
+                                                                    <td>1</td>
+                                                                    <td class="text-end">${{ params.price }}</td>
+                                                                    <td class="text-end">${{ params.total_amount }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
+                                                
 
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
@@ -246,20 +271,20 @@ const params = ref({
 
 
 const bind_data = () => {
-        columns.value = [
-            { key: "id", label: "S.NO" },
-            { key: "title", label: "ITEMS" },
-            { key: "quantity", label: "QTY" },
-            { key: "price", label: "PRICE", class: "text-end" },
-            { key: "amount", label: "AMOUNT", class: "text-end" },
-        ];
-        items.value = [
-            { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
-            { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
-            { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
-            { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
-        ];
-    };
+    columns.value = [
+        { key: "id", label: "S.NO" },
+        { key: "title", label: "ITEMS" },
+        { key: "quantity", label: "QTY" },
+        { key: "price", label: "PRICE", class: "text-end" },
+        { key: "amount", label: "AMOUNT", class: "text-end" },
+    ];
+    items.value = [
+        { id: 1, title: "Calendar App Customization", quantity: 1, price: "120", amount: "120" },
+        { id: 2, title: "Chat App Customization", quantity: 1, price: "230", amount: "230" },
+        { id: 3, title: "Laravel Integration", quantity: 1, price: "405", amount: "405" },
+        { id: 4, title: "Backend UI Design", quantity: 1, price: "2500", amount: "2500" },
+    ];
+};
 
 
 const print = () => {
