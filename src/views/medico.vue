@@ -253,7 +253,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in items" :key="index">
+                                <tr v-for="(item, index) in formData.specialities" :key="index">
                                     <td class="delete-item-row">
                                         <ul class="table-controls mt-2">
                                             <li>
@@ -503,7 +503,6 @@ const cols = ref([
     { field: 'ciudad', title: 'Telefono' },
     { field: 'estado', title: 'Departamento' },
     { field: 'barrio', title: 'Barrio' },
-    { field: 'especialidad', title: 'Especialidad' },
     { field: 'email', title: 'Correo' },
     { field: 'actions', title: 'Acciones' },
 ]);
@@ -534,11 +533,14 @@ const formData = ref({
     city: '',
     state: '',
     neighborhood: '',
-    speciality: '',
+    specialities: [],
     email: '',
     password: '',
     password_confirmed: '',
 });
+
+
+
 
 const errors = ref({
     type_document: [],
@@ -591,7 +593,7 @@ const resetFormData = () => {
         city: '',
         state: '',
         neighborhood: '',
-        speciality: '',
+        specialities: [],
         email: '',
         password: '',
         password_confirmed: '',
@@ -662,7 +664,6 @@ const viewUser = async (user) => {
         formData.value.document = data.documento;
         formData.value.first_name = data.nombre;
         formData.value.last_name = data.apellido;
-        formData.value.speciality = data.especialidad;
         formData.value.sex = data.sexo;
         formData.value.phone = data.telefono;
         formData.value.birthdate = data.fecha_nacimiento;
@@ -681,7 +682,6 @@ const EditMedico = async (user) => {
             document: formData.value.document,
             first_name: formData.value.first_name,
             last_name: formData.value.last_name,
-            speciality: formData.value.speciality,
             sex: formData.value.sex,
             phone: formData.value.phone,
             birthdate: formData.value.birthdate,
@@ -742,39 +742,13 @@ const items = ref([]);
 
 const selectedSpeciality = ref('');
 
-// const add_item = () => {
-//     let max_id = 0;
-
-//     alert(selectedSpeciality.key);
-//     if (selectedSpeciality.value) {
-//         items.value.push({
-//             title: selectedSpeciality.value,
-//         });
-//         selectedSpeciality.value = '';
-
-//         this.errors.selectedSpeciality.value = [];
-//     } else {
-//         this.errors.selectedSpeciality.value = ['Debe seleccionar una especialidad.'];
-//     }
-// };
-
-// const remove_item = (item) => {
-//     items.value = items.value.filter((d) => d.id != item.id);
-// };
-
-
-
 const add_item = () => {
-    let max_id = 0;
-    if (items.value && items.value.length) {
-        max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-    }
-    items.value.push(selectedSpeciality.value);
+    formData.value.specialities.push(selectedSpeciality.value);
 
 };
 
 const remove_item = (item) => {
-    items.value = items.value.filter((d) => d.id != item.id);
+    formData.value.specialities =formData.value.specialities.filter((d) => d.id != item.id);
 };
 
 const specialtyList = ref([]);
@@ -783,7 +757,6 @@ const showSpeciality = async () => {
     try {
         const { data, message } = await useApi('speciality');
         specialtyList.value = data;
-        console.log(data);
     } catch (error) {
         console.error('Error al obtener las Consultas', error);
     }
