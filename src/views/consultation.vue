@@ -493,7 +493,7 @@
 
                 Swal.fire('Eliminar!', 'Tu archivo ha sido eliminado!.', 'success');
             } catch (error) {
-                Swal.fire('Error!', 'An error occurred while deleting the record.', 'error');
+                Swal.fire('Error!', 'Debes eliminar el registro de la factura.', 'error');
             }
         }
     };
