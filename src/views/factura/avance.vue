@@ -46,10 +46,14 @@
                                                             <p class="inv-email-address">(120) 456 789</p>
                                                         </div>
                                                         <div class="col-sm-6 align-self-center mt-3 text-sm-end">
-                                                            <p class="inv-created-date"><span class="inv-title">Fecha Inicial
-                                                                    : </span> <span class="inv-date">{{ params.date_consult }}</span></p>
-                                                            <p class="inv-due-date"><span class="inv-title">Fecha Vencimiento :
-                                                                </span> <span class="inv-date">{{ params.due_date }}</span></p>
+                                                            <p class="inv-created-date">
+                                                                <span class="inv-title">Fecha Inicial : </span>
+                                                                <input class="border-0" type="date" v-model="params.date_consult">
+                                                            </p>                                                                                                                       
+                                                            <p class="inv-created-date">
+                                                                <span class="inv-title">Fecha Final : </span>
+                                                                <input class="border-0" type="date" v-model="params.due_date">
+                                                            </p>                                                                      
                                                         </div>
                                                     </div>
                                                 </div>
@@ -108,7 +112,8 @@
                                                                     <td>{{ params.type_consult }}</td>
                                                                     <td>1</td>
                                                                     <td class="text-end">${{ params.price }}</td>
-                                                                    <td class="text-end">${{ params.price * 1 }}</td>
+                                                                    <td class="text-end">${{ params.price }}
+                                                                    </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -125,26 +130,25 @@
                                                                         <p class="">Subtotal:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">${{ params.price * 1 }}</p>
+                                                                        <p class="">${{ params.price }}</p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
                                                                         <p class="">Impuestos:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">{{ params.taxes }}</p>
+                                                                        <input class="border-double text-center" style="width: 40px; margin-right: -5px" type="text" v-model="params.taxes">
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
-                                                                        <p class="discount-rate">Descuento: <span
-                                                                                class="discount-percentage">{{ params.discounts }}</span></p>
+                                                                        <p class="discount-rate">Descuento:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">{{ params.taxes }}</p>
+                                                                        <input class="border-double text-center" style="width: 40px; margin-right: -5px" type="text" v-model="params.discounts">
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
                                                                         <h4 class="">Total:</h4>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5 grand-total-amount">
-                                                                        <h4 class="">${{ params.amount_paid }}</h4>
+                                                                        <h4 class="">${{ calculateTotal() }}</h4>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -205,8 +209,6 @@ import { useMeta } from "/src/composables/use-meta";
 import { useApi } from '/src/composables/use-api';
 useMeta({ title: "Revisar Factura" });
 
-const items = ref([]);
-const columns = ref([]);
 const route = useRoute();
 
 const id = ref('');
@@ -214,6 +216,7 @@ const id = ref('');
 onMounted(() => {
     id.value = route.params.id;
     invoiceConsultation(id.value);
+    calculateTotal();
 });
 
 const params = ref({
@@ -229,18 +232,15 @@ const params = ref({
     phone: "",
     email: "",
     next_invoice_number: "",
+    invoice_number: '',
+    start_date: '',
+    due_date: '',
+    status: '',
+    total_amount: '',
+    taxes: '',
+    discounts: '',
+    amount_paid: '',
 });
-
-const formData = ref({
-        invoice_number: '',
-        start_date: '',
-        due_date: '',
-        status: '',
-        total_amount: '',
-        taxes: '',
-        discounts: '',
-        amount_paid: '',
-    });
 
 const print = () => {
     window.print();
@@ -263,6 +263,18 @@ const invoiceConsultation = async (id) => {
     params.value.next_invoice_number = data.next_invoice_number
 
     console.log(params.value)
+};
+
+const calculateTotal = () => {
+    const subtotal = parseFloat(params.value.price);
+    const taxes = parseFloat(params.value.taxes);
+    const discounts = parseFloat(params.value.discounts);
+
+    const total = subtotal + taxes - discounts;
+
+    params.value.amount_paid = total;
+
+    return total.toFixed(2); 
 };
 
 </script>
