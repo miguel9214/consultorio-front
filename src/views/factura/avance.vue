@@ -37,7 +37,8 @@
 
                                                         <div class="col-sm-6 text-sm-end">
                                                             <p class="inv-list-number"><span class="inv-title">Fact :
-                                                                </span> <span class="inv-number">#{{ params.next_invoice_number }}</span></p>
+                                                                </span> <span class="inv-number">#{{
+                                                                    params.next_invoice_number }}</span></p>
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
@@ -48,12 +49,14 @@
                                                         <div class="col-sm-6 align-self-center mt-3 text-sm-end">
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Inicial : </span>
-                                                                <input class="border-0" type="date" v-model="params.date_consult">
-                                                            </p>                                                                                                                       
+                                                                <input class="border-0" type="date"
+                                                                    v-model="params.date_consult">
+                                                            </p>
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Final : </span>
-                                                                <input class="border-0" type="date" v-model="params.due_date">
-                                                            </p>                                                                      
+                                                                <input class="border-0" type="date"
+                                                                    v-model="params.due_date">
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,7 +96,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="inv--product-table-section">
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
@@ -118,7 +121,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                </div>                                                
+                                                </div>
 
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
@@ -130,19 +133,24 @@
                                                                         <p class="">Subtotal:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <p class="">${{ params.price }}</p>
+                                                                        <p id="priceDisplay" class="">${{ params.price }}
+                                                                        </p>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
                                                                         <p class="">Impuestos:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <input class="border-double text-center" style="width: 40px; margin-right: -5px" type="text" v-model="params.taxes">
+                                                                        <input class="border-double text-center"
+                                                                            style="width: 40px; margin-right: -5px"
+                                                                            type="text" v-model="params.taxes">
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
                                                                         <p class="discount-rate">Descuento:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <input class="border-double text-center" style="width: 40px; margin-right: -5px" type="text" v-model="params.discounts">
+                                                                        <input class="border-double text-center"
+                                                                            style="width: 40px; margin-right: -5px"
+                                                                            type="text" v-model="params.discounts">
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
                                                                         <h4 class="">Total:</h4>
@@ -159,7 +167,8 @@
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                            <p>Nota: El cuidado de la salud es la base para una vida plena y satisfactoria.</p>
+                                                            <p>Nota: El cuidado de la salud es la base para una vida plena y
+                                                                satisfactoria.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -175,7 +184,7 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send">Enviar Factura</a>
+                                            <a href="javascript:;" class="btn btn-primary btn-send"  @click="CreateInvoices">Enviar Factura</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
@@ -213,10 +222,26 @@ const route = useRoute();
 
 const id = ref('');
 
-onMounted(() => {
+onMounted(async () => {
     id.value = route.params.id;
-    invoiceConsultation(id.value);
+    await invoiceConsultation(id.value);
     calculateTotal();
+
+    // const priceElement = document.getElementById("priceDisplay");
+    // if (priceElement) {
+    //     const priceText = priceElement.innerText.trim(); // Eliminar espacios en blanco alrededor del texto
+    //     const priceWithoutDollarSign = priceText.replace(/\$/g, ''); // Eliminar el símbolo $
+    //     const price = parseFloat(priceWithoutDollarSign); // Convertir a número
+    //     console.log('price: ', price);
+    //     if (!isNaN(price)) {
+    //         params.value.total_amount = price;
+    //         console.log(params.value.total_amount)
+    //     } else {
+    //         console.error("El precio no es un número válido.");
+    //     }
+    // } else {
+    //     console.error("Elemento del precio no encontrado.");
+    // }
 });
 
 const params = ref({
@@ -237,8 +262,8 @@ const params = ref({
     due_date: '',
     status: '',
     total_amount: '',
-    taxes: '',
-    discounts: '',
+    taxes: 0,
+    discounts: 0,
     amount_paid: '',
 });
 
@@ -247,8 +272,7 @@ const print = () => {
 };
 
 const invoiceConsultation = async (id) => {
-    const { data, message } = await useApi('consultation/Invoice/' +id);
-    console.log('data: ', data);
+    const { data, message } = await useApi('consultation/Invoice/' + id);
     params.value.doctor = data.doctor
     params.value.pacient = data.pacient
     params.value.date_consult = data.date_consult
@@ -261,20 +285,42 @@ const invoiceConsultation = async (id) => {
     params.value.phone = data.phone
     params.value.email = data.email
     params.value.next_invoice_number = data.next_invoice_number
+};
 
-    console.log(params.value)
+const CreateInvoices = async () => {
+
+    await useApi('invoice', 'POST', {
+        invoice_number: params.value.next_invoice_number,
+        start_date: params.value.date_consult,
+        due_date: params.value.due_date,
+        status: params.value.status,
+        total_amount: params.value.price,
+        taxes: params.value.taxes,
+        discounts: params.value.discounts,
+        amount_paid: params.value.amount_paid,    
+        consultation_id: id.value    
+    });
+    Swal.fire({
+        title: 'Éxito!',
+        text: 'Consulta creada correctamente!',
+        icon: 'success',
+        confirmButtonText: '¡Entendido!',
+    }).then(() => {
+    })
 };
 
 const calculateTotal = () => {
     const subtotal = parseFloat(params.value.price);
     const taxes = parseFloat(params.value.taxes);
+    const taxesDecimal = taxes / 100;
     const discounts = parseFloat(params.value.discounts);
+    const discountsDecimal = discounts / 100;
 
-    const total = subtotal + taxes - discounts;
-
+    const valueTaxes = (subtotal * taxesDecimal) + subtotal;
+    const total = valueTaxes - (valueTaxes * discountsDecimal);
     params.value.amount_paid = total;
 
-    return total.toFixed(2); 
+    return total;
 };
 
 </script>
