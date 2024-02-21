@@ -49,13 +49,19 @@
                                                         <div class="col-sm-6 align-self-center mt-3 text-sm-end">
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Inicial : </span>
-                                                                <input class="border-0" type="date"
+                                                                <input class="border-0 fw-bold" type="date"
                                                                     v-model="params.date_consult">
                                                             </p>
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Final : </span>
-                                                                <input class="border-0" type="date"
+                                                                <input class="border-0 fw-bold" type="date"
                                                                     v-model="params.due_date">
+                                                                <!-- <br>
+                                                                <template v-if="errors.discounts.length > 0">
+                                                                    <b :key="e" v-for="e in errors.discounts" class="text-danger">
+                                                                        {{ e }}
+                                                                    </b>
+                                                                </template> -->
                                                             </p>
                                                         </div>
                                                     </div>
@@ -122,7 +128,6 @@
                                                         </table>
                                                     </div>
                                                 </div>
-
                                                 <div class="inv--total-amounts">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-5 col-12 order-sm-0 order-1"></div>
@@ -140,17 +145,29 @@
                                                                         <p class="">Impuestos:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <input class="border-double text-center"
+                                                                        <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
                                                                             type="text" v-model="params.taxes">
+                                                                            <!-- <br>
+                                                                            <template v-if="errors.taxes.length > 0">
+                                                                                <b :key="e" v-for="e in errors.taxes" class="text-danger">
+                                                                                    {{ e }}
+                                                                                </b>
+                                                                            </template> -->
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
                                                                         <p class="discount-rate">Descuento:</p>
                                                                     </div>
                                                                     <div class="col-sm-4 col-5">
-                                                                        <input class="border-double text-center"
+                                                                        <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
                                                                             type="text" v-model="params.discounts">
+                                                                            <!-- <br>
+                                                                            <template v-if="errors.discounts.length > 0">
+                                                                                <b :key="e" v-for="e in errors.discounts" class="text-danger">
+                                                                                    {{ e }}
+                                                                                </b>
+                                                                            </template> -->
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
                                                                         <h4 class="">Total:</h4>
@@ -161,6 +178,22 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div id="preview-field" class="field-wrapper input">
+                                                        <div class="field-wrapper input">
+                                                            <label for="fullname" class="col-form-label fw-bold">Estado de Pago</label>
+                                                            <select v-model="params.status" class="mb-4 form-select w-25 border-0">
+                                                                <option value="" disabled selected>Estado</option>
+                                                                <option value="pagado">Pagado</option>
+                                                                <option value="pendiente">Pendiente</option>
+                                                            </select>                                                                
+                                                        </div>
+                                                        
+                                                        <!-- <template v-if="errors.status.length > 0">
+                                                            <b :key="e" v-for="e in errors.status" class="text-danger">
+                                                                {{ e }}
+                                                            </b>
+                                                        </template> -->
                                                     </div>
                                                 </div>
 
@@ -226,22 +259,6 @@ onMounted(async () => {
     id.value = route.params.id;
     await invoiceConsultation(id.value);
     calculateTotal();
-
-    // const priceElement = document.getElementById("priceDisplay");
-    // if (priceElement) {
-    //     const priceText = priceElement.innerText.trim(); // Eliminar espacios en blanco alrededor del texto
-    //     const priceWithoutDollarSign = priceText.replace(/\$/g, ''); // Eliminar el símbolo $
-    //     const price = parseFloat(priceWithoutDollarSign); // Convertir a número
-    //     console.log('price: ', price);
-    //     if (!isNaN(price)) {
-    //         params.value.total_amount = price;
-    //         console.log(params.value.total_amount)
-    //     } else {
-    //         console.error("El precio no es un número válido.");
-    //     }
-    // } else {
-    //     console.error("Elemento del precio no encontrado.");
-    // }
 });
 
 const params = ref({
@@ -266,6 +283,25 @@ const params = ref({
     discounts: 0,
     amount_paid: '',
 });
+console.log("status", params.value.status)
+
+// const errors = ref({
+//         start_date: [],
+//         due_date: [],
+//         status: [],
+//         taxes: [],
+//         discounts: [],
+//     });
+
+//     const errorsClear = () => {
+//         errors.value = {
+//             start_date: [],
+//             due_date: [],
+//             status: [],
+//             taxes: [],
+//             discounts: [],
+//         };
+//     };
 
 const print = () => {
     window.print();
@@ -289,7 +325,22 @@ const invoiceConsultation = async (id) => {
 
 const CreateInvoices = async () => {
 
-    await useApi('invoice', 'POST', {
+    // errorsClear();
+
+    // let has_error = false;
+    // Object.entries(params.value).forEach((f) => {
+    //     const elemento = f[0];
+    //     const value = f[1];
+    //     if (value == '') {
+    //         has_error = true;
+    //         errors.value[elemento] = 'Este campo es obligatorio';
+    //     }
+    // });
+
+    // if (has_error) return;
+
+    try {
+        await useApi('invoice', 'POST', {
         invoice_number: params.value.next_invoice_number,
         start_date: params.value.date_consult,
         due_date: params.value.due_date,
@@ -302,11 +353,23 @@ const CreateInvoices = async () => {
     });
     Swal.fire({
         title: 'Éxito!',
-        text: 'Consulta creada correctamente!',
+        text: 'Factura creada correctamente!',
         icon: 'success',
         confirmButtonText: '¡Entendido!',
-    }).then(() => {
-    })
+            }).then(() => {
+                if (discardButton.value) {
+                    discardButton.value.click();
+                }
+            });
+        }  catch (error) {
+            console.error('Error en crear la factura:', error);
+            Swal.fire({
+            title: 'Error!',
+            text: 'Hubo un problema al crear la factura. Por favor, complete todos los datos.',
+            icon: 'error',
+            confirmButtonText: '¡Entendido!'
+    });
+        }
 };
 
 const calculateTotal = () => {
