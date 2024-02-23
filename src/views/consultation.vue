@@ -386,6 +386,7 @@
     const discardButton = ref(null);
 
     const CreateEPS = async () => {
+        
         errorsClear();
 
         let has_error = false;

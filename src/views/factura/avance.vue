@@ -147,7 +147,7 @@
                                                                     <div class="col-sm-4 col-5">
                                                                         <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
-                                                                            type="numeric" v-model="params.taxes">
+                                                                            type="number" v-model="params.taxes">
                                                                             <br>
                                                                             <template v-if="errors.taxes.length > 0">
                                                                                 <b :key="e" v-for="e in errors.taxes" class="text-danger">
@@ -161,7 +161,7 @@
                                                                     <div class="col-sm-4 col-5">
                                                                         <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
-                                                                            type="text" v-model="params.discounts">
+                                                                            type="number" v-model="params.discounts">
                                                                             <br>
                                                                             <template v-if="errors.discounts.length > 0">
                                                                                 <b :key="e" v-for="e in errors.discounts" class="text-danger">
@@ -305,22 +305,6 @@ const print = () => {
     window.print();
 };
 
-const invoiceConsultation = async (id) => {
-    const { data, message } = await useApi('consultation/Invoice/' + id);
-    params.value.doctor = data.doctor
-    params.value.pacient = data.pacient
-    params.value.date_consult = data.date_consult
-    params.value.hour = data.hour
-    params.value.observation = data.observation
-    params.value.status_consult = data.status_consult
-    params.value.type_consult = data.type_consult
-    params.value.price = data.price
-    params.value.address = data.address
-    params.value.phone = data.phone
-    params.value.email = data.email
-    params.value.next_invoice_number = data.next_invoice_number
-};
-
 const CreateInvoices = async () => {
 
     errorsClear();
@@ -328,15 +312,17 @@ const CreateInvoices = async () => {
     let has_error = false;
     Object.entries(params.value).forEach((f) => {
         const elemento = f[0];
+        console.log("elemento", elemento)
         const value = f[1];
+        console.log("value", value)
         if (value == '') {
             has_error = true;
             errors.value[elemento] = 'Este campo es obligatorio';
         }
     });
-
+    
+    console.log("que sale", has_error)
     if (has_error) return;
-
     try {
         await useApi('invoice', 'POST', {
         invoice_number: params.value.next_invoice_number,
@@ -362,8 +348,9 @@ const CreateInvoices = async () => {
             text: 'Hubo un problema al crear la factura. Por favor, complete todos los datos.',
             icon: 'error',
             confirmButtonText: '¡Entendido!'
-            });
+        });
     }
+
 };
 
 const calculateTotal = () => {
@@ -378,6 +365,25 @@ const calculateTotal = () => {
     params.value.amount_paid = total;
 
     return total;
+};
+
+const invoiceConsultation = async (id) => {
+    const { data, message } = await useApi('consultation/Invoice/' + id);
+    params.value.doctor = data.doctor
+    params.value.pacient = data.pacient
+    params.value.date_consult = data.date_consult
+    params.value.hour = data.hour
+    params.value.observation = data.observation
+    params.value.status_consult = data.status_consult
+    params.value.type_consult = data.type_consult
+    params.value.price = data.price
+    params.value.address = data.address
+    params.value.phone = data.phone
+    params.value.email = data.email
+    params.value.next_invoice_number = data.next_invoice_number
+    params.value.invoice_number = data.next_invoice_number
+    params.value.start_date = data.date_consult
+    params.value.total_amount = data.price
 };
 
 </script>

@@ -147,7 +147,7 @@
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pendingTask">
                                         <li>
-                                            <router-link href="javascript:void(0);" to="/invoices/edit" class="dropdown-item acciones-edit"
+                                            <router-link href="javascript:void(0);" :to="{name: 'invoices-preview', params: {id: data.value.id }}" class="dropdown-item acciones-edit"
                                                 ><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     width="24"
