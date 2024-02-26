@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Facturacion</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Revisar Factura</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Editar Factura</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -36,9 +36,12 @@
                                                         </div>
 
                                                         <div class="col-sm-6 text-sm-end">
-                                                            <p class="inv-list-number"><span class="inv-title">Fact :
-                                                                </span> <span class="inv-number">#{{
-                                                                    params.next_invoice_number }}</span></p>
+                                                            <p class="inv-list-number">
+                                                                <span class="inv-title">Fact :
+                                                                </span> <span class="inv-number" contenteditable="false">
+                                                                    #{{params.invoice_number }}
+                                                                </span>
+                                                            </p>
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
@@ -50,7 +53,7 @@
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Inicial : </span>
                                                                 <input class="border-0 fw-bold" type="date"
-                                                                    v-model="params.date_consult">
+                                                                    v-model="params.start_date">
                                                             </p>
                                                             <p class="inv-created-date">
                                                                 <span class="inv-title">Fecha Final : </span>
@@ -216,7 +219,7 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send"  @click="CreateInvoices">Enviar Factura</a>
+                                            <a href="javascript:;" class="btn btn-primary btn-send"  @click="UpdateInvoices">Editar Factura</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
@@ -292,6 +295,7 @@ const errors = ref({
         status: [],
         total_amount: [],
         discounts: [],
+        taxes: [],
         amount_paid: [],
         observation: [],
         status_consult: [],      
@@ -314,6 +318,7 @@ const errorsClear = () => {
         status: [],
         total_amount: [],
         discounts: [],
+        taxes: [],
         amount_paid: [],
         observation: [],
         status_consult: [],      
@@ -331,7 +336,7 @@ const print = () => {
     window.print();
 };
 
-const CreateInvoices = async () => {
+const UpdateInvoices = async () => {
 
     errorsClear();
 
@@ -348,28 +353,27 @@ const CreateInvoices = async () => {
     });    
     if (has_error) return;
     try {
-        await useApi('invoice', 'POST', {
-        invoice_number: params.value.next_invoice_number,
-        start_date: params.value.date_consult,
+        await useApi('invoice/'+ id.value, 'PUT', {
+        invoice_number: params.value.invoice_number,
+        start_date: params.value.start_date,
         due_date: params.value.due_date,
         status: params.value.status,
-        total_amount: params.value.price,
+        total_amount: params.value.total_amount,
         taxes: params.value.taxes,
         discounts: params.value.discounts,
         amount_paid: params.value.amount_paid,    
-        consultation_id: id.value    
     });
     Swal.fire({
         title: 'Éxito!',
-        text: 'Factura creada correctamente!',
+        text: 'Factura actualizada correctamente!',
         icon: 'success',
         confirmButtonText: '¡Entendido!',
         });
     }  catch (error) {
-            console.error('Error en crear la factura:', error);
+            console.error('Error en actualizar la factura:', error);
             Swal.fire({
             title: 'Error!',
-            text: 'Hubo un problema al crear la factura. Por favor, complete todos los datos.',
+            text: 'Hubo un problema en actualizar la factura. Por favor, complete todos los datos.',
             icon: 'error',
             confirmButtonText: '¡Entendido!'
         });
@@ -400,6 +404,7 @@ const invoiceConsultation = async (id) => {
     params.value.status = data.status
     params.value.total_amount = data.total_amount
     params.value.discounts = data.discounts
+    params.value.taxes = data.taxes
     params.value.amount_paid = data.amount_paid
     params.value.date_consult = data.date_consult
     params.value.status_consult = data.status_consult
