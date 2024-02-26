@@ -147,7 +147,7 @@
 
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="pendingTask">
                                         <li>
-                                            <router-link href="javascript:void(0);" :to="{name: 'invoices-preview', params: {id: data.value.id }}" class="dropdown-item acciones-edit"
+                                            <router-link :to="{name: 'invoices-preview', params: {id: props.row.id}}" class="dropdown-item acciones-edit"
                                                 ><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     width="24"
@@ -239,6 +239,8 @@
         await fetchDataFromApi();
     });
 
+    let id;
+
     const fetchDataFromApi = async () => {
         try {
             const { data, message } = await useApi("invoice");
@@ -258,7 +260,6 @@
         }
     };
 
-    //checkbox selection
     const selcted_row = (val) => {
         selected_rows.value.push(val);
         return;

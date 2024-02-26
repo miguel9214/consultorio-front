@@ -256,6 +256,7 @@ const id = ref('');
 
 onMounted(async () => {
     id.value = route.params.id;
+    console.log(id.value)
     await invoiceConsultation(id.value);
     calculateTotal();
 });
@@ -319,9 +320,7 @@ const CreateInvoices = async () => {
             has_error = true;
             errors.value[elemento] = 'Este campo es obligatorio';
         }
-    });
-    
-    console.log("que sale", has_error)
+    });    
     if (has_error) return;
     try {
         await useApi('invoice', 'POST', {
@@ -364,7 +363,7 @@ const calculateTotal = () => {
     const total = valueTaxes - (valueTaxes * discountsDecimal);
     params.value.amount_paid = total;
 
-    return total;
+    return total.toFixed(0);
 };
 
 const invoiceConsultation = async (id) => {
