@@ -228,10 +228,6 @@
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-success btn-download">Descargar</a>
                                         </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <router-link to="/invoices/edit"
-                                                class="btn btn-dark btn-edit">Editar</router-link>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -336,6 +332,30 @@ const print = () => {
     window.print();
 };
 
+const invoiceConsultation = async (id) => {
+    const { data, message } = await useApi('invoice/' + id);
+    params.value.pacient = data.pacient
+    params.value.invoice_number = data.invoice_number
+    params.value.start_date = data.start_date
+    params.value.due_date = data.due_date
+    params.value.status = data.status
+    params.value.total_amount = data.total_amount
+    params.value.discounts = data.discounts
+    params.value.taxes = data.taxes
+    params.value.amount_paid = data.amount_paid
+    params.value.date_consult = data.date_consult
+    params.value.status_consult = data.status_consult
+    params.value.observation = data.observation
+    params.value.hour = data.hour
+    params.value.date_consult = data.next_date_consult
+    params.value.type_consult = data.type_consult
+    params.value.price = data.price
+    params.value.address = data.address
+    params.value.phone = data.phone
+    params.value.email = data.email
+};
+
+
 const UpdateInvoices = async () => {
 
     errorsClear();
@@ -393,29 +413,6 @@ const calculateTotal = () => {
     params.value.amount_paid = total;
 
     return total.toFixed(0);
-};
-
-const invoiceConsultation = async (id) => {
-    const { data, message } = await useApi('invoice/' + id);
-    params.value.pacient = data.pacient
-    params.value.invoice_number = data.invoice_number
-    params.value.start_date = data.start_date
-    params.value.due_date = data.due_date
-    params.value.status = data.status
-    params.value.total_amount = data.total_amount
-    params.value.discounts = data.discounts
-    params.value.taxes = data.taxes
-    params.value.amount_paid = data.amount_paid
-    params.value.date_consult = data.date_consult
-    params.value.status_consult = data.status_consult
-    params.value.observation = data.observation
-    params.value.hour = data.hour
-    params.value.date_consult = data.next_date_consult
-    params.value.type_consult = data.type_consult
-    params.value.price = data.price
-    params.value.address = data.address
-    params.value.phone = data.phone
-    params.value.email = data.email
 };
 
 </script>

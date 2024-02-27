@@ -58,7 +58,8 @@
                                                                     v-model="params.due_date">
                                                                 <br>
                                                                 <template v-if="errors.due_date.length > 0">
-                                                                    <b :key="e" v-for="e in errors.due_date" class="text-danger">
+                                                                    <b :key="e" v-for="e in errors.due_date"
+                                                                        class="text-danger">
                                                                         {{ e }}
                                                                     </b>
                                                                 </template>
@@ -148,12 +149,13 @@
                                                                         <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
                                                                             type="number" v-model="params.taxes">
-                                                                            <br>
-                                                                            <template v-if="errors.taxes.length > 0">
-                                                                                <b :key="e" v-for="e in errors.taxes" class="text-danger">
-                                                                                    {{ e }}
-                                                                                </b>
-                                                                            </template>
+                                                                        <br>
+                                                                        <template v-if="errors.taxes.length > 0">
+                                                                            <b :key="e" v-for="e in errors.taxes"
+                                                                                class="text-danger">
+                                                                                {{ e }}
+                                                                            </b>
+                                                                        </template>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7">
                                                                         <p class="discount-rate">Descuento:</p>
@@ -162,12 +164,13 @@
                                                                         <input class="border-0 text-center"
                                                                             style="width: 40px; margin-right: -5px"
                                                                             type="number" v-model="params.discounts">
-                                                                            <br>
-                                                                            <template v-if="errors.discounts.length > 0">
-                                                                                <b :key="e" v-for="e in errors.discounts" class="text-danger">
-                                                                                    {{ e }}
-                                                                                </b>
-                                                                            </template>
+                                                                        <br>
+                                                                        <template v-if="errors.discounts.length > 0">
+                                                                            <b :key="e" v-for="e in errors.discounts"
+                                                                                class="text-danger">
+                                                                                {{ e }}
+                                                                            </b>
+                                                                        </template>
                                                                     </div>
                                                                     <div class="col-sm-8 col-7 grand-total-title">
                                                                         <h4 class="">Total:</h4>
@@ -181,13 +184,15 @@
                                                     </div>
                                                     <div id="preview-field" class="field-wrapper input">
                                                         <div class="field-wrapper input">
-                                                            <label for="fullname" class="col-form-label fw-bold">Estado de Pago</label>
-                                                            <select v-model="params.status" class="mb-4 form-select w-25 border-0">
+                                                            <label for="fullname" class="col-form-label fw-bold">Estado de
+                                                                Pago</label>
+                                                            <select v-model="params.status"
+                                                                class="mb-4 form-select w-25 border-0">
                                                                 <option value="" disabled selected>Estado</option>
                                                                 <option value="pagado">Pagado</option>
                                                                 <option value="pendiente">Pendiente</option>
-                                                            </select>                                                                
-                                                        </div>                                                        
+                                                            </select>
+                                                        </div>
                                                         <template v-if="errors.status.length > 0">
                                                             <b :key="e" v-for="e in errors.status" class="text-danger">
                                                                 {{ e }}
@@ -216,7 +221,8 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send"  @click="CreateInvoices">Enviar Factura</a>
+                                            <a href="javascript:;" class="btn btn-primary btn-send"
+                                                @click="CreateInvoices">Enviar Factura</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
@@ -224,10 +230,6 @@
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-success btn-download">Descargar</a>
-                                        </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <router-link to="/invoices/edit"
-                                                class="btn btn-dark btn-edit">Editar</router-link>
                                         </div>
                                     </div>
                                 </div>
@@ -285,12 +287,12 @@ const params = ref({
 });
 
 const errors = ref({
-        start_date: [],
-        due_date: [],
-        status: [],
-        taxes: [],
-        discounts: [],
-    });
+    start_date: [],
+    due_date: [],
+    status: [],
+    taxes: [],
+    discounts: [],
+});
 
 const errorsClear = () => {
     errors.value = {
@@ -320,29 +322,33 @@ const CreateInvoices = async () => {
             has_error = true;
             errors.value[elemento] = 'Este campo es obligatorio';
         }
-    });    
+    });
     if (has_error) return;
     try {
         await useApi('invoice', 'POST', {
-        invoice_number: params.value.next_invoice_number,
-        start_date: params.value.date_consult,
-        due_date: params.value.due_date,
-        status: params.value.status,
-        total_amount: params.value.price,
-        taxes: params.value.taxes,
-        discounts: params.value.discounts,
-        amount_paid: params.value.amount_paid,    
-        consultation_id: id.value    
-    });
-    Swal.fire({
-        title: 'Éxito!',
-        text: 'Factura creada correctamente!',
-        icon: 'success',
-        confirmButtonText: '¡Entendido!',
+            invoice_number: params.value.next_invoice_number,
+            start_date: params.value.date_consult,
+            due_date: params.value.due_date,
+            status: params.value.status,
+            total_amount: params.value.price,
+            taxes: params.value.taxes,
+            discounts: params.value.discounts,
+            amount_paid: params.value.amount_paid,
+            consultation_id: id.value
         });
-    }  catch (error) {
-            console.error('Error en crear la factura:', error);
-            Swal.fire({
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Factura creada correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'http://localhost:5173/invoices/list';
+            }
+        });
+    } catch (error) {
+        console.error('Error en crear la factura:', error);
+        Swal.fire({
             title: 'Error!',
             text: 'Hubo un problema al crear la factura. Por favor, complete todos los datos.',
             icon: 'error',
