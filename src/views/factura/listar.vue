@@ -30,7 +30,7 @@
                                     </svg>
                                     Crear
                                 </router-link>
-                                <button type="button" class="btn ml-2 btn-danger" @click="delete_row(items.id)">
+                                <button type="button" class="btn ml-2 btn-danger" @click="delete_row_selcted(val)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-trash-2">
@@ -43,6 +43,7 @@
                                     </svg>
                                     Eliminar
                                 </button>
+                                {{ val }}
                             </template>
                             <template #id="props">
                                 <div class="checkbox-outline-primary custom-control custom-checkbox">
@@ -185,13 +186,9 @@ const table_option = ref({
 
 const route = useRoute();
 
-const selected_rows = ref([]);
-
 onMounted(async () => {
     await fetchDataFromApi();
 });
-
-// let id;
 
 const fetchDataFromApi = async () => {
     try {
@@ -224,24 +221,33 @@ const delete_row = async (id) => {
     }
 };
 
-const selcted_row = async (val) => {
+const selcted_row = (val) => {
+    console.log(val);
+    return val;
+};
+
+const delete_row_selcted = async () => {
+    const val = selcted_row(val);
+
     const result = await Swal.fire({
-        title: 'Estas seguro?',
+        title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, borralo!',
+        confirmButtonText: 'Sí, bórralo!',
     });
+
     if (result.isConfirmed) {
         try {
             await useApi('invoice/' + val, 'DELETE');
-            items.value = items.value.filter((d) => d.id !== id);
-            Swal.fire('Eliminado!', 'Tu archivo ha sido eliminado.', 'success');
+            items.value = items.value.filter((d) => d.id !== val);
+            Swal.fire('¡Eliminado!', 'Tu archivo ha sido eliminado.', 'success');
         } catch (error) {
             Swal.fire('Error!', 'Hubo un error al eliminar el registro de la factura.', 'error');
         }
     }
 };
+
 </script>
