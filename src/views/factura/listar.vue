@@ -30,7 +30,7 @@
                                     </svg>
                                     Crear
                                 </router-link>
-                                <button type="button" class="btn ml-2 btn-danger" @click="delete_row_selcted(val)">
+                                <button type="button" class="btn ml-2 btn-danger" @click="delete_Selected_Row()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-trash-2">
@@ -43,8 +43,8 @@
                                     </svg>
                                     Eliminar
                                 </button>
-                                {{ val }}
-                            </template>
+                                <!-- <p>valor:{{ items[0].id }}</p> -->
+                            </template>                            
                             <template #id="props">
                                 <div class="checkbox-outline-primary custom-control custom-checkbox">
                                     <input variant="primary" type="checkbox" class="custom-control-input"
@@ -161,7 +161,7 @@ const columns = ref(["id", "factura", "paciente", "correo", "fecha", "pagar", "e
 const table_option = ref({
     headings: {
         id: (h, row, index) => {
-            return "#";
+            return "#Id";
         },
     },
     perPage: 10,
@@ -183,8 +183,6 @@ const table_option = ref({
         down: "sort-icon-desc",
     },
 });
-
-const route = useRoute();
 
 onMounted(async () => {
     await fetchDataFromApi();
@@ -221,14 +219,28 @@ const delete_row = async (id) => {
     }
 };
 
-const selcted_row = (val) => {
-    console.log(val);
-    return val;
+const selectedId = ref(null);
+
+const selcted_row = async (id) => {    
+    selectedId.value = id;
+    console.log('val: ', selectedId.value)
 };
 
-const delete_row_selcted = async () => {
-    const val = selcted_row(val);
+const delete_Selected_Row = async () => {
+    if (selectedId.value !== null) {
+        await delete_row_selcted(selectedId.value);
+    } else {
+        await Swal.fire({
+            title: 'Error',
+            text: 'No se ha seleccionado ninguna fila para eliminar.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+};
 
+const delete_row_selcted = async (id) => {
+    console.log('ID seleccionada:', id);
     const result = await Swal.fire({
         title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
@@ -241,8 +253,8 @@ const delete_row_selcted = async () => {
 
     if (result.isConfirmed) {
         try {
-            await useApi('invoice/' + val, 'DELETE');
-            items.value = items.value.filter((d) => d.id !== val);
+            await useApi('invoice/' + id, 'DELETE');
+            items.value = items.value.filter((d) => d.id !== id);
             Swal.fire('¡Eliminado!', 'Tu archivo ha sido eliminado.', 'success');
         } catch (error) {
             Swal.fire('Error!', 'Hubo un error al eliminar el registro de la factura.', 'error');
