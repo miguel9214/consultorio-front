@@ -500,10 +500,11 @@ const cols = ref([
     { field: 'telefono', title: 'Telefono' },
     { field: 'fecha_nacimiento', title: 'Fecha Nacimiento' },
     { field: 'direccion', title: 'Direccion' },
-    { field: 'ciudad', title: 'Telefono' },
+    { field: 'ciudad', title: 'Ciudad' },
     { field: 'estado', title: 'Departamento' },
     { field: 'barrio', title: 'Barrio' },
     { field: 'email', title: 'Correo' },
+    { field: 'especialidades', title: 'Especialidades' },
     { field: 'actions', title: 'Acciones' },
 ]);
 
@@ -604,7 +605,7 @@ const fetchDataFromApi = async () => {
     try {
         let currentId = 1;
         const { data, message } = await useApi('medico');
-        rows.value = data.map((item) => ({ ...item, index: currentId++ }));
+        rows.value = data.map((item) => ({ ...item, index: currentId++, especialidades: item.especialidades.join(', '), }));
         totalRows.value = data.length;
     } catch (error) {
         console.error('Error fetching data from API:', error);
