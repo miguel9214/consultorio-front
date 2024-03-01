@@ -231,14 +231,7 @@ const selcted_row = async (id) => {
         }
     });
 
-    const selectedCheckbox = document.getElementById('chk' + id);
-    if (selectedCheckbox) {
-        selectedCheckbox.checked = true;
-    }
-    
     selectedId.value = id;
-    console.log("val", id)
-    
 };
 
 const delete_Selected_Row = async () => {
