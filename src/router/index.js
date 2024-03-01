@@ -72,12 +72,6 @@ const routes = [
         meta: { required_auth: true },
     },
     {
-        path: '/invoices/add',
-        name: 'invoices-add',
-        component: () => import(/* webpackChunkName: "apps-invoice-add" */ '../views/factura/agregar.vue'),
-        meta: { required_auth: true },
-    },
-    {
         path: '/invoices/edit/:id',
         name: 'invoices-edit',
         component: () => import(/* webpackChunkName: "apps-invoice-edit" */ '../views/factura/editar.vue'),

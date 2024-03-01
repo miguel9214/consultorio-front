@@ -206,40 +206,14 @@
 
                 <!-- FACTURA -->
                 <li class="menu">
-                    <a href="#Invoice" class="dropdown-toggle" data-bs-toggle="collapse" aria-controls="dashboard"
-                        aria-expanded="false">
+                    <router-link to="/invoices/list" class="dropdown-toggle" @click="toggleMobileMenu">
                         <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    d="M18 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V4C20 2.89543 19.1046 2 18 2ZM8 15H16M8 11H16M8 7H12" stroke-width="1"></path>
-                            </svg>
-                            
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" data-v-c3d7ea0a=""><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>                             
                             <span>{{ $t('Factura') }}</span>
                         </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-right">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </div>
-                    </a>
+                    </router-link>
+                </li>   
 
-                    <ul id="Invoice" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
-                        <li>
-                            <router-link to="/invoices/list" @click="toggleMobileMenu">Lista</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/invoices/preview" @click="toggleMobileMenu">Revisar</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/invoices/add" @click="toggleMobileMenu">Crear</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/invoices/edit" @click="toggleMobileMenu">Editar</router-link>
-                        </li>
-                    </ul>
-                </li>
                 <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#apps" aria-controls="apps"
                         aria-expanded="false">

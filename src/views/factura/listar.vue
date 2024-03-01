@@ -21,15 +21,6 @@
                     <div class="custom-table">
                         <v-client-table :data="items" :columns="columns" :options="table_option">
                             <template #beforeFilter>
-                                <router-link to="/invoices/add" class="btn me-2 btn-primary"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-plus">
-                                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    </svg>
-                                    Crear
-                                </router-link>
                                 <button type="button" class="btn ml-2 btn-danger" @click="delete_Selected_Row()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

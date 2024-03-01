@@ -388,6 +388,10 @@ const UpdateInvoices = async () => {
         text: 'Factura actualizada correctamente!',
         icon: 'success',
         confirmButtonText: '¡Entendido!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'http://localhost:5173/invoices/list';
+            }
         });
     }  catch (error) {
             console.error('Error en actualizar la factura:', error);
