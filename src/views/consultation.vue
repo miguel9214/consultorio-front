@@ -12,7 +12,7 @@
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger me-3" @click="deleteUser(data.value.id)">Eliminar</button>
-                                    <router-link :to="{name: 'invoices-preview', params: {id: data.value.id }}" class="btn me-2 btn-secondary"> Factura </router-link>
+                                    <router-link :to="{name: 'invoices-preview', params: {id: data.value.id }}" class="btn me-2 btn-secondary" v-if="data.value.status_invoice !== 'Facturado' "> Factura </router-link>
                                 </div>
                             </template>
                         </vue3-datatable>
