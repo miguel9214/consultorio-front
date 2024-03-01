@@ -5,7 +5,7 @@
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
-                            <h1 class="text-center">Registarte ó Crea tu cuenta</h1>
+                            <h1 class="text-center">Registrate ó Crea tu cuenta</h1>
                             <p class="signup-link text-center">Ya tienes una cuenta? <router-link
                                     to="/auth/login">Ingresar</router-link></p>
                             <div class="row">

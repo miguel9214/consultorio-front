@@ -43,7 +43,6 @@
                                     </svg>
                                     Eliminar
                                 </button>
-                                <!-- <p>valor:{{ items[0].id }}</p> -->
                             </template>                            
                             <template #id="props">
                                 <div class="checkbox-outline-primary custom-control custom-checkbox">
@@ -221,9 +220,25 @@ const delete_row = async (id) => {
 
 const selectedId = ref(null);
 
-const selcted_row = async (id) => {    
+const selcted_row = async (id) => {  
+    
+    items.value.forEach(item => {
+        if (item.id !== id) {
+            const checkbox = document.getElementById('chk' + item.id);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        }
+    });
+
+    const selectedCheckbox = document.getElementById('chk' + id);
+    if (selectedCheckbox) {
+        selectedCheckbox.checked = true;
+    }
+    
     selectedId.value = id;
-    console.log('val: ', selectedId.value)
+    console.log("val", id)
+    
 };
 
 const delete_Selected_Row = async () => {
@@ -240,7 +255,6 @@ const delete_Selected_Row = async () => {
 };
 
 const delete_row_selcted = async (id) => {
-    console.log('ID seleccionada:', id);
     const result = await Swal.fire({
         title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
@@ -253,6 +267,11 @@ const delete_row_selcted = async (id) => {
 
     if (result.isConfirmed) {
         try {
+            const checkbox = document.getElementById('chk' + id);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+
             await useApi('invoice/' + id, 'DELETE');
             items.value = items.value.filter((d) => d.id !== id);
             Swal.fire('¡Eliminado!', 'Tu archivo ha sido eliminado.', 'success');
