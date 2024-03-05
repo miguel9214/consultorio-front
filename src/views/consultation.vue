@@ -7,7 +7,7 @@
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                 <div class="panel br-6 p-0">
                     <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows">
+                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows" :sortable="true">
                             <template #actions="data">
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>

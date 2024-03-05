@@ -55,7 +55,14 @@ const routes = [
     {
         path: '/speciality',
         name: 'speciality',
-        component: () => import(/* webpackChunkName: "eps" */ '../views/speciality.vue'),
+        component: () => import(/* webpackChunkName: "speciality" */ '../views/speciality.vue'),
+    },
+
+    //MEDICINE
+    {
+        path: '/medicine',
+        name: 'medicine',
+        component: () => import(/* webpackChunkName: "medicine" */ '../views/medicine.vue'),
     },
 
     //FACTURA

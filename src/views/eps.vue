@@ -8,7 +8,7 @@
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                 <div class="panel br-6 p-0">
                     <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows">
+                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows" :sortable="true">
                             <template #actions="data">
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3"
@@ -370,8 +370,7 @@ let id;
 
 const viewUser = async (user) => {   
 
-        const {data,message} = await useApi("eps/"+user.id);
-        console.log('data: ', data);
+        const {data,message} = await useApi("eps/" + user.id);
 
         if(message == "EPS found"){
             id = user.id
@@ -382,10 +381,9 @@ const viewUser = async (user) => {
             formData.value.contract_start_date = data.contract_start_date
             formData.value.contract_end_date = data.contract_end_date                        
         };
-        console.log(id)
 };
 
-const EditEPS = async (user) => {
+const EditEPS = async () => {
 
     try {
         const datosActualizados = {
@@ -430,6 +428,7 @@ const deleteUser = async (id) => {
         confirmButtonText: 'Sí, borralo!'
     });
 
+    console.log("que tiene:", result)
     if (result.isConfirmed) {
         try {
             await useApi("eps/" + id,"DELETE");
