@@ -6,8 +6,8 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Facturacion</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Factura</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Prescripcion</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Prescripcion</span></li>
                             </ol>
                         </nav>
                     </div>
