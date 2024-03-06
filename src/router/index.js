@@ -51,6 +51,14 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //PRESCRIPTION
+    {
+        path: '/prescription/:id',
+        name: 'prescription-creat',
+        component: () => import(/* webpackChunkName: "prescription-creat" */ '../views/prescripcion/creatPrescription.vue'),
+        meta: { required_auth: true },
+    },
+
     //SPECIALITY
     {
         path: '/speciality',
