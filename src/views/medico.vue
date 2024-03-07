@@ -730,7 +730,7 @@ const deleteUser = async (id) => {
 
             rows.value = rows.value.filter((d) => d.id != id);
 
-            Swal.fire('Eliminar!', 'Tu archivo ha sido eliminado!.', 'success');
+            Swal.fire('Eliminar!', 'El medico fue ha sido eliminado!.', 'success');
         } catch (error) {
             Swal.fire('Error!', 'An error occurred while deleting the record.', 'error');
         }
