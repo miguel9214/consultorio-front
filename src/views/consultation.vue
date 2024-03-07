@@ -7,12 +7,14 @@
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                 <div class="panel br-6 p-0">
                     <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows">
+                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="totalRows" :sortable="true">
                             <template #actions="data">
                                 <div class="flex">
                                     <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#modalEditarEPS" @click="viewUser(data.value)">Editar</button>
                                     <button type="button" class="btn btn-danger me-3" @click="deleteUser(data.value.id)">Eliminar</button>
                                     <router-link :to="{name: 'invoices-preview', params: {id: data.value.id }}" class="btn me-2 btn-secondary" v-if="data.value.status_invoice !== 'Facturado' "> Factura </router-link>
+                                    <button type="button" class="btn me-2 btn-warning" data-bs-toggle="modal" data-bs-target="#modalPrescripcion">Prescripcion</button>
+                                    <!-- <router-link :to="{name: 'prescription-creat', params: {id: data.value.id }}" class="btn me-2 btn-warning "> Prescripcion </router-link> -->
                                 </div>
                             </template>
                         </vue3-datatable>
@@ -288,6 +290,142 @@
                     </a>
                     <a href="javascript:void(0)" data-bs-dismiss="modal">
                         <button type="button" class="btn btn-success" @click="EditEPS">Editar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPrescripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Consulta</h5>
+                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close" @click="resetFormData"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Nombre Medico -->
+                                    <div id="consultation-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Medico</label>
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.doctor_id" class="mb-4 form-select w-100" tabindex="1">
+                                                <option style="margin: 1px" value="" disabled selected>Medicos</option>
+                                                <option :value="doctor.id" :key="doctor.id" v-for="doctor in doctorList">{{ doctor.doctor }}</option>
+                                            </select>
+                                        </div>
+
+                                        <template v-if="errors.doctor_id.length > 0">
+                                            <b :key="e" v-for="e in errors.doctor_id" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Tipo de Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Tipo de Consulta</label>
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.consultation_type_id" class="mb-4 form-select w-100" tabindex="3">
+                                                <option style="margin: 1px" value="" disabled selected>Tipo de Consulta</option>
+                                                <option :value="consultation_type.id" :key="consultation_type.id" v-for="consultation_type in consultation_typeList">
+                                                    {{ consultation_type.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <template v-if="errors.consultation_type_id.length > 0">
+                                            <b :key="e" v-for="e in errors.consultation_type_id" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Fecha de Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Fecha de Consulta</label>
+                                        <input v-model="formData.date" type="date" class="form-control" tabindex="5" />
+
+                                        <template v-if="errors.date.length > 0">
+                                            <b :key="e" v-for="e in errors.date" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="text-start">
+                                <div class="form">
+                                    <!-- Nombre Paciente -->
+                                    <div id="consultation-field" class="field-wrapper input">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Nombre Paciente</label>
+                                        <div style="margin-top: 1px">
+                                            <select v-model="formData.pacient_id" class="mb-4 form-select w-100" tabindex="2">
+                                                <option style="margin: 1px" value="" disabled selected>Pacientes</option>
+                                                <option :value="pacient.id" :key="pacient.id" v-for="pacient in pacientList">{{ pacient.patient }}</option>
+                                            </select>
+                                        </div>
+
+                                        <template v-if="errors.pacient_id.length > 0">
+                                            <b :key="e" v-for="e in errors.pacient_id" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                    <!-- Paciente Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input">
+                                        <div class="field-wrapper input">
+                                            <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Estado del Paciente</label>
+                                            <select v-model="formData.status" class="mb-4 form-select w-100" tabindex="4">
+                                                <option value="" disabled selected>Seleccionar estado</option>
+                                                <option value="completado">Completado</option>
+                                                <option value="cancelado">Cancelado</option>
+                                                <option value="pendiente">Pendiente</option>
+                                                <option value="esperando">Esperando</option>
+                                            </select>
+                                            <template v-if="errors.status.length > 0">
+                                                <b :key="e" v-for="e in errors.status" class="text-danger">
+                                                    {{ e }}
+                                                </b>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <!-- Hora de Consulta -->
+                                    <div id="consultation-field" class="field-wrapper input mt-2">
+                                        <label for="fullname" class="col-form-label p-1 fs-6 fw-bold">Hora de Consulta</label>
+                                        <input v-model="formData.hour" type="time" class="form-control" tabindex="5" />
+
+                                        <template v-if="errors.hour.length > 0">
+                                            <b :key="e" v-for="e in errors.hour" class="text-danger">
+                                                {{ e }}
+                                            </b>
+                                        </template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Observación de Consulta -->
+                        <div id="observation-field" class="field-wrapper input mt-2">
+                            <label for="observation" class="col-form-label p-1 fs-6 fw-bold">Observación de Consulta</label>
+                            <textarea v-model="formData.observation" class="form-control" rows="4" tabindex="6"></textarea>
+
+                            <template v-if="errors.observation.length > 0">
+                                <b :key="e" v-for="e in errors.observation" class="text-danger">
+                                    {{ e }}
+                                </b>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-danger" @click="resetFormData">Descartar</button>
+                    </a>
+                    <a href="javascript:void(0)" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-success" @click="CreateEPS">Crear</button>
                     </a>
                 </div>
             </div>

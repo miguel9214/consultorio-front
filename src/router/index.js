@@ -51,11 +51,26 @@ const routes = [
         meta: { required_auth: true },
     },
 
+    //PRESCRIPTION
+    {
+        path: '/prescription/:id',
+        name: 'prescription-creat',
+        component: () => import(/* webpackChunkName: "prescription-creat" */ '../views/prescripcion/crear.vue'),
+        meta: { required_auth: true },
+    },
+
     //SPECIALITY
     {
         path: '/speciality',
         name: 'speciality',
-        component: () => import(/* webpackChunkName: "eps" */ '../views/speciality.vue'),
+        component: () => import(/* webpackChunkName: "speciality" */ '../views/speciality.vue'),
+    },
+
+    //MEDICINE
+    {
+        path: '/medicine',
+        name: 'medicine',
+        component: () => import(/* webpackChunkName: "medicine" */ '../views/medicine.vue'),
     },
 
     //FACTURA

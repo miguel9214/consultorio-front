@@ -6,6 +6,7 @@
 
             <perfect-scrollbar class="list-unstyled menu-categories" tag="ul"
                 :options="{ wheelSpeed: 0.5, swipeEasing: !0, minScrollbarLength: 40, maxScrollbarLength: 300, suppressScrollX: true }">
+
                 <!-- DASHBOARD -->
                 <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard"
@@ -41,6 +42,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <!-- EPS -->
                 <li class="menu">
                     <router-link to="/eps" class="dropdown-toggle" @click="toggleMobileMenu">
@@ -67,6 +69,7 @@
                         </div>
                     </router-link>
                 </li>
+
                 <!-- MEDICO -->
                 <li class="menu">
                     <router-link to="/medico" class="dropdown-toggle" @click="toggleMobileMenu">
@@ -115,56 +118,7 @@
                         </div>
                     </router-link>
                 </li>
-                <!-- CONSULTATION_TYPE -->
-                <li class="menu">
-                    <router-link to="/consultationType" class="dropdown-toggle" @click="toggleMobileMenu">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24">
-                                <defs></defs>
-                                <title>medical-files-medical-check</title>
-                                <path
-                                    d="M10.5 21.5H2A1.5 1.5 0 0 1 0.5 20V2A1.5 1.5 0 0 1 2 0.5h9.086a1 1 0 0 1 0.707 0.293l4.415 4.415a1 1 0 0 1 0.293 0.707V9.5"
-                                    fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1"></path>
-                                <path d="M11.5 0.59V5a0.5 0.5 0 0 0 0.5 0.5h4.411" fill="none" stroke="#000000"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-                                <path d="m8.5 6.75 -3 3L4 8.25" fill="none" stroke="#000000" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="1"></path>
-                                <path d="m8.5 11.75 -3 3 -1.5 -1.5" fill="none" stroke="#000000" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="1"></path>
-                                <path d="M11.5 17.5a6 6 0 1 0 12 0 6 6 0 1 0 -12 0" fill="none" stroke="#000000"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-                                <path
-                                    d="M21 17a0.5 0.5 0 0 0 -0.5 -0.5h-2v-2a0.5 0.5 0 0 0 -0.5 -0.5h-1a0.5 0.5 0 0 0 -0.5 0.5v2h-2a0.5 0.5 0 0 0 -0.5 0.5v1a0.5 0.5 0 0 0 0.5 0.5h2v2a0.5 0.5 0 0 0 0.5 0.5h1a0.5 0.5 0 0 0 0.5 -0.5v-2h2a0.5 0.5 0 0 0 0.5 -0.5Z"
-                                    fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1"></path>
-                            </svg>
-                            <span>{{ $t('Tipo Consulta') }}</span>
-                        </div>
-                    </router-link>
-                </li>
-                <!-- CONSULTATION -->
-                <li class="menu">
-                    <router-link to="/consultation" class="dropdown-toggle" @click="toggleMobileMenu">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
-                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    d="m17.612 21.4059 5.3115 1.5175 -0.7588 -4.5527 0 -6.9079c0 -0.4025 -0.1599 -0.7885 -0.4445 -1.0731 -0.2846 -0.2846 -0.6706 -0.44451 -1.0731 -0.44451h-9.8642c-0.4024 0 -0.78844 0.15991 -1.07304 0.44451 -0.28459 0.2846 -0.44448 0.6706 -0.44448 1.0731l0.00002 8.4255c0 0.4025 0.15988 0.7885 0.44448 1.0731 0.2846 0.2846 0.67062 0.4445 1.07312 0.4445h6.829Z"
-                                    stroke-width="1"></path>
-                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.1677 12.4998h-2.6876l0 1.8744 -1.9476 0 0 2.6876h1.9476l0 1.8744h2.6876v-1.8744h1.8011v-2.6876l-1.8011 0v-1.8744Z"
-                                    stroke-width="1"></path>
-                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6.63663 13.8529H1.00244c0 -1.4583 0.57933 -2.857 1.61055 -3.88817 1.03121 -1.03121 2.42984 -1.61054 3.8882 -1.61054 0.61666 0 1.22264 0.10358 1.79467 0.30111"
-                                    stroke-width="1"></path>
-                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6.50128 8.35424c2.02458 0 3.66582 -1.64125 3.66582 -3.66583 0 -2.02458 -1.64124 -3.66583 -3.66582 -3.66583 -2.02458 0 -3.66583 1.64125 -3.66583 3.66583 0 2.02458 1.64125 3.66583 3.66583 3.66583Z"
-                                    stroke-width="1"></path>
-                            </svg>
-                            <span>{{ $t('Consulta') }}</span>
-                        </div>
-                    </router-link>
-                </li>
+
                 <!-- SPECIALITY -->
                 <li class="menu">
                     <router-link to="/speciality" class="dropdown-toggle" @click="toggleMobileMenu">
@@ -202,7 +156,69 @@
                             <span>{{ $t('Especialidad') }}</span>
                         </div>
                     </router-link>
+                </li>  
+
+                <!-- CONSULTATION_TYPE -->
+                <li class="menu">
+                    <router-link to="/consultationType" class="dropdown-toggle" @click="toggleMobileMenu">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24">
+                                <defs></defs>
+                                <title>medical-files-medical-check</title>
+                                <path
+                                    d="M10.5 21.5H2A1.5 1.5 0 0 1 0.5 20V2A1.5 1.5 0 0 1 2 0.5h9.086a1 1 0 0 1 0.707 0.293l4.415 4.415a1 1 0 0 1 0.293 0.707V9.5"
+                                    fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1"></path>
+                                <path d="M11.5 0.59V5a0.5 0.5 0 0 0 0.5 0.5h4.411" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+                                <path d="m8.5 6.75 -3 3L4 8.25" fill="none" stroke="#000000" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="1"></path>
+                                <path d="m8.5 11.75 -3 3 -1.5 -1.5" fill="none" stroke="#000000" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="1"></path>
+                                <path d="M11.5 17.5a6 6 0 1 0 12 0 6 6 0 1 0 -12 0" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+                                <path
+                                    d="M21 17a0.5 0.5 0 0 0 -0.5 -0.5h-2v-2a0.5 0.5 0 0 0 -0.5 -0.5h-1a0.5 0.5 0 0 0 -0.5 0.5v2h-2a0.5 0.5 0 0 0 -0.5 0.5v1a0.5 0.5 0 0 0 0.5 0.5h2v2a0.5 0.5 0 0 0 0.5 0.5h1a0.5 0.5 0 0 0 0.5 -0.5v-2h2a0.5 0.5 0 0 0 0.5 -0.5Z"
+                                    fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1"></path>
+                            </svg>
+                            <span>{{ $t('Tipo Consulta') }}</span>
+                        </div>
+                    </router-link>
                 </li>
+
+                <!-- CONSULTATION -->
+                <li class="menu">
+                    <router-link to="/consultation" class="dropdown-toggle" @click="toggleMobileMenu">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    d="m17.612 21.4059 5.3115 1.5175 -0.7588 -4.5527 0 -6.9079c0 -0.4025 -0.1599 -0.7885 -0.4445 -1.0731 -0.2846 -0.2846 -0.6706 -0.44451 -1.0731 -0.44451h-9.8642c-0.4024 0 -0.78844 0.15991 -1.07304 0.44451 -0.28459 0.2846 -0.44448 0.6706 -0.44448 1.0731l0.00002 8.4255c0 0.4025 0.15988 0.7885 0.44448 1.0731 0.2846 0.2846 0.67062 0.4445 1.07312 0.4445h6.829Z"
+                                    stroke-width="1"></path>
+                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.1677 12.4998h-2.6876l0 1.8744 -1.9476 0 0 2.6876h1.9476l0 1.8744h2.6876v-1.8744h1.8011v-2.6876l-1.8011 0v-1.8744Z"
+                                    stroke-width="1"></path>
+                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6.63663 13.8529H1.00244c0 -1.4583 0.57933 -2.857 1.61055 -3.88817 1.03121 -1.03121 2.42984 -1.61054 3.8882 -1.61054 0.61666 0 1.22264 0.10358 1.79467 0.30111"
+                                    stroke-width="1"></path>
+                                <path stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6.50128 8.35424c2.02458 0 3.66582 -1.64125 3.66582 -3.66583 0 -2.02458 -1.64124 -3.66583 -3.66582 -3.66583 -2.02458 0 -3.66583 1.64125 -3.66583 3.66583 0 2.02458 1.64125 3.66583 3.66583 3.66583Z"
+                                    stroke-width="1"></path>
+                            </svg>
+                            <span>{{ $t('Consulta') }}</span>
+                        </div>
+                    </router-link>
+                </li>   
+                
+                <!-- MEDICAMENTO -->
+                <li class="menu">
+                    <router-link to="/medicine" class="dropdown-toggle" @click="toggleMobileMenu">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" height="14" width="14" id="Bandage--Streamline-Core"><desc>Bandage Streamline Icon: https://streamlinehq.com</desc><g id="Bandage--Streamline-Core"><path id="Vector" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="m3.13 7.86988 4.74 -4.74" stroke-width="1"></path><path id="Vector_2" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="m6.13 10.8699 4.74 -4.74002" stroke-width="1"></path><path id="Vector_3" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M7.78998 12.5201c0.62724 0.6272 1.47795 0.9796 2.36502 0.9796 0.887 0 1.7377 -0.3524 2.365 -0.9796 0.6272 -0.6272 0.9796 -1.478 0.9796 -2.365 0 -0.88704 -0.3524 -1.73776 -0.9796 -2.365l-6.31002 -6.31C5.58274 0.852866 4.73203 0.500488 3.84498 0.500488c-0.88705 0 -1.73776 0.352378 -2.365 0.979612 -0.627236 0.62724 -0.979614 1.47796 -0.979614 2.365 0 0.88705 0.352378 1.73777 0.979614 2.365l6.31 6.31Z" stroke-width="1"></path></g></svg>                           
+                            <span>{{ $t('Medicamentos') }}</span>
+                        </div>
+                    </router-link>
+                </li>   
 
                 <!-- FACTURA -->
                 <li class="menu">
@@ -212,7 +228,7 @@
                             <span>{{ $t('Factura') }}</span>
                         </div>
                     </router-link>
-                </li>   
+                </li> 
 
                 <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#apps" aria-controls="apps"
