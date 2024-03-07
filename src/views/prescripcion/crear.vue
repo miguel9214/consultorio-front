@@ -36,9 +36,7 @@
                                                         </div>
 
                                                         <div class="col-sm-6 text-sm-end">
-                                                            <p class="inv-list-number"><span class="inv-title">Fact :
-                                                                </span> <span class="inv-number">#{{
-                                                                    params.next_invoice_number }}</span></p>
+                                                            <p class="inv-list-number"><span class="inv-title">Prescripción</span></p>
                                                         </div>
 
                                                         <div class="col-sm-6 align-self-center mt-3">
@@ -71,16 +69,16 @@
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
-                                                            <p class="inv-to">Facturar a</p>
+                                                            <p class="inv-to fs-6">Prescrito a</p>
                                                         </div>
 
                                                         <div
                                                             class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
-                                                            <h6 class="inv-title">Informacion de Pago:</h6>
+                                                            <h6 class="inv-title"></h6>
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-customer-name">{{ params.pacient }}</p>
+                                                            <p class="inv-street-addr text-black">{{ params.pacient }}</p>
                                                             <p class="inv-street-addr">{{ params.address }}</p>
                                                             <p class="inv-email-address">{{ params.email }}</p>
                                                             <p class="inv-email-address">{{ params.phone }}</p>
@@ -89,16 +87,10 @@
                                                         <div
                                                             class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
                                                             <div class="inv--payment-info">
-                                                                <p><span class="inv-subtitle">Bank Name:</span> <span>Bank
-                                                                        of America</span></p>
-                                                                <p><span class="inv-subtitle">Account Number: </span>
-                                                                    <span>1234567890</span>
-                                                                </p>
-                                                                <p><span class="inv-subtitle">SWIFT code:</span>
-                                                                    <span>VS70134</span>
-                                                                </p>
-                                                                <p><span class="inv-subtitle">Country: </span> <span>United
-                                                                        States</span></p>
+                                                                <p><span class="inv-street-addr">Dcto:</span><span class=" inv-street-addr text-black">1065884745</span></p>
+                                                                <p><span class="inv-street-addr">Plan:</span><span>PLAN UNICO</span></p>
+                                                                <p><span class="inv-street-addr">Vigencia:</span><span>30 dias</span></p>
+                                                                <p><span class="inv-street-addr">Hab: </span> <span>4A</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
