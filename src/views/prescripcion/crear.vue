@@ -7,7 +7,8 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Prescripcion</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Prescripcion</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Prescripcion</span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -27,49 +28,34 @@
                                             <div class="content-section">
                                                 <div class="inv--head-section inv--detail-section">
                                                     <div class="row">
-                                                        <div class="col-sm-6 col-12 me-auto">
+                                                        <div class="col-sm-3 col-12 me-auto">
                                                             <div class="d-flex">
                                                                 <img class="company-logo"
-                                                                    src="/src/assets/images/cork-logo.png" alt="company" />
+                                                                    src="/src/assets/images/cork-logo.png"
+                                                                    alt="company" />
                                                                 <h3 class="in-heading align-self-center">Cork Inc.</h3>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-6 text-sm-end">
-                                                            <p class="inv-list-number"><span class="inv-title">Prescripción</span></p>
+                                                        <div class="col-sm-6 text-center">
+                                                            <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">CLINICA DE ESPECIALISTAS MARIA AUXILIADORA S.A.S</p>
+                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Dirección: Calle 5 N° 32 - 07</p>
+                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">NIT: 800197217-9</p>
+                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Ciudad: AGUACHICA</p>
+                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Orden CONSULTA</p>
                                                         </div>
 
-                                                        <div class="col-sm-6 align-self-center mt-3">
-                                                            <p class="inv-street-addr">XYZ Delta Street</p>
-                                                            <p class="inv-email-address">info@company.com</p>
-                                                            <p class="inv-email-address">(120) 456 789</p>
-                                                        </div>
-                                                        <div class="col-sm-6 align-self-center mt-3 text-sm-end">
-                                                            <p class="inv-created-date">
-                                                                <span class="inv-title">Fecha Inicial : </span>
-                                                                <input class="border-0 fw-bold" type="date"
-                                                                    v-model="params.date_consult">
-                                                            </p>
-                                                            <p class="inv-created-date">
-                                                                <span class="inv-title">Fecha Final : </span>
-                                                                <input class="border-0 fw-bold" type="date"
-                                                                    v-model="params.due_date">
-                                                                <br>
-                                                                <template v-if="errors.due_date.length > 0">
-                                                                    <b :key="e" v-for="e in errors.due_date"
-                                                                        class="text-danger">
-                                                                        {{ e }}
-                                                                    </b>
-                                                                </template>
-                                                            </p>
+                                                        <div class="col-sm-3 text-sm-end">
+                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
-                                                        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
-                                                            <p class="inv-to fs-6">Prescrito a</p>
+                                                        <div
+                                                            class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
+                                                            <p class="inv-to fs-8">Prescrito a</p>
                                                         </div>
 
                                                         <div
@@ -78,16 +64,20 @@
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-street-addr text-black">{{ params.pacient }}</p>
+                                                            <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">{{ params.pacient }}</p>
                                                             <p class="inv-street-addr">{{ params.address }}</p>
                                                             <p class="inv-email-address">{{ params.email }}</p>
                                                             <p class="inv-email-address">{{ params.phone }}</p>
+
+                                                            <div class="mt-3">
+                                                                <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">Médico: {{ params.doctor }}</p>
+                                                            </div>
                                                         </div>
 
                                                         <div
                                                             class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
                                                             <div class="inv--payment-info">
-                                                                <p><span class="inv-street-addr">Dcto:</span><span class=" inv-street-addr text-black">1065884745</span></p>
+                                                                <p><span class="inv-street-addr">Dcto:</span><span class=" inv-street-addr" style="font-weight: 800; color:#0e1726">1065884745</span></p>
                                                                 <p><span class="inv-street-addr">Plan:</span><span>PLAN UNICO</span></p>
                                                                 <p><span class="inv-street-addr">Vigencia:</span><span>30 dias</span></p>
                                                                 <p><span class="inv-street-addr">Hab: </span> <span>4A</span></p>
@@ -101,11 +91,11 @@
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>S.NO</th>
-                                                                    <th>ITEMS</th>
-                                                                    <th>QTY</th>
-                                                                    <th class="text-end">PRECIO</th>
-                                                                    <th class="text-end">TOTAL</th>
+                                                                    <th>It</th>
+                                                                    <th>Codigo</th>
+                                                                    <th>Descripcion</th>
+                                                                    <th class="text-end">Dosis Medicina</th>
+                                                                    <th class="text-end">Datos Clínicos</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -120,83 +110,13 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                </div>
-                                                <div class="inv--total-amounts">
-                                                    <div class="row mt-4">
-                                                        <div class="col-sm-5 col-12 order-sm-0 order-1"></div>
-                                                        <div class="col-sm-7 col-12 order-sm-1 order-0">
-                                                            <div class="text-sm-end">
-                                                                <div class="row">
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="">Subtotal:</p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <p id="priceDisplay" class="">${{ params.price }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="">Impuestos:</p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <input class="border-0 text-center"
-                                                                            style="width: 40px; margin-right: -5px"
-                                                                            type="number" v-model="params.taxes">
-                                                                        <br>
-                                                                        <template v-if="errors.taxes.length > 0">
-                                                                            <b :key="e" v-for="e in errors.taxes"
-                                                                                class="text-danger">
-                                                                                {{ e }}
-                                                                            </b>
-                                                                        </template>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="discount-rate">Descuento:</p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <input class="border-0 text-center"
-                                                                            style="width: 40px; margin-right: -5px"
-                                                                            type="number" v-model="params.discounts">
-                                                                        <br>
-                                                                        <template v-if="errors.discounts.length > 0">
-                                                                            <b :key="e" v-for="e in errors.discounts"
-                                                                                class="text-danger">
-                                                                                {{ e }}
-                                                                            </b>
-                                                                        </template>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7 grand-total-title">
-                                                                        <h4 class="">Total:</h4>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5 grand-total-amount">
-                                                                        <h4 class="">${{ calculateTotal() }}</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="preview-field" class="field-wrapper input">
-                                                        <div class="field-wrapper input">
-                                                            <label for="fullname" class="col-form-label fw-bold">Estado de
-                                                                Pago</label>
-                                                            <select v-model="params.status"
-                                                                class="mb-4 form-select w-25 border-0">
-                                                                <option value="" disabled selected>Estado</option>
-                                                                <option value="pagado">Pagado</option>
-                                                                <option value="pendiente">Pendiente</option>
-                                                            </select>
-                                                        </div>
-                                                        <template v-if="errors.status.length > 0">
-                                                            <b :key="e" v-for="e in errors.status" class="text-danger">
-                                                                {{ e }}
-                                                            </b>
-                                                        </template>
-                                                    </div>
-                                                </div>
+                                                </div>                                        
 
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                            <p>Nota: El cuidado de la salud es la base para una vida plena y
+                                                            <p>Nota: El cuidado de la salud es la base para una vida
+                                                                plena y
                                                                 satisfactoria.</p>
                                                         </div>
                                                     </div>
