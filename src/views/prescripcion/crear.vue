@@ -38,11 +38,11 @@
                                                         </div>
 
                                                         <div class="col-sm-6 text-center">
-                                                            <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">CLINICA DE ESPECIALISTAS MARIA AUXILIADORA S.A.S</p>
-                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Dirección: Calle 5 N° 32 - 07</p>
-                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">NIT: 800197217-9</p>
-                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Ciudad: AGUACHICA</p>
-                                                            <p class="inv-email-address" style="font-weight: 800; color:#0e1726">Orden CONSULTA</p>
+                                                            <p class="inv-street-addr" style="font-weight: 600; color:#0e1726">CLINICA DE ESPECIALISTAS MARIA AUXILIADORA</p>
+                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Dirección: Calle 5 N° 32 - 07</p>
+                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">NIT: 800197217-9</p>
+                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Ciudad: AGUACHICA</p>
+                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Orden CONSULTA</p>
                                                         </div>
 
                                                         <div class="col-sm-3 text-sm-end">
@@ -134,7 +134,7 @@
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-primary btn-send"
-                                                @click="CreateInvoices">Enviar Factura</a>
+                                                @click="CreateInvoices">Guardar</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
