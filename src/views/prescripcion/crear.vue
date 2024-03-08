@@ -38,15 +38,26 @@
                                                         </div>
 
                                                         <div class="col-sm-6 text-center">
-                                                            <p class="inv-street-addr" style="font-weight: 600; color:#0e1726">CLINICA DE ESPECIALISTAS MARIA AUXILIADORA</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Dirección: Calle 5 N° 32 - 07</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">NIT: 800197217-9</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Ciudad: AGUACHICA</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color:#0e1726">Orden CONSULTA</p>
+                                                            <p class="inv-street-addr"
+                                                                style="font-weight: 600; color:#0e1726">CLINICA DE
+                                                                ESPECIALISTAS MARIA AUXILIADORA</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color:#0e1726">Dirección: Calle
+                                                                5 N° 32 - 07</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color:#0e1726">NIT: 800197217-9
+                                                            </p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color:#0e1726">Ciudad:
+                                                                AGUACHICA</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color:#0e1726">Orden CONSULTA
+                                                            </p>
                                                         </div>
 
                                                         <div class="col-sm-3 text-sm-end">
-                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}</p>
+                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,23 +75,34 @@
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">{{ params.pacient }}</p>
+                                                            <p class="inv-street-addr"
+                                                                style="font-weight: 800; color:#0e1726">{{
+                                                                params.pacient }}</p>
                                                             <p class="inv-street-addr">{{ params.address }}</p>
                                                             <p class="inv-email-address">{{ params.email }}</p>
                                                             <p class="inv-email-address">{{ params.phone }}</p>
 
                                                             <div class="mt-3">
-                                                                <p class="inv-street-addr" style="font-weight: 800; color:#0e1726">Médico: {{ params.doctor }}</p>
+                                                                <p class="inv-street-addr"
+                                                                    style="font-weight: 800; color:#0e1726">Médico: {{
+                                                                params.doctor }}</p>
                                                             </div>
                                                         </div>
 
                                                         <div
                                                             class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
                                                             <div class="inv--payment-info">
-                                                                <p><span class="inv-street-addr">Dcto:</span><span class=" inv-street-addr" style="font-weight: 800; color:#0e1726">1065884745</span></p>
-                                                                <p><span class="inv-street-addr">Plan:</span><span>PLAN UNICO</span></p>
-                                                                <p><span class="inv-street-addr">Vigencia:</span><span>30 dias</span></p>
-                                                                <p><span class="inv-street-addr">Hab: </span> <span>4A</span></p>
+                                                                <p><span class="inv-street-addr">Dcto:</span><span
+                                                                        class=" inv-street-addr"
+                                                                        style="font-weight: 800; color:#0e1726">1065884745</span>
+                                                                </p>
+                                                                <p><span class="inv-street-addr">Plan:</span><span>PLAN
+                                                                        UNICO</span></p>
+                                                                <p><span class="inv-street-addr">Vigencia:</span><span>30
+                                                                        dias</span></p>
+                                                                <p><span class="inv-street-addr">Hab: </span>
+                                                                    <span>4A</span>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,7 +132,125 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                </div>                                        
+                                                </div>
+
+                                                <div class="invoice-detail-items">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered item-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class=""></th>
+                                                                    <th>Description</th>
+                                                                    <th class="">Rate</th>
+                                                                    <th class="">Qty</th>
+                                                                    <th class="text-end">Amount</th>
+                                                                    <th class="text-center">Tax</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="delete-item-row">
+                                                                        <ul class="table-controls">
+                                                                            <li>
+                                                                                <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
+                                                                                    <svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24" height="24"
+                                                                                        viewBox="0 0 24 24" fill="none"
+                                                                                        stroke="currentColor"
+                                                                                        stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        class="feather feather-x-circle">
+                                                                                        <circle cx="12" cy="12" r="10">
+                                                                                        </circle>
+                                                                                        <line x1="15" y1="9" x2="9"
+                                                                                            y2="15"></line>
+                                                                                        <line x1="9" y1="9" x2="15"
+                                                                                            y2="15"></line>
+                                                                                    </svg></a></li>
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td class="description"><input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Item Description"><textarea
+                                                                            class="form-control"
+                                                                            placeholder="Additional Details"></textarea>
+                                                                    </td>
+                                                                    <td class="rate"><input type="number"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Price"></td>
+                                                                    <td class="text-end qty"><input type="number"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Quantity"></td>
+                                                                    <td class="text-end amount"><span
+                                                                            class="editable-amount mt-2"><span
+                                                                                class="currency">$</span> <span
+                                                                                class="amount">100</span></span></td>
+                                                                    <td class="text-center tax">
+                                                                        <div
+                                                                            class="checkbox-primary custom-control custom-checkbox">
+                                                                            <input type="checkbox" id="chktax-0"
+                                                                                class="custom-control-input"><label
+                                                                                class="custom-control-label"
+                                                                                for="chktax-0"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="delete-item-row">
+                                                                        <ul class="table-controls">
+                                                                            <li><a href="javascript:void(0);"
+                                                                                    class="delete-item"><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24" height="24"
+                                                                                        viewBox="0 0 24 24" fill="none"
+                                                                                        stroke="currentColor"
+                                                                                        stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        class="feather feather-x-circle">
+                                                                                        <circle cx="12" cy="12" r="10">
+                                                                                        </circle>
+                                                                                        <line x1="15" y1="9" x2="9"
+                                                                                            y2="15"></line>
+                                                                                        <line x1="9" y1="9" x2="15"
+                                                                                            y2="15"></line>
+                                                                                    </svg></a></li>
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td class="description"><input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Item Description"><textarea
+                                                                            class="form-control"
+                                                                            placeholder="Additional Details"></textarea>
+                                                                    </td>
+                                                                    <td class="rate"><input type="number"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Price"></td>
+                                                                    <td class="text-end qty"><input type="number"
+                                                                            class="form-control form-control-sm"
+                                                                            placeholder="Quantity"></td>
+                                                                    <td class="text-end amount"><span
+                                                                            class="editable-amount mt-2"><span
+                                                                                class="currency">$</span> <span
+                                                                                class="amount">0</span></span></td>
+                                                                    <td class="text-center tax">
+                                                                        <div
+                                                                            class="checkbox-primary custom-control custom-checkbox">
+                                                                            <input type="checkbox" id="chktax-1"
+                                                                                class="custom-control-input"><label
+                                                                                class="custom-control-label"
+                                                                                for="chktax-1"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary additem btn-sm"
+                                                        @click="add_item()">Add Item</button>
+                                                </div>
 
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
@@ -158,6 +298,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import "/src/assets/sass/apps/invoice-preview.scss";
+import "/src/assets/sass/apps/invoice-add.scss";
 import { useRoute } from "vue-router";
 
 import { useMeta } from "/src/composables/use-meta";
@@ -169,6 +310,8 @@ const route = useRoute();
 const id = ref('');
 
 onMounted(async () => {
+    items.value.push({ id: 1, title: "", description: "", rate: 0, quantity: 0, amount: 100, is_tax: false });
+
     id.value = route.params.id;
     console.log(id.value)
     await invoiceConsultation(id.value);
@@ -301,6 +444,25 @@ const invoiceConsultation = async (id) => {
     params.value.invoice_number = data.next_invoice_number
     params.value.start_date = data.date_consult
     params.value.total_amount = data.price
+};
+
+const items = ref([]);
+
+const remove_item = (item) => {
+    items.value = items.value.filter((d) => d.id != item.id);
+};
+
+const change_file = (event) => {
+    selected_file.value = URL.createObjectURL(event.target.files[0]);
+};
+
+const add_item = () => {
+    let max_id = 0;
+    if (items.value && items.value.length) {
+        max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+    }
+    items.value.push({ id: max_id + 1, title: "", description: "", rate: 0, quantity: 0, amount: 0, is_tax: false });
+    console.log(items.value)
 };
 
 </script>
