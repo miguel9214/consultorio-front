@@ -123,16 +123,16 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td>1</td>
-                                                                    <td>{{ params.type_consult }}</td>
+                                                                    <td>2</td>
                                                                     <td>1</td>
-                                                                    <td class="text-end">${{ params.price }}</td>
-                                                                    <td class="text-end">${{ params.price }}
-                                                                    </td>
+                                                                    <td class="text-end">4</td>
+                                                                    <td class="text-end">5</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="invoice-detail-items">
                                                     <div class="table-responsive">
@@ -140,21 +140,21 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th class=""></th>
-                                                                    <th>Description</th>
-                                                                    <th class="">Rate</th>
-                                                                    <th class="">Qty</th>
-                                                                    <th class="text-end">Amount</th>
-                                                                    <th class="text-center">Tax</th>
+                                                                    <th class="">Codigo</th>
+                                                                    <th>Description Medicamento</th>
+                                                                    <th class="">Dosis</th>
+                                                                    <th class="text-end w-25">Instrucciones Adicionales</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
+                                                                <tr v-for="(item, index) in params.medicine" :key="index">
                                                                     <td class="delete-item-row">
                                                                         <ul class="table-controls">
                                                                             <li>
-                                                                                <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
-                                                                                    <svg
-                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                <a href="javascript:void(0);"
+                                                                                    class="delete-item"
+                                                                                    @click="remove_item(item)">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="24" height="24"
                                                                                         viewBox="0 0 24 24" fill="none"
                                                                                         stroke="currentColor"
@@ -168,90 +168,43 @@
                                                                                             y2="15"></line>
                                                                                         <line x1="9" y1="9" x2="15"
                                                                                             y2="15"></line>
-                                                                                    </svg></a></li>
+                                                                                    </svg>
+                                                                                </a>
+                                                                            </li>
                                                                         </ul>
                                                                     </td>
-                                                                    <td class="description"><input type="text"
+                                                                    <td class="codigo">
+                                                                        <input type="text" v-model="params.code"
                                                                             class="form-control form-control-sm"
-                                                                            placeholder="Item Description"><textarea
+                                                                            placeholder="AB1" />
+                                                                    </td>
+                                                                    <td class="description">
+                                                                        <select v-model="selectedMedicine" class="form-select w-100" tabindex="14">
+                                                                            <option style="margin: 1px" value="" disabled selected>Especialidad</option>
+                                                                            <option :value="{ id: medicine.id, name: medicine.name }" :key="medicine.id" v-for="medicine in medicineList">{{ medicine.name }}</option>
+                                                                        </select>                                                                       
+                                                                        <textarea v-model="params.treatment"
                                                                             class="form-control"
-                                                                            placeholder="Additional Details"></textarea>
+                                                                            placeholder="Tratamiento"></textarea>
                                                                     </td>
-                                                                    <td class="rate"><input type="number"
-                                                                            class="form-control form-control-sm"
-                                                                            placeholder="Price"></td>
-                                                                    <td class="text-end qty"><input type="number"
-                                                                            class="form-control form-control-sm"
-                                                                            placeholder="Quantity"></td>
-                                                                    <td class="text-end amount"><span
-                                                                            class="editable-amount mt-2"><span
-                                                                                class="currency">$</span> <span
-                                                                                class="amount">100</span></span></td>
-                                                                    <td class="text-center tax">
-                                                                        <div
-                                                                            class="checkbox-primary custom-control custom-checkbox">
-                                                                            <input type="checkbox" id="chktax-0"
-                                                                                class="custom-control-input"><label
-                                                                                class="custom-control-label"
-                                                                                for="chktax-0"></label>
-                                                                        </div>
+                                                                    <td class="dosis">
+                                                                        <input type="text" v-model="params.dose"
+                                                                            class="form-control form-control-sm "
+                                                                            placeholder="mg, mm..." />
                                                                     </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="delete-item-row">
-                                                                        <ul class="table-controls">
-                                                                            <li><a href="javascript:void(0);"
-                                                                                    class="delete-item"><svg
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        width="24" height="24"
-                                                                                        viewBox="0 0 24 24" fill="none"
-                                                                                        stroke="currentColor"
-                                                                                        stroke-width="2"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        class="feather feather-x-circle">
-                                                                                        <circle cx="12" cy="12" r="10">
-                                                                                        </circle>
-                                                                                        <line x1="15" y1="9" x2="9"
-                                                                                            y2="15"></line>
-                                                                                        <line x1="9" y1="9" x2="15"
-                                                                                            y2="15"></line>
-                                                                                    </svg></a></li>
-                                                                        </ul>
-                                                                    </td>
-                                                                    <td class="description"><input type="text"
-                                                                            class="form-control form-control-sm"
-                                                                            placeholder="Item Description"><textarea
-                                                                            class="form-control"
-                                                                            placeholder="Additional Details"></textarea>
-                                                                    </td>
-                                                                    <td class="rate"><input type="number"
-                                                                            class="form-control form-control-sm"
-                                                                            placeholder="Price"></td>
-                                                                    <td class="text-end qty"><input type="number"
-                                                                            class="form-control form-control-sm"
-                                                                            placeholder="Quantity"></td>
-                                                                    <td class="text-end amount"><span
-                                                                            class="editable-amount mt-2"><span
-                                                                                class="currency">$</span> <span
-                                                                                class="amount">0</span></span></td>
-                                                                    <td class="text-center tax">
-                                                                        <div
-                                                                            class="checkbox-primary custom-control custom-checkbox">
-                                                                            <input type="checkbox" id="chktax-1"
-                                                                                class="custom-control-input"><label
-                                                                                class="custom-control-label"
-                                                                                for="chktax-1"></label>
-                                                                        </div>
+                                                                    <td class="text-end qty">
+                                                                        <textarea v-model="params.additional_instructions"
+                                                                        class="form-control"
+                                                                        placeholder="..."></textarea>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
+
                                                     <button type="button" class="btn btn-secondary additem btn-sm"
                                                         @click="add_item()">Add Item</button>
                                                 </div>
-
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-12 col-12 order-sm-0 order-1">
@@ -310,52 +263,51 @@ const route = useRoute();
 const id = ref('');
 
 onMounted(async () => {
-    items.value.push({ id: 1, title: "", description: "", rate: 0, quantity: 0, amount: 100, is_tax: false });
 
     id.value = route.params.id;
     console.log(id.value)
     await invoiceConsultation(id.value);
-    calculateTotal();
+
+    showMedicine();
 });
 
 const params = ref({
     doctor: "",
     pacient: "",
-    date_consult: "",
-    hour: "",
-    observation: "",
-    status_consult: "",
-    type_consult: "",
-    price: "",
-    address: "",
     phone: "",
     email: "",
-    next_invoice_number: "",
-    invoice_number: '',
-    start_date: '',
-    due_date: '',
-    status: '',
-    total_amount: '',
-    taxes: 0,
-    discounts: 0,
-    amount_paid: '',
+    code: "",
+    treatment: "",
+    dose: "",
+    additional_instructions: "",
+    medicine: [],
+
 });
 
 const errors = ref({
-    start_date: [],
-    due_date: [],
-    status: [],
-    taxes: [],
-    discounts: [],
+    doctor: [],
+    pacient: [],
+    phone: [],
+    email: [],
+    medicine: [],
+    code: [],
+    treatment: [],
+    dose: [],
+    additional_instructions: [],
+
 });
 
 const errorsClear = () => {
     errors.value = {
-        start_date: [],
-        due_date: [],
-        status: [],
-        taxes: [],
-        discounts: [],
+        doctor: [],
+        pacient: [],
+        phone: [],
+        email: [],
+        medicine: [],
+        code: [],
+        treatment: [],
+        dose: [],
+        additional_instructions: [],
     };
 };
 
@@ -363,7 +315,7 @@ const print = () => {
     window.print();
 };
 
-const CreateInvoices = async () => {
+const CreateMedicine = async () => {
 
     errorsClear();
 
@@ -413,56 +365,37 @@ const CreateInvoices = async () => {
 
 };
 
-const calculateTotal = () => {
-    const subtotal = parseFloat(params.value.price);
-    const taxes = parseFloat(params.value.taxes);
-    const taxesDecimal = taxes / 100;
-    const discounts = parseFloat(params.value.discounts);
-    const discountsDecimal = discounts / 100;
-
-    const valueTaxes = (subtotal * taxesDecimal) + subtotal;
-    const total = valueTaxes - (valueTaxes * discountsDecimal);
-    params.value.amount_paid = total;
-
-    return total.toFixed(0);
-};
-
 const invoiceConsultation = async (id) => {
     const { data, message } = await useApi('consultation/Invoice/' + id);
     params.value.doctor = data.doctor
     params.value.pacient = data.pacient
-    params.value.date_consult = data.date_consult
-    params.value.hour = data.hour
-    params.value.observation = data.observation
-    params.value.status_consult = data.status_consult
-    params.value.type_consult = data.type_consult
-    params.value.price = data.price
-    params.value.address = data.address
     params.value.phone = data.phone
     params.value.email = data.email
-    params.value.next_invoice_number = data.next_invoice_number
-    params.value.invoice_number = data.next_invoice_number
-    params.value.start_date = data.date_consult
-    params.value.total_amount = data.price
 };
 
 const items = ref([]);
-
-const remove_item = (item) => {
-    items.value = items.value.filter((d) => d.id != item.id);
-};
-
-const change_file = (event) => {
-    selected_file.value = URL.createObjectURL(event.target.files[0]);
-};
+const selectedMedicine = ref('');
 
 const add_item = () => {
-    let max_id = 0;
-    if (items.value && items.value.length) {
-        max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+    params.value.medicine.push(selectedMedicine.value);
+};
+
+const remove_item = (item) => {
+    params.value.medicine = params.value.medicine.filter((d) => d.id != item.id);
+};
+
+//MEDICAMENTO
+
+const medicineList = ref([]);
+
+const showMedicine = async () => {
+    try {
+        const { data, message } = await useApi('medicine');
+        medicineList.value = data;
+        console.log("Imprimir lista de medicinas", medicineList);
+    } catch (error) {
+        console.error('Error al obtener los medicamentos', error);
     }
-    items.value.push({ id: max_id + 1, title: "", description: "", rate: 0, quantity: 0, amount: 0, is_tax: false });
-    console.log(items.value)
 };
 
 </script>
