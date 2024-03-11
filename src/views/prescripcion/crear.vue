@@ -116,8 +116,9 @@
                                                                     <th>It</th>
                                                                     <th>Codigo</th>
                                                                     <th>Descripcion</th>
+                                                                    <th>Tratamiento</th>
                                                                     <th class="text-end">Dosis Medicina</th>
-                                                                    <th class="text-end">Datos Clínicos</th>
+                                                                    <th class="text-end">Instrucciones</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -125,7 +126,8 @@
                                                                     <td>1</td>
                                                                     <td>2</td>
                                                                     <td>1</td>
-                                                                    <td class="text-end">4</td>
+                                                                    <td>4</td>
+                                                                    <td class="text-end">5</td>
                                                                     <td class="text-end">5</td>
                                                                 </tr>
                                                             </tbody>
@@ -153,7 +155,7 @@
                                                                             <li>
                                                                                 <a href="javascript:void(0);"
                                                                                     class="delete-item"
-                                                                                    @click="remove_item(item)">
+                                                                                    @click="remove_item(index)">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="24" height="24"
                                                                                         viewBox="0 0 24 24" fill="none"
@@ -174,27 +176,27 @@
                                                                         </ul>
                                                                     </td>
                                                                     <td class="codigo">
-                                                                        <input type="text" v-model="params.code"
+                                                                        <input type="text" v-model="params.code[index]"
                                                                             class="form-control form-control-sm"
                                                                             placeholder="AB1" />
                                                                     </td>
                                                                     <td class="description">
-                                                                        <select v-model="selectedMedicine" class="form-select w-100" tabindex="14">
+                                                                        <select v-model="selectedMedicine[index]" class="form-select w-100" tabindex="14">
                                                                             <option style="margin: 1px" value="" disabled selected>Especialidad</option>
                                                                             <option :value="{ id: medicine.id, name: medicine.name }" :key="medicine.id" v-for="medicine in medicineList">{{ medicine.name }}</option>
                                                                         </select>                                                                       
-                                                                        <textarea v-model="params.treatment"
+                                                                        <textarea v-model="params.treatment[index]"
                                                                             class="form-control"
                                                                             placeholder="Tratamiento"></textarea>
                                                                     </td>
                                                                     <td class="dosis">
-                                                                        <input type="text" v-model="params.dose"
+                                                                        <input type="text" v-model="params.dose[index]"
                                                                             class="form-control form-control-sm "
                                                                             placeholder="mg, mm..." />
                                                                     </td>
                                                                     <td class="text-end qty">
-                                                                        <textarea v-model="params.additional_instructions"
-                                                                        class="form-control"
+                                                                        <textarea v-model="params.additional_instructions[index]"
+                                                                        class="form-control m-0"
                                                                         placeholder="..."></textarea>
                                                                     </td>
                                                                 </tr>
@@ -203,7 +205,7 @@
                                                     </div>
 
                                                     <button type="button" class="btn btn-secondary additem btn-sm"
-                                                        @click="add_item()">Add Item</button>
+                                                        @click="add_item()">Agregar</button>
                                                 </div>
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
@@ -276,10 +278,10 @@ const params = ref({
     pacient: "",
     phone: "",
     email: "",
-    code: "",
-    treatment: "",
-    dose: "",
-    additional_instructions: "",
+    code: [],
+    treatment: [],
+    dose: [],
+    additional_instructions: [],
     medicine: [],
 
 });
@@ -374,14 +376,23 @@ const invoiceConsultation = async (id) => {
 };
 
 const items = ref([]);
-const selectedMedicine = ref('');
+const selectedMedicine = ref([]);
 
 const add_item = () => {
     params.value.medicine.push(selectedMedicine.value);
+    selectedMedicine.value.push('');
+    params.value.code.push(''); 
+    params.value.treatment.push(''); 
+    params.value.dose.push(''); 
+    params.value.additional_instructions.push(''); 
 };
 
-const remove_item = (item) => {
-    params.value.medicine = params.value.medicine.filter((d) => d.id != item.id);
+const remove_item = (index) => {
+    params.value.medicine.splice(index, 1);
+    params.value.code.splice(index, 1);
+    params.value.treatment.splice(index, 1);
+    params.value.dose.splice(index, 1);
+    params.value.additional_instructions.splice(index, 1);
 };
 
 //MEDICAMENTO
