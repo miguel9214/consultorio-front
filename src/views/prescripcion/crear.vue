@@ -260,7 +260,6 @@
 
     onMounted(async () => {
         id.value = route.params.id;
-        console.log(id.value);
         await invoiceConsultation(id.value);
 
         showMedicine();
@@ -314,9 +313,7 @@
         let has_error = false;
         Object.entries(params.value).forEach((f) => {
             const elemento = f[0];
-            console.log('elemento', elemento);
             const value = f[1];
-            console.log('value', value);
             if (value == '') {
                 has_error = true;
                 errors.value[elemento] = 'Este campo es obligatorio';
@@ -324,12 +321,19 @@
         });
         if (has_error) return;
         try {
-            await useApi('prescription', 'POST', {
-                date_prescription: params.value.date_prescription,
+            const medicineObjects = params.value.medicine;
+
+            const medicineIds = medicineObjects.map((medicine) => medicine.id);
+
+            const items = medicineIds.map((medicineId, index) => ({
+                medicine_id: medicineId,
                 dose: params.value.dose[index],
                 treatment: params.value.treatment[index],
-                treatment: params.value.treatment[index],
                 additional_instructions: params.value.additional_instructions[index],
+            }));
+            await useApi('prescription', 'POST', {
+                date_prescription: params.value.date_prescription,
+                items: items,
             });
             Swal.fire({
                 title: 'Éxito!',
@@ -342,7 +346,6 @@
                 }
             });
         } catch (error) {
-            console.error('Error en crear la factura:', error);
             Swal.fire({
                 title: 'Error!',
                 text: 'Hubo un problema al crear la prescripción. Por favor, complete todos los datos.',
@@ -388,7 +391,6 @@
         try {
             const { data, message } = await useApi('medicine');
             medicineList.value = data;
-            console.log('Imprimir lista de medicinas', medicineList);
         } catch (error) {
             console.error('Error al obtener los medicamentos', error);
         }
