@@ -171,7 +171,7 @@
                                                                                         <select v-model="selectedMedicine[index]" class="form-select w-100" tabindex="14">
                                                                                             <option style="margin: 1px" value="" disabled selected>Especialidad</option>
                                                                                             <option
-                                                                                                :value="{ id: medicine.id, name: medicine.name }"
+                                                                                                :value="`${medicine.id}`"
                                                                                                 :key="medicine.id"
                                                                                                 v-for="medicine in medicineList"
                                                                                             >
@@ -322,11 +322,14 @@
         if (has_error) return;
         try {
             const medicineObjects = params.value.medicine;
+            console.log("Medicamentos: ", medicineObjects);
 
-            const medicineIds = medicineObjects.map((medicine) => medicine.id);
+            const medicineIds = medicineObjects;
+            console.log("Medicamentos 2 parte: ", medicineIds);
 
             const items = medicineIds.map((medicineId, index) => ({
                 medicine_id: medicineId,
+                consulta_id: id.value,
                 dose: params.value.dose[index],
                 treatment: params.value.treatment[index],
                 additional_instructions: params.value.additional_instructions[index],
