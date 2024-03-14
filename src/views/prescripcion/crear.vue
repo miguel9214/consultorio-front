@@ -7,7 +7,8 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Prescripcion</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Prescripcion</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Crear Prescripcion</span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -29,53 +30,77 @@
                                                     <div class="row">
                                                         <div class="col-sm-3 col-12 me-auto">
                                                             <div class="d-flex">
-                                                                <img class="company-logo" src="/src/assets/images/cork-logo.png" alt="company" />
+                                                                <img class="company-logo"
+                                                                    src="/src/assets/images/cork-logo.png"
+                                                                    alt="company" />
                                                                 <h3 class="in-heading align-self-center">Cork Inc.</h3>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-sm-6 text-center">
-                                                            <p class="inv-street-addr" style="font-weight: 600; color: #0e1726">CLINICA DE ESPECIALISTAS MARIA AUXILIADORA</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color: #0e1726">Dirección: Calle 5 N° 32 - 07</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color: #0e1726">NIT: 800197217-9</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color: #0e1726">Ciudad: AGUACHICA</p>
-                                                            <p class="inv-email-address" style="font-weight: 600; color: #0e1726">Orden CONSULTA</p>
+                                                            <p class="inv-street-addr"
+                                                                style="font-weight: 600; color: #0e1726">CLINICA DE
+                                                                ESPECIALISTAS MARIA AUXILIADORA</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color: #0e1726">Dirección:
+                                                                Calle 5 N° 32 - 07</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color: #0e1726">NIT:
+                                                                800197217-9</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color: #0e1726">Ciudad:
+                                                                AGUACHICA</p>
+                                                            <p class="inv-email-address"
+                                                                style="font-weight: 600; color: #0e1726">Orden CONSULTA
+                                                            </p>
                                                         </div>
 
                                                         <div class="col-sm-3 text-sm-end">
-                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}</p>
+                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
-                                                        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
+                                                        <div
+                                                            class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
                                                             <p class="inv-to fs-8">Prescrito a</p>
                                                         </div>
 
-                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
+                                                        <div
+                                                            class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
                                                             <h6 class="inv-title"></h6>
                                                         </div>
 
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                            <p class="inv-street-addr" style="font-weight: 800; color: #0e1726">{{ params.pacient }}</p>
+                                                            <p class="inv-street-addr"
+                                                                style="font-weight: 800; color: #0e1726">{{
+                                                                params.pacient }}</p>
                                                             <p class="inv-street-addr">{{ params.address }}</p>
                                                             <p class="inv-email-address">{{ params.email }}</p>
                                                             <p class="inv-email-address">{{ params.phone }}</p>
 
                                                             <div class="mt-3">
-                                                                <p class="inv-street-addr" style="font-weight: 800; color: #0e1726">Médico: {{ params.doctor }}</p>
+                                                                <p class="inv-street-addr"
+                                                                    style="font-weight: 800; color: #0e1726">Médico: {{
+                                                                params.doctor }}</p>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
+                                                        <div
+                                                            class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
                                                             <div class="inv--payment-info">
                                                                 <p>
-                                                                    <span class="inv-street-addr">Dcto:</span><span class="inv-street-addr" style="font-weight: 800; color: #0e1726">1065884745</span>
+                                                                    <span class="inv-street-addr">Dcto:</span><span
+                                                                        class="inv-street-addr"
+                                                                        style="font-weight: 800; color: #0e1726">1065884745</span>
                                                                 </p>
-                                                                <p><span class="inv-street-addr">Plan:</span><span>PLAN UNICO</span></p>
-                                                                <p><span class="inv-street-addr">Vigencia:</span><span>30 dias</span></p>
+                                                                <p><span class="inv-street-addr">Plan:</span><span>PLAN
+                                                                        UNICO</span></p>
+                                                                <p><span class="inv-street-addr">Vigencia:</span><span>30
+                                                                        dias</span></p>
                                                                 <p>
                                                                     <span class="inv-street-addr">Hab: </span>
                                                                     <span>4A</span>
@@ -112,20 +137,29 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="modal fade" id="modalPrescripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modalPrescripcion" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-xl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Extra Large</h5>
-                                                                <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Extra
+                                                                    Large</h5>
+                                                                <button type="button" data-dismiss="modal"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    class="btn-close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="col-md-3">
                                                                     <div class="form-group mb-4 d-flex">
-                                                                        <label for="date" class="m-2 text-black">Fecha: </label>
-                                                                        <input v-model="params.date_prescription" type="date" class="form-control form-control-sm" id="invoiceDate" placeholder="Invoice Date">
+                                                                        <label for="date" class="m-2 text-black">Fecha:
+                                                                        </label>
+                                                                        <input v-model="params.date_prescription"
+                                                                            type="date"
+                                                                            class="form-control form-control-sm"
+                                                                            id="invoiceDate" placeholder="Invoice Date">
                                                                     </div>
-                                                                </div>                                                                
+                                                                </div>
                                                                 <div class="invoice-detail-items">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered item-table">
@@ -135,17 +169,20 @@
                                                                                     <th class="">Codigo</th>
                                                                                     <th>Description Medicamento</th>
                                                                                     <th class="">Dosis</th>
-                                                                                    <th class="text-end w-25">Instrucciones Adicionales</th>
+                                                                                    <th class="text-end w-25">
+                                                                                        Instrucciones Adicionales</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr v-for="(item, index) in params.medicine" :key="index">
+                                                                                <tr v-for="(item, index) in selectedMedicine"
+                                                                                    :key="index">
                                                                                     <td class="delete-item-row">
                                                                                         <ul class="table-controls">
                                                                                             <li>
-                                                                                                <a href="javascript:void(0);" class="delete-item" @click="remove_item(index)">
-                                                                                                    <svg
-                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                <a href="javascript:void(0);"
+                                                                                                    class="delete-item"
+                                                                                                    @click="remove_item(index)">
+                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
                                                                                                         width="24"
                                                                                                         height="24"
                                                                                                         viewBox="0 0 24 24"
@@ -154,51 +191,84 @@
                                                                                                         stroke-width="2"
                                                                                                         stroke-linecap="round"
                                                                                                         stroke-linejoin="round"
-                                                                                                        class="feather feather-x-circle"
-                                                                                                    >
-                                                                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                                                                        <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                                                                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                                                                                                        class="feather feather-x-circle">
+                                                                                                        <circle cx="12"
+                                                                                                            cy="12"
+                                                                                                            r="10">
+                                                                                                        </circle>
+                                                                                                        <line x1="15"
+                                                                                                            y1="9"
+                                                                                                            x2="9"
+                                                                                                            y2="15">
+                                                                                                        </line>
+                                                                                                        <line x1="9"
+                                                                                                            y1="9"
+                                                                                                            x2="15"
+                                                                                                            y2="15">
+                                                                                                        </line>
                                                                                                     </svg>
                                                                                                 </a>
                                                                                             </li>
                                                                                         </ul>
                                                                                     </td>
                                                                                     <td class="codigo">
-                                                                                        <input type="text" v-model="params.code[index]" class="form-control form-control-sm" placeholder="AB1" />
+                                                                                        <input type="text"
+                                                                                            v-model="paramsPrescription.medicines[index].medicine.code"
+                                                                                            class="form-control form-control-sm"
+                                                                                            placeholder="AB1" />
                                                                                     </td>
                                                                                     <td class="description">
-                                                                                        <select v-model="selectedMedicine[index]" class="form-select w-100" tabindex="14">
-                                                                                            <option style="margin: 1px" value="" disabled selected>Especialidad</option>
+                                                                                        <select
+                                                                                            v-model="paramsPrescription.medicines[index].medicine"
+                                                                                            @change="selectedMedicineEvent(paramsPrescription.medicine[index].name.id, index)"
+                                                                                            class="form-select w-100"
+                                                                                            tabindex="14">
+                                                                                            <option style="margin: 1px"
+                                                                                                value="" disabled
+                                                                                                selected>Medicamento
+                                                                                            </option>
                                                                                             <option
-                                                                                                :value="`${medicine.id}`"
+                                                                                                :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
                                                                                                 :key="medicine.id"
-                                                                                                v-for="medicine in medicineList"
-                                                                                            >
+                                                                                                v-for="medicine in medicineList">
                                                                                                 {{ medicine.name }}
                                                                                             </option>
                                                                                         </select>
-                                                                                        <textarea v-model="params.treatment[index]" class="form-control" placeholder="Tratamiento"></textarea>
+                                                                                        <textarea
+                                                                                            v-model="paramsPrescription.medicines[index].treatment"
+                                                                                            class="form-control"
+                                                                                            placeholder="Tratamiento"></textarea>
                                                                                     </td>
                                                                                     <td class="dosis">
-                                                                                        <input type="text" v-model="params.dose[index]" class="form-control form-control-sm" placeholder="mg, mm..." />
+                                                                                        <input type="text"
+                                                                                            v-model="paramsPrescription.medicines[index].dose"
+                                                                                            class="form-control form-control-sm"
+                                                                                            placeholder="mg, mm..." />
                                                                                     </td>
                                                                                     <td class="text-end qty">
-                                                                                        <textarea v-model="params.additional_instructions[index]" class="form-control m-0" placeholder="..."></textarea>
+                                                                                        <textarea
+                                                                                            v-model="paramsPrescription.medicines[index].additional_instructions"
+                                                                                            class="form-control m-0"
+                                                                                            placeholder="..."></textarea>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-                                                                    <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Agregar</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-secondary additem btn-sm"
+                                                                        @click="add_item()">Agregar</button>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a href="javascript:void(0)" ref="discardButton" data-bs-dismiss="modal">
-                                                                    <button type="button" class="btn btn-danger" @click="resetFormData">Descartar</button>
+                                                                <a href="javascript:void(0)" ref="discardButton"
+                                                                    data-bs-dismiss="modal">
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        @click="resetFormData">Descartar</button>
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
-                                                                    <button type="button" class="btn btn-success" @click="createPrescripcion">Crear</button>
+                                                                    <button type="button" class="btn btn-success"
+                                                                        @click="createPrescripcion">Crear</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -206,13 +276,16 @@
                                                 </div>
 
                                                 <div style="padding: 10px 25px 10px 33px">
-                                                    <button type="button" class="btn btn-success me-3" data-bs-toggle="modal" data-bs-target="#modalPrescripcion">Prescripcion</button>
+                                                    <button type="button" class="btn btn-success me-3"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalPrescripcion">Prescripcion</button>
                                                 </div>
 
                                                 <div class="inv--note">
                                                     <div class="row mt-4">
                                                         <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                            <p>Nota: El cuidado de la salud es la base para una vida plena y satisfactoria.</p>
+                                                            <p>Nota: El cuidado de la salud es la base para una vida
+                                                                plena y satisfactoria.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -228,10 +301,12 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send" @click="CreateInvoices">Guardar</a>
+                                            <a href="javascript:;" class="btn btn-primary btn-send"
+                                                @click="CreateInvoices">Guardar</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Imprimir</a>
+                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print"
+                                                @click="print()">Imprimir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -245,39 +320,55 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
-    import '/src/assets/sass/apps/invoice-preview.scss';
-    import '/src/assets/sass/apps/invoice-add.scss';
-    import { useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import '/src/assets/sass/apps/invoice-preview.scss';
+import '/src/assets/sass/apps/invoice-add.scss';
+import { useRoute } from 'vue-router';
 
-    import { useMeta } from '/src/composables/use-meta';
-    import { useApi } from '/src/composables/use-api';
-    useMeta({ title: 'Revisar Factura' });
+import { useMeta } from '/src/composables/use-meta';
+import { useApi } from '/src/composables/use-api';
+useMeta({ title: 'Revisar Factura' });
 
-    const route = useRoute();
+const route = useRoute();
 
-    const id = ref('');
+const id = ref('');
 
-    onMounted(async () => {
-        id.value = route.params.id;
-        await invoiceConsultation(id.value);
+onMounted(async () => {
+    id.value = route.params.id;
+    await invoiceConsultation(id.value);
 
-        showMedicine();
-    });
+    showMedicine();
+});
 
-    const params = ref({
-        doctor: '',
-        pacient: '',
-        phone: '',
-        email: '',
-        code: [],
-        treatment: [],
-        dose: [],
-        additional_instructions: [],
-        medicine: [],
-    });
+const params = ref({
+    doctor: '',
+    pacient: '',
+    phone: '',
+    email: '',
+});
 
-    const errors = ref({
+const paramsPrescription = ref({
+    code: [],
+    treatment: [],
+    dose: [],
+    additional_instructions: [],
+    medicines: [],
+});
+
+const errors = ref({
+    doctor: [],
+    pacient: [],
+    phone: [],
+    email: [],
+    medicine: [],
+    code: [],
+    treatment: [],
+    dose: [],
+    additional_instructions: [],
+});
+
+const errorsClear = () => {
+    errors.value = {
         doctor: [],
         pacient: [],
         phone: [],
@@ -287,115 +378,96 @@
         treatment: [],
         dose: [],
         additional_instructions: [],
+    };
+};
+
+const print = () => {
+    window.print();
+};
+
+const createPrescripcion = async () => {
+    errorsClear();
+
+    let has_error = false;
+    Object.entries(paramsPrescription.value).forEach((f) => {
+        const elemento = f[0];
+        const value = f[1];
+        if (value == '') {
+            has_error = true;
+            errors.value[elemento] = 'Este campo es obligatorio';
+        }
     });
 
-    const errorsClear = () => {
-        errors.value = {
-            doctor: [],
-            pacient: [],
-            phone: [],
-            email: [],
-            medicine: [],
-            code: [],
-            treatment: [],
-            dose: [],
-            additional_instructions: [],
-        };
-    };
+    if (has_error) return;
 
-    const print = () => {
-        window.print();
-    };
-
-    const createPrescripcion = async () => {
-        errorsClear();
-
-        let has_error = false;
-        Object.entries(params.value).forEach((f) => {
-            const elemento = f[0];
-            const value = f[1];
-            if (value == '') {
-                has_error = true;
-                errors.value[elemento] = 'Este campo es obligatorio';
+    try {
+        await useApi('prescription', 'POST', paramsPrescription.value);
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Prescripción creada correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!',
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
             }
+            resetFormData();
         });
-        if (has_error) return;
-        try {
-            const medicineObjects = params.value.medicine;
-            console.log("Medicamentos: ", medicineObjects);
+    } catch (error) {
+        const errors_api = error.errors;
+        Object.entries(errors_api).forEach((e) => {
+            const elemento = e[0];
+            const mensaje = e[1];
+            errors.value[elemento] = mensaje;
+        });
+    }
 
-            const medicineIds = medicineObjects;
-            console.log("Medicamentos 2 parte: ", medicineIds);
+    fetchDataFromApi();
+};
 
-            const items = medicineIds.map((medicineId, index) => ({
-                medicine_id: medicineId,
-                consulta_id: id.value,
-                dose: params.value.dose[index],
-                treatment: params.value.treatment[index],
-                additional_instructions: params.value.additional_instructions[index],
-            }));
-            await useApi('prescription', 'POST', {
-                date_prescription: params.value.date_prescription,
-                items: items,
-            });
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'Prescripción creada correctamente!',
-                icon: 'success',
-                confirmButtonText: '¡Entendido!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'http://localhost:5173/invoices/list';
-                }
-            });
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Hubo un problema al crear la prescripción. Por favor, complete todos los datos.',
-                icon: 'error',
-                confirmButtonText: '¡Entendido!',
-            });
-        }
-    };
+const invoiceConsultation = async (id) => {
+    const { data, message } = await useApi('consultation/Invoice/' + id);
+    params.value.doctor = data.doctor;
+    params.value.pacient = data.pacient;
+    params.value.phone = data.phone;
+    params.value.email = data.email;
+};
 
-    const invoiceConsultation = async (id) => {
-        const { data, message } = await useApi('consultation/Invoice/' + id);
-        params.value.doctor = data.doctor;
-        params.value.pacient = data.pacient;
-        params.value.phone = data.phone;
-        params.value.email = data.email;
-    };
+const items = ref([]);
+const selectedMedicine = ref([]);
 
-    const items = ref([]);
-    const selectedMedicine = ref([]);
+const add_item = () => {
+    paramsPrescription.value.medicines.push({
+        medicine: {
+            id: "",
+            code: "",
+            name: "",
+        },
+        dose: "",
+        treatment: "",
+        additional_instructions: ""
+    });
+    selectedMedicine.value.push('');
+};
 
-    const add_item = () => {
-        params.value.medicine.push(selectedMedicine.value);
-        selectedMedicine.value.push('');
-        params.value.code.push('');
-        params.value.treatment.push('');
-        params.value.dose.push('');
-        params.value.additional_instructions.push('');
-    };
+const remove_item = (index) => {
+    paramsPrescription.value.medicine.splice(index, 1);
+    paramsPrescription.value.code.splice(index, 1);
+    paramsPrescription.value.treatment.splice(index, 1);
+    paramsPrescription.value.dose.splice(index, 1);
+    paramsPrescription.value.additional_instructions.splice(index, 1);
+};
 
-    const remove_item = (index) => {
-        params.value.medicine.splice(index, 1);
-        params.value.code.splice(index, 1);
-        params.value.treatment.splice(index, 1);
-        params.value.dose.splice(index, 1);
-        params.value.additional_instructions.splice(index, 1);
-    };
+//MEDICAMENTO
 
-    //MEDICAMENTO
+const medicineList = ref([]);
 
-    const medicineList = ref([]);
-
-    const showMedicine = async () => {
-        try {
-            const { data, message } = await useApi('medicine');
-            medicineList.value = data;
-        } catch (error) {
-            console.error('Error al obtener los medicamentos', error);
-        }
-    };
+const showMedicine = async () => {
+    try {
+        const { data, message } = await useApi('medicine');
+        medicineList.value = data;
+    } catch (error) {
+        console.error('Error al obtener los medicamentos', error);
+    }
+};
 </script>
