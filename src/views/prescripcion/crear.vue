@@ -381,57 +381,6 @@ const print = () => {
     window.print();
 };
 
-// const createPrescripcion = async () => {
-//     // errorsClear();
-
-//     // let has_error = false;
-//     // Object.entries(paramsPrescription.value).forEach((f) => {
-//     //     const elemento = f[0];
-//     //     const value = f[1];
-//     //     if (value == '') {
-//     //         has_error = true;
-//     //         errors.value[elemento] = 'Este campo es obligatorio';
-//     //     }
-//     // });
-
-//     // if (has_error) return;
-//     // alert("LLEGA HASTA ACA")
-//     try {
-//         const medicineIds = paramsPrescription.value.medicines.map(item => item.selectedMedicineId);
-        
-//         await useApi('prescription', 'POST', {
-//             date_prescription: params.value.date_prescription,
-//             medicines: paramsPrescription.value.medicines.map((item, index) => ({
-//                 medicine_id: item.selectedMedicineId,
-//                 dose: item.dose,
-//                 treatment: item.treatment,
-//                 additional_instructions: item.additional_instructions,
-//             })),
-//             consultation_id: id.value,
-//         });
-//         Swal.fire({
-//             title: 'Éxito!',
-//             text: 'Prescripción creada correctamente!',
-//             icon: 'success',
-//             confirmButtonText: '¡Entendido!',
-//         }).then(() => {
-//             if (discardButton.value) {
-//                 discardButton.value.click();
-//             }
-//             resetFormData();
-//         });
-//     } catch (error) {
-//         const errors_api = error.errors;
-//         Object.entries(errors_api).forEach((e) => {
-//             const elemento = e[0];
-//             const mensaje = e[1];
-//             errors.value[elemento] = mensaje;
-//         });
-//     }
-
-//     fetchDataFromApi();
-// };
-
 const createPrescripcion = async () => {
     // errorsClear();
 
@@ -448,9 +397,6 @@ const createPrescripcion = async () => {
     // if (has_error) return;
 
     try {
-        // Recolectar los IDs de los medicamentos seleccionados
-
-        // Construir el objeto de datos para la solicitud
         const prescriptionData = {
             date_prescription: params.value.date_prescription,
             medicines: paramsPrescription.value.medicines.map(medicine => ({
@@ -462,7 +408,6 @@ const createPrescripcion = async () => {
             consultation_id: id.value,
         };
 
-        // Llamar a useApi con los datos de la prescripción
         await useApi('prescription', 'POST', prescriptionData);
 
         Swal.fire({
