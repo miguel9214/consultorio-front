@@ -143,8 +143,7 @@
                                                     <div class="modal-dialog modal-xl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Extra
-                                                                    Large</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Crear Prescripción</h5>
                                                                 <button type="button" data-dismiss="modal"
                                                                     data-bs-dismiss="modal" aria-label="Close"
                                                                     class="btn-close"></button>
@@ -220,12 +219,11 @@
                                                                                     <td class="description">
                                                                                         <select
                                                                                             v-model="paramsPrescription.medicines[index].medicine"
-                                                                                            @change="selectedMedicineEvent(paramsPrescription.medicine[index].name.id, index)"
                                                                                             class="form-select w-100"
                                                                                             tabindex="14">
                                                                                             <option style="margin: 1px"
                                                                                                 value="" disabled
-                                                                                                selected>Medicamento
+                                                                                                selected> Medicamento
                                                                                             </option>
                                                                                             <option
                                                                                                 :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
@@ -270,6 +268,7 @@
                                                                     <button type="button" class="btn btn-success"
                                                                         @click="createPrescripcion">Crear</button>
                                                                 </a>
+                                                                {{  paramsPrescription.medicines }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -386,6 +385,10 @@ const print = () => {
 };
 
 const createPrescripcion = async () => {
+
+    const data = paramsPrescription.value.medicines;
+    alert(data);
+
     errorsClear();
 
     let has_error = false;
@@ -401,7 +404,7 @@ const createPrescripcion = async () => {
     if (has_error) return;
 
     try {
-        await useApi('prescription', 'POST', paramsPrescription.value);
+        await useApi('prescription', 'POST', paramsPrescription.value.medicines);
         Swal.fire({
             title: 'Éxito!',
             text: 'Prescripción creada correctamente!',
@@ -451,11 +454,8 @@ const add_item = () => {
 };
 
 const remove_item = (index) => {
-    paramsPrescription.value.medicine.splice(index, 1);
-    paramsPrescription.value.code.splice(index, 1);
-    paramsPrescription.value.treatment.splice(index, 1);
-    paramsPrescription.value.dose.splice(index, 1);
-    paramsPrescription.value.additional_instructions.splice(index, 1);
+    paramsPrescription.value.medicines.splice(index, 1);
+    selectedMedicine.value.splice(index, 1);
 };
 
 //MEDICAMENTO
