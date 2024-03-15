@@ -221,10 +221,7 @@
                                                                                             v-model="paramsPrescription.medicines[index].medicine"
                                                                                             class="form-select w-100"
                                                                                             tabindex="14">
-                                                                                            <option style="margin: 1px"
-                                                                                                value="" disabled
-                                                                                                selected> Medicamento
-                                                                                            </option>
+                                                                                            <option style="margin: 1px" value="" disabled selected> Medicamento</option>
                                                                                             <option
                                                                                                 :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
                                                                                                 :key="medicine.id"
@@ -384,27 +381,90 @@ const print = () => {
     window.print();
 };
 
+// const createPrescripcion = async () => {
+//     // errorsClear();
+
+//     // let has_error = false;
+//     // Object.entries(paramsPrescription.value).forEach((f) => {
+//     //     const elemento = f[0];
+//     //     const value = f[1];
+//     //     if (value == '') {
+//     //         has_error = true;
+//     //         errors.value[elemento] = 'Este campo es obligatorio';
+//     //     }
+//     // });
+
+//     // if (has_error) return;
+//     // alert("LLEGA HASTA ACA")
+//     try {
+//         const medicineIds = paramsPrescription.value.medicines.map(item => item.selectedMedicineId);
+        
+//         await useApi('prescription', 'POST', {
+//             date_prescription: params.value.date_prescription,
+//             medicines: paramsPrescription.value.medicines.map((item, index) => ({
+//                 medicine_id: item.selectedMedicineId,
+//                 dose: item.dose,
+//                 treatment: item.treatment,
+//                 additional_instructions: item.additional_instructions,
+//             })),
+//             consultation_id: id.value,
+//         });
+//         Swal.fire({
+//             title: 'Éxito!',
+//             text: 'Prescripción creada correctamente!',
+//             icon: 'success',
+//             confirmButtonText: '¡Entendido!',
+//         }).then(() => {
+//             if (discardButton.value) {
+//                 discardButton.value.click();
+//             }
+//             resetFormData();
+//         });
+//     } catch (error) {
+//         const errors_api = error.errors;
+//         Object.entries(errors_api).forEach((e) => {
+//             const elemento = e[0];
+//             const mensaje = e[1];
+//             errors.value[elemento] = mensaje;
+//         });
+//     }
+
+//     fetchDataFromApi();
+// };
+
 const createPrescripcion = async () => {
+    // errorsClear();
 
-    const data = paramsPrescription.value.medicines;
-    alert(data);
+    // let has_error = false;
+    // Object.entries(paramsPrescription.value).forEach((f) => {
+    //     const elemento = f[0];
+    //     const value = f[1];
+    //     if (value === '') {
+    //         has_error = true;
+    //         errors.value[elemento] = 'Este campo es obligatorio';
+    //     }
+    // });
 
-    errorsClear();
-
-    let has_error = false;
-    Object.entries(paramsPrescription.value).forEach((f) => {
-        const elemento = f[0];
-        const value = f[1];
-        if (value == '') {
-            has_error = true;
-            errors.value[elemento] = 'Este campo es obligatorio';
-        }
-    });
-
-    if (has_error) return;
+    // if (has_error) return;
 
     try {
-        await useApi('prescription', 'POST', paramsPrescription.value.medicines);
+        // Recolectar los IDs de los medicamentos seleccionados
+
+        // Construir el objeto de datos para la solicitud
+        const prescriptionData = {
+            date_prescription: params.value.date_prescription,
+            medicines: paramsPrescription.value.medicines.map(medicine => ({
+                medicine_id: medicine.medicine.id,
+                dose: medicine.dose,
+                treatment: medicine.treatment,
+                additional_instructions: medicine.additional_instructions
+            })),
+            consultation_id: id.value,
+        };
+
+        // Llamar a useApi con los datos de la prescripción
+        await useApi('prescription', 'POST', prescriptionData);
+
         Swal.fire({
             title: 'Éxito!',
             text: 'Prescripción creada correctamente!',
@@ -428,6 +488,7 @@ const createPrescripcion = async () => {
     fetchDataFromApi();
 };
 
+
 const invoiceConsultation = async (id) => {
     const { data, message } = await useApi('consultation/Invoice/' + id);
     params.value.doctor = data.doctor;
@@ -448,7 +509,8 @@ const add_item = () => {
         },
         dose: "",
         treatment: "",
-        additional_instructions: ""
+        additional_instructions: "",
+        selectedMedicineId: ""
     });
     selectedMedicine.value.push('');
 };
