@@ -143,23 +143,34 @@
                                                     <div class="modal-dialog modal-xl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Crear Prescripción</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Crear
+                                                                    Prescripción</h5>
                                                                 <button type="button" data-dismiss="modal"
                                                                     data-bs-dismiss="modal" aria-label="Close"
                                                                     class="btn-close"></button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group mb-4 d-flex">
-                                                                        <label for="date" class="m-2 text-black">Fecha:
-                                                                        </label>
-                                                                        <input v-model="params.date_prescription"
-                                                                            type="date"
-                                                                            class="form-control form-control-sm"
-                                                                            id="invoiceDate" placeholder="Invoice Date">
+                                                            <div class="invoice-detail-items">
+                                                                <div class="modal-body">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group d-flex">
+                                                                            <label for="date"
+                                                                                class="m-2 text-black">Fecha:
+                                                                            </label>
+                                                                            <input v-model="params.date_prescription"
+                                                                                type="date"
+                                                                                class="form-control form-control-sm"
+                                                                                id="invoiceDate"
+                                                                                placeholder="Invoice Date">
+                                                                        </div>
+                                                                        <template
+                                                                            v-if="errors.date_prescription.length > 0">
+                                                                            <b :key="e"
+                                                                                v-for="e in errors.date_prescription"
+                                                                                class="text-danger">
+                                                                                {{ e }}
+                                                                            </b>
+                                                                        </template>
                                                                     </div>
-                                                                </div>
-                                                                <div class="invoice-detail-items">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered item-table">
                                                                             <thead>
@@ -221,7 +232,10 @@
                                                                                             v-model="paramsPrescription.medicines[index].medicine"
                                                                                             class="form-select w-100"
                                                                                             tabindex="14">
-                                                                                            <option style="margin: 1px" value="" disabled selected> Medicamento</option>
+                                                                                            <option style="margin: 1px"
+                                                                                                value="" disabled
+                                                                                                selected> Medicamento
+                                                                                            </option>
                                                                                             <option
                                                                                                 :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
                                                                                                 :key="medicine.id"
@@ -265,7 +279,6 @@
                                                                     <button type="button" class="btn btn-success"
                                                                         @click="createPrescripcion">Crear</button>
                                                                 </a>
-                                                                {{  paramsPrescription.medicines }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -344,6 +357,7 @@ const params = ref({
 });
 
 const paramsPrescription = ref({
+    date_prescription: [],
     code: [],
     treatment: [],
     dose: [],
@@ -352,10 +366,7 @@ const paramsPrescription = ref({
 });
 
 const errors = ref({
-    doctor: [],
-    pacient: [],
-    phone: [],
-    email: [],
+    date_prescription: [],
     medicine: [],
     code: [],
     treatment: [],
@@ -365,10 +376,7 @@ const errors = ref({
 
 const errorsClear = () => {
     errors.value = {
-        doctor: [],
-        pacient: [],
-        phone: [],
-        email: [],
+        date_prescription: [],
         medicine: [],
         code: [],
         treatment: [],
@@ -377,24 +385,39 @@ const errorsClear = () => {
     };
 };
 
+const resetFormData = () => {
+    console.log("Antes de restablecer:", paramsPrescription.value);
+    paramsPrescription.value = {
+        date_prescription: [],
+        code: [],
+        treatment: [],
+        dose: [],
+        additional_instructions: [],
+        medicines: [],
+    };
+    console.log("Después de restablecer:", paramsPrescription.value);
+};
+
 const print = () => {
     window.print();
 };
 
+const discardButton = ref(null);
+
 const createPrescripcion = async () => {
-    // errorsClear();
+    errorsClear();
 
-    // let has_error = false;
-    // Object.entries(paramsPrescription.value).forEach((f) => {
-    //     const elemento = f[0];
-    //     const value = f[1];
-    //     if (value === '') {
-    //         has_error = true;
-    //         errors.value[elemento] = 'Este campo es obligatorio';
-    //     }
-    // });
+    let has_error = false;
+    Object.entries(paramsPrescription.value).forEach((f) => {
+        const elemento = f[0];
+        const value = f[1];
+        if (value === '') {
+            has_error = true;
+            errors.value[elemento] = 'Este campo es obligatorio';
+        }
+    });
 
-    // if (has_error) return;
+    if (has_error) return;
 
     try {
         const prescriptionData = {
@@ -429,8 +452,6 @@ const createPrescripcion = async () => {
             errors.value[elemento] = mensaje;
         });
     }
-
-    fetchDataFromApi();
 };
 
 
