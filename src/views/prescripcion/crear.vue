@@ -54,10 +54,8 @@
                                                                 style="font-weight: 600; color: #0e1726">Orden CONSULTA
                                                             </p>
                                                         </div>
-
                                                         <div class="col-sm-3 text-sm-end">
-                                                            <p class="inv-street-addr">Fecha: {{ params.start_date }}
-                                                            </p>
+                                                            <p class="inv-street-addr">Fecha: <span id="current-date" class="">{{ formattedDate }}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,9 +229,10 @@
                                                                                         <select v-model="paramsPrescription.medicines[index].medicine" class="form-select w-100">
                                                                                             <option style="margin: 1px" disabled selected>Medicamentos</option>
                                                                                             <option
+                                                                                                v-for="medicine in medicineList"
                                                                                                 :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
                                                                                                 :key="medicine.id"
-                                                                                                v-for="medicine in medicineList">
+                                                                                                :disabled="isMedicineSelected(medicine)">
                                                                                                 {{ medicine.name }}
                                                                                             </option>
                                                                                         </select>
@@ -323,7 +322,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import '/src/assets/sass/apps/invoice-preview.scss';
 import '/src/assets/sass/apps/invoice-add.scss';
 import { useRoute } from 'vue-router';
@@ -385,7 +384,6 @@ const resetFormData = () => {
     selectedMedicine.value = [];
 };
 
-
 const print = () => {
     window.print();
 };
@@ -409,7 +407,7 @@ const createPrescripcion = async () => {
 
     try {
         const prescriptionData = {
-            date_prescription: params.value.date_prescription,
+            date_prescription: paramsPrescription.value.date_prescription,
             medicines: paramsPrescription.value.medicines.map(medicine => ({
                 medicine_id: medicine.medicine.id,
                 dose: medicine.dose,
@@ -441,7 +439,6 @@ const createPrescripcion = async () => {
         });
     }
 };
-
 
 const invoiceConsultation = async (id) => {
     const { data, message } = await useApi('consultation/Invoice/' + id);
@@ -484,4 +481,14 @@ const showMedicine = async () => {
         console.error('Error al obtener los medicamentos', error);
     }
 };
+
+//MEDICINA SELECCIONADA
+const isMedicineSelected = (medicine) => {
+    return paramsPrescription.value.medicines.some(selectedMedicine => selectedMedicine.medicine.id === medicine.id);
+};
+
+//FECHA ACTUAL
+const currentDate = new Date();
+const formattedDate = currentDate.getDate() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getFullYear();
+
 </script>
