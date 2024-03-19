@@ -228,14 +228,8 @@
                                                                                             placeholder="AB1" />
                                                                                     </td>
                                                                                     <td class="description">
-                                                                                        <select
-                                                                                            v-model="paramsPrescription.medicines[index].medicine"
-                                                                                            class="form-select w-100"
-                                                                                            tabindex="14">
-                                                                                            <option style="margin: 1px"
-                                                                                                value="" disabled
-                                                                                                selected> Medicamento
-                                                                                            </option>
+                                                                                        <select v-model="paramsPrescription.medicines[index].medicine" class="form-select w-100">
+                                                                                            <option style="margin: 1px" disabled selected>Medicamentos</option>
                                                                                             <option
                                                                                                 :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
                                                                                                 :key="medicine.id"
@@ -457,7 +451,6 @@ const invoiceConsultation = async (id) => {
     params.value.email = data.email;
 };
 
-const items = ref([]);
 const selectedMedicine = ref([]);
 
 const add_item = () => {
