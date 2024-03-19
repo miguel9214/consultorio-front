@@ -147,7 +147,7 @@
                                                                     Prescripción</h5>
                                                                 <button type="button" data-dismiss="modal"
                                                                     data-bs-dismiss="modal" aria-label="Close"
-                                                                    class="btn-close"></button>
+                                                                    class="btn-close" @click="resetFormData"></button>
                                                             </div>
                                                             <div class="invoice-detail-items">
                                                                 <div class="modal-body">
@@ -156,7 +156,7 @@
                                                                             <label for="date"
                                                                                 class="m-2 text-black">Fecha:
                                                                             </label>
-                                                                            <input v-model="params.date_prescription"
+                                                                            <input v-model="paramsPrescription.date_prescription"
                                                                                 type="date"
                                                                                 class="form-control form-control-sm"
                                                                                 id="invoiceDate"
@@ -357,7 +357,7 @@ const params = ref({
 });
 
 const paramsPrescription = ref({
-    date_prescription: [],
+    date_prescription: '',
     code: [],
     treatment: [],
     dose: [],
@@ -386,17 +386,11 @@ const errorsClear = () => {
 };
 
 const resetFormData = () => {
-    console.log("Antes de restablecer:", paramsPrescription.value);
-    paramsPrescription.value = {
-        date_prescription: [],
-        code: [],
-        treatment: [],
-        dose: [],
-        additional_instructions: [],
-        medicines: [],
-    };
-    console.log("Después de restablecer:", paramsPrescription.value);
+    paramsPrescription.value.date_prescription = '';
+    paramsPrescription.value.medicines = [];
+    selectedMedicine.value = [];
 };
+
 
 const print = () => {
     window.print();
@@ -476,7 +470,6 @@ const add_item = () => {
         dose: "",
         treatment: "",
         additional_instructions: "",
-        selectedMedicineId: ""
     });
     selectedMedicine.value.push('');
 };
