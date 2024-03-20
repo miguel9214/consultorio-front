@@ -435,7 +435,6 @@
 
         if (message == 'Consultation found') {
             id = user.id;
-            console.log("id de consulta", id)
             formData.value.pacient_id = data.pacient_id;
             formData.value.doctor_id = data.doctor_id;
             formData.value.consultation_type_id = data.consultation_type_id;

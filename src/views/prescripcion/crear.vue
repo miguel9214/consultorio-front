@@ -115,20 +115,20 @@
                                                                 <tr>
                                                                     <th>It</th>
                                                                     <th>Codigo</th>
-                                                                    <th>Descripcion</th>
+                                                                    <th>Medicamento</th>
                                                                     <th>Tratamiento</th>
                                                                     <th class="text-end">Dosis Medicina</th>
                                                                     <th class="text-end">Instrucciones</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>2</td>
-                                                                    <td>1</td>
-                                                                    <td>4</td>
-                                                                    <td class="text-end">5</td>
-                                                                    <td class="text-end">5</td>
+                                                                <tr v-for="(prescription, index) in prescriptionList" :key="index">
+                                                                    <td>{{ index + 1 }}</td>
+                                                                    <td>{{ prescription.medicine_code }}</td>
+                                                                    <td>{{ prescription.medicine_name }}</td>
+                                                                    <td>{{ prescription.treatment }}</td>
+                                                                    <td class="text-end">{{ prescription.dose }}</td>
+                                                                    <td class="text-end">{{ prescription.additional_instructions }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -340,6 +340,7 @@ onMounted(async () => {
     await invoiceConsultation(id.value);
 
     showMedicine();
+    showPrescription(id.value);
 });
 
 const params = ref({
@@ -470,7 +471,6 @@ const print = () => {
 };
 
 //MEDICAMENTO
-
 const medicineList = ref([]);
 
 const showMedicine = async () => {
@@ -479,6 +479,18 @@ const showMedicine = async () => {
         medicineList.value = data;
     } catch (error) {
         console.error('Error al obtener los medicamentos', error);
+    }
+};
+
+//PRESCRIPTION
+const prescriptionList = ref([]);
+
+const showPrescription = async (id) => {
+    try{
+        const { data, message } = await useApi('prescription/' + id);
+        prescriptionList.value = data;
+    }catch (error) {
+        console.error('Error al obtener las prescripciones', error);
     }
 };
 
