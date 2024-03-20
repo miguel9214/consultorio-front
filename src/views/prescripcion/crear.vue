@@ -245,7 +245,7 @@
                                                                                         <input type="text"
                                                                                             v-model="paramsPrescription.medicines[index].dose"
                                                                                             class="form-control form-control-sm"
-                                                                                            placeholder="mg, mm..." />
+                                                                                            placeholder="mg, mm, ml..." />
                                                                                     </td>
                                                                                     <td class="text-end qty">
                                                                                         <textarea
@@ -378,14 +378,18 @@ const errorsClear = () => {
     };
 };
 
+const invoiceConsultation = async (id) => {
+    const { data, message } = await useApi('consultation/Invoice/' + id);
+    params.value.doctor = data.doctor;
+    params.value.pacient = data.pacient;
+    params.value.phone = data.phone;
+    params.value.email = data.email;
+};
+
 const resetFormData = () => {
     paramsPrescription.value.date_prescription = '';
     paramsPrescription.value.medicines = [];
     selectedMedicine.value = [];
-};
-
-const print = () => {
-    window.print();
 };
 
 const discardButton = ref(null);
@@ -440,14 +444,6 @@ const createPrescripcion = async () => {
     }
 };
 
-const invoiceConsultation = async (id) => {
-    const { data, message } = await useApi('consultation/Invoice/' + id);
-    params.value.doctor = data.doctor;
-    params.value.pacient = data.pacient;
-    params.value.phone = data.phone;
-    params.value.email = data.email;
-};
-
 const selectedMedicine = ref([]);
 
 const add_item = () => {
@@ -467,6 +463,10 @@ const add_item = () => {
 const remove_item = (index) => {
     paramsPrescription.value.medicines.splice(index, 1);
     selectedMedicine.value.splice(index, 1);
+};
+
+const print = () => {
+    window.print();
 };
 
 //MEDICAMENTO
