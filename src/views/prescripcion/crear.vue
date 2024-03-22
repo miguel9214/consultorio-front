@@ -247,7 +247,8 @@
                                                                                         <textarea
                                                                                             v-model="paramsPrescription.medicines[index].treatment"
                                                                                             class="form-control"
-                                                                                            placeholder="Tratamiento"></textarea>
+                                                                                            placeholder="Tratamiento">
+                                                                                        </textarea>
                                                                                     </td>
                                                                                     <td class="dosis">
                                                                                         <input type="text"
@@ -305,12 +306,12 @@
                                                                                 class="m-2 text-black">Fecha:
                                                                             </label>
                                                                             <input
-                                                                                v-model="paramsPrescription.date_prescription"
+                                                                                v-model="prescriptionData.date_prescription"
                                                                                 type="date"
                                                                                 class="form-control form-control-sm"
                                                                                 id="invoiceDate"
                                                                                 placeholder="Invoice Date">
-                                                                        </div>
+                                                                            </div>
                                                                         <template
                                                                             v-if="errors.date_prescription.length > 0">
                                                                             <b :key="e"
@@ -333,7 +334,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr v-for="(item, index) in prescriptionData.medicines"
+                                                                                <tr v-for="(item, index) in prescriptionData"
                                                                                     :key="index">
                                                                                     <td class="delete-item-row">
                                                                                         <ul class="table-controls">
@@ -372,39 +373,30 @@
                                                                                     </td>
                                                                                     <td class="codigo">
                                                                                         <input type="text"
-                                                                                            v-model="paramsPrescription.medicines[index].medicine.code"
+                                                                                            v-model="item.medicine_code"
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="AB1" />
                                                                                     </td>
                                                                                     <td class="description">
-                                                                                        <select
-                                                                                            v-model="paramsPrescription.medicines[index].medicine"
-                                                                                            class="form-select w-100">
-                                                                                            <option style="margin: 1px"
-                                                                                                disabled selected>
-                                                                                                Medicamentos</option>
-                                                                                            <option
-                                                                                                v-for="medicine in medicineList"
-                                                                                                :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
-                                                                                                :key="medicine.id"
-                                                                                                :disabled="isMedicineSelected(medicine)">
-                                                                                                {{ medicine.name }}
-                                                                                            </option>
-                                                                                        </select>
+                                                                                        <input type="text"
+                                                                                            v-model="item.medicine_name"
+                                                                                            class="form-control form-control-sm"
+                                                                                            placeholder="Descripción del Medicamento">
                                                                                         <textarea
-                                                                                            v-model="paramsPrescription.medicines[index].treatment"
+                                                                                            v-model="item.treatment"
                                                                                             class="form-control"
-                                                                                            placeholder="Tratamiento"></textarea>
+                                                                                            placeholder="Tratamiento">
+                                                                                        </textarea>
                                                                                     </td>
                                                                                     <td class="dosis">
                                                                                         <input type="text"
-                                                                                            v-model="paramsPrescription.medicines[index].dose"
+                                                                                            v-model="item.dose"
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="mg, mm, ml..." />
                                                                                     </td>
                                                                                     <td class="text-end qty">
                                                                                         <textarea
-                                                                                            v-model="paramsPrescription.medicines[index].additional_instructions"
+                                                                                            v-model="item.additional_instructions"
                                                                                             class="form-control m-0"
                                                                                             placeholder="..."></textarea>
                                                                                     </td>
@@ -624,10 +616,14 @@ const remove_item = (index) => {
 
 const prescriptionData = ref([]);
 
+
 const viewPrescription = async (prescriptionId) => {
     try {
-        const { data } = await useApi('prescriptionConsultation/' + prescriptionId);
-        prescriptionData.value = data;
+        const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
+        if(message == 'Prescription found - viewPrescription' ){
+            prescriptionData.value = data;
+            console.log("Fecha de Prescripción: ", prescriptionData.value.date_prescription);
+        }
     } catch (error) {
         console.error('Error:', error);
     }
