@@ -306,7 +306,7 @@
                                                                                 class="m-2 text-black">Fecha:
                                                                             </label>
                                                                             <input
-                                                                                v-model="prescriptionData.date_prescription"
+                                                                                v-model="paramsPrescription.date_prescription"
                                                                                 type="date"
                                                                                 class="form-control form-control-sm"
                                                                                 id="invoiceDate"
@@ -334,14 +334,14 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr v-for="(item, index) in prescriptionData"
+                                                                                <tr v-for="(item, index) in prescriptionDataEdit"
                                                                                     :key="index">
                                                                                     <td class="delete-item-row">
                                                                                         <ul class="table-controls">
                                                                                             <li>
                                                                                                 <a href="javascript:void(0);"
                                                                                                     class="delete-item"
-                                                                                                    @click="remove_item(index)">
+                                                                                                    @click="remove_item_Edit(item.id)">
                                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                                         width="24"
                                                                                                         height="24"
@@ -613,16 +613,14 @@ const remove_item = (index) => {
 };
 
 //EDITAR PRESCRIPCION
-
-const prescriptionData = ref([]);
-
+const prescriptionDataEdit = ref([]);
 
 const viewPrescription = async (prescriptionId) => {
     try {
         const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
         if(message == 'Prescription found - viewPrescription' ){
-            prescriptionData.value = data;
-            console.log("Fecha de Prescripción: ", prescriptionData.value.date_prescription);
+            prescriptionDataEdit.value = data;
+            paramsPrescription.value.date_prescription = data[0].date_prescription;
         }
     } catch (error) {
         console.error('Error:', error);
@@ -632,6 +630,32 @@ const viewPrescription = async (prescriptionId) => {
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
 };
+
+const remove_item_Edit = async (id) => {
+    console.log("La ID: ", id)
+    const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¡No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, bórralo!',
+    });
+
+    if (result.isConfirmed) {
+        try {
+            await useApi('prescription/' + id, 'DELETE');
+            
+            prescriptionDataEdit.value = prescriptionDataEdit.value.filter(item => item.id !== id);
+
+            Swal.fire('Eliminado!', 'Tu registro ha sido eliminado!', 'success');
+        } catch (error) {
+            Swal.fire('Error!', 'Ha ocurrido un error al intentar eliminar el registro.', 'error');
+        }
+    }
+};
+;
 
 //LISTAR MEDICAMENTO
 const medicineList = ref([]);
