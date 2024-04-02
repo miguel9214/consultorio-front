@@ -341,7 +341,7 @@
                                                                                             <li>
                                                                                                 <a href="javascript:void(0);"
                                                                                                     class="delete-item"
-                                                                                                    @click="remove_item_Edit(item.id)">
+                                                                                                    @click="remove_item_Edit(item.prescription_id)">
                                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                                         width="24"
                                                                                                         height="24"
@@ -414,7 +414,7 @@
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                                                                     <button type="button" class="btn btn-success"
-                                                                        @click="createPrescripcion">Editar</button>
+                                                                        @click="EditPrescription">Editar</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -575,19 +575,15 @@ const createPrescripcion = async () => {
             text: 'Prescripción creada correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!',
-        }).then(() => {
+        }).then((result) => {
             if (discardButton.value) {
                 discardButton.value.click();
             }
             resetFormData();
+            window.location.reload();
         });
     } catch (error) {
-        const errors_api = error.errors;
-        Object.entries(errors_api).forEach((e) => {
-            const elemento = e[0];
-            const mensaje = e[1];
-            errors.value[elemento] = mensaje;
-        });
+        Swal.fire('Error!', 'El medicamento ya ha sido prescrito para esta consulta.', 'error');
     }
 };
 
@@ -627,12 +623,39 @@ const viewPrescription = async (prescriptionId) => {
     }
 };
 
+const EditPrescription = async (id) => {
+    try {
+        const datosActualizados = {
+            date_prescription: paramsPrescription.value.date_prescription,
+            dose: item.dose,
+            treatment: item.treatment,
+            additional_instructions: item.additional_instructions
+        };
+
+        await useApi('prescription/' + id, 'PUT', datosActualizados);
+
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Prescripción editada correctamente!',
+            icon: 'success',
+            confirmButtonText: '¡Entendido!',
+        }).then(() => {
+            if (discardButton.value) {
+                discardButton.value.click();
+            }
+            resetFormData();
+            window.location.reload();
+        });
+    } catch (error) {
+        console.error('Error al actualizar la Prescripción:', error);
+    }
+};
+
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
 };
 
-const remove_item_Edit = async (id) => {
-    console.log("La ID: ", id)
+const remove_item_Edit = async (prescription_id) => {
     const result = await Swal.fire({
         title: '¿Estás seguro?',
         text: '¡No podrás revertir esto!',
@@ -645,17 +668,17 @@ const remove_item_Edit = async (id) => {
 
     if (result.isConfirmed) {
         try {
-            await useApi('prescription/' + id, 'DELETE');
+            await useApi('prescription/' + prescription_id, 'DELETE');
             
-            prescriptionDataEdit.value = prescriptionDataEdit.value.filter(item => item.id !== id);
+            prescriptionDataEdit.value = prescriptionDataEdit.value.filter(item => item.prescription_id !== prescription_id);
 
             Swal.fire('Eliminado!', 'Tu registro ha sido eliminado!', 'success');
+
         } catch (error) {
             Swal.fire('Error!', 'Ha ocurrido un error al intentar eliminar el registro.', 'error');
         }
     }
 };
-;
 
 //LISTAR MEDICAMENTO
 const medicineList = ref([]);
