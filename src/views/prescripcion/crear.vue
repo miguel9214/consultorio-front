@@ -414,7 +414,7 @@
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                                                                     <button type="button" class="btn btn-success"
-                                                                        @click="EditPrescription">Editar</button>
+                                                                        @click="EditPrescription(index)">Editar</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -623,16 +623,24 @@ const viewPrescription = async (prescriptionId) => {
     }
 };
 
-const EditPrescription = async (id) => {
+const EditPrescription = async (index) => {
     try {
-        const datosActualizados = {
-            date_prescription: paramsPrescription.value.date_prescription,
+        const item = prescriptionDataEdit.value[index];
+        
+        const medicinesData = prescriptionDataEdit.value.map(item => ({
             dose: item.dose,
             treatment: item.treatment,
             additional_instructions: item.additional_instructions
+        }));
+
+        const datosActualizados = {
+            date_prescription: paramsPrescription.value.date_prescription,
+            medicines: medicinesData
         };
 
-        await useApi('prescription/' + id, 'PUT', datosActualizados);
+        console.log("Se imprime: ", datosActualizados);
+
+        await useApi('prescription/' + item.prescription_id, 'PUT', datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
@@ -650,6 +658,7 @@ const EditPrescription = async (id) => {
         console.error('Error al actualizar la Prescripción:', error);
     }
 };
+
 
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
