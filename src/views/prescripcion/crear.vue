@@ -414,7 +414,7 @@
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                                                                     <button type="button" class="btn btn-success"
-                                                                        @click="EditPrescription(index)">Editar</button>
+                                                                        @click="EditPrescription(prescriptionIdValue.value)">Editar</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -610,6 +610,7 @@ const remove_item = (index) => {
 
 //EDITAR PRESCRIPCION
 const prescriptionDataEdit = ref([]);
+const prescriptionIdValue = ref(null); // Declarar como una referencia reactiva
 
 const viewPrescription = async (prescriptionId) => {
     try {
@@ -617,20 +618,26 @@ const viewPrescription = async (prescriptionId) => {
         if(message == 'Prescription found - viewPrescription' ){
             prescriptionDataEdit.value = data;
             paramsPrescription.value.date_prescription = data[0].date_prescription;
+
+            prescriptionIdValue.value = data[0].prescription_id; // Asignar valor usando .value
+            console.log("El valor de prescription_id es:", prescriptionIdValue.value);
         }
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-const EditPrescription = async (index) => {
+
+const EditPrescription = async (prescription_id) => {
     try {
-        const item = prescriptionDataEdit.value[index];
+        const item = prescriptionDataEdit.value[id];
         
         const medicinesData = prescriptionDataEdit.value.map(item => ({
             dose: item.dose,
             treatment: item.treatment,
-            additional_instructions: item.additional_instructions
+            additional_instructions: item.additional_instructions,
+            prescription_id: item.prescription_id,
+            consultation_id: item.consultation_id
         }));
 
         const datosActualizados = {
@@ -640,7 +647,7 @@ const EditPrescription = async (index) => {
 
         console.log("Se imprime: ", datosActualizados);
 
-        await useApi('prescription/' + item.prescription_id, 'PUT', datosActualizados);
+        await useApi('prescription/' + prescription_id, 'PUT', datosActualizados);
 
         Swal.fire({
             title: 'Éxito!',
@@ -658,7 +665,6 @@ const EditPrescription = async (index) => {
         console.error('Error al actualizar la Prescripción:', error);
     }
 };
-
 
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
