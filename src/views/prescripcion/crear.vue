@@ -414,7 +414,7 @@
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                                                                     <button type="button" class="btn btn-success"
-                                                                        @click="EditPrescription(prescriptionIdValue.value)">Editar</button>
+                                                                        @click="EditPrescription(prescriptionIds)">Editar</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -610,23 +610,31 @@ const remove_item = (index) => {
 
 //EDITAR PRESCRIPCION
 const prescriptionDataEdit = ref([]);
-const prescriptionIdValue = ref(null); // Declarar como una referencia reactiva
+const prescriptionIdValue = ref(null);
+const prescriptionIds = ref([]); 
 
 const viewPrescription = async (prescriptionId) => {
     try {
         const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
         if(message == 'Prescription found - viewPrescription' ){
             prescriptionDataEdit.value = data;
+            console.log("El valor de DATA es:", data);
+
             paramsPrescription.value.date_prescription = data[0].date_prescription;
 
-            prescriptionIdValue.value = data[0].prescription_id; // Asignar valor usando .value
-            console.log("El valor de prescription_id es:", prescriptionIdValue.value);
+            // prescriptionIdValue.value = data[0].prescription_id;
+            // console.log("El valor de prescription_id es:", prescriptionIdValue.value);
+
+            prescriptionIds.value = data.map(item => item.prescription_id);
+            console.log("Que contiene?", prescriptionIds.value)
+            prescriptionIds.value.forEach(id => {
+                console.log("ID de prescripción:", id);
+            });
         }
     } catch (error) {
         console.error('Error:', error);
     }
 };
-
 
 const EditPrescription = async (prescription_id) => {
     try {
