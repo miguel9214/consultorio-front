@@ -610,7 +610,6 @@ const remove_item = (index) => {
 
 //EDITAR PRESCRIPCION
 const prescriptionDataEdit = ref([]);
-const prescriptionIdValue = ref(null);
 const prescriptionIds = ref([]); 
 
 const viewPrescription = async (prescriptionId) => {
@@ -622,44 +621,37 @@ const viewPrescription = async (prescriptionId) => {
 
             paramsPrescription.value.date_prescription = data[0].date_prescription;
 
-            // prescriptionIdValue.value = data[0].prescription_id;
-            // console.log("El valor de prescription_id es:", prescriptionIdValue.value);
-
             prescriptionIds.value = data.map(item => item.prescription_id);
             console.log("Que contiene?", prescriptionIds.value)
-            prescriptionIds.value.forEach(id => {
-                console.log("ID de prescripción:", id);
-            });
         }
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-const EditPrescription = async (prescription_id) => {
+const EditPrescription = async (prescriptionIds) => {
     try {
-        const item = prescriptionDataEdit.value[id];
-        
-        const medicinesData = prescriptionDataEdit.value.map(item => ({
-            dose: item.dose,
-            treatment: item.treatment,
-            additional_instructions: item.additional_instructions,
-            prescription_id: item.prescription_id,
-            consultation_id: item.consultation_id
-        }));
+        for (const prescriptionId of prescriptionIds) {
 
-        const datosActualizados = {
-            date_prescription: paramsPrescription.value.date_prescription,
-            medicines: medicinesData
-        };
+            const updatedData = {
+                date_prescription: paramsPrescription.value.date_prescription,
+                medicines: prescriptionDataEdit.value.map(item => ({
+                    dose: item.dose,
+                    treatment: item.treatment,
+                    additional_instructions: item.additional_instructions,
+                    prescription_id: item.prescription_id,
+                    consultation_id: item.consultation_id
+                }))
+            };
 
-        console.log("Se imprime: ", datosActualizados);
+            console.log("Datos actualizados:", updatedData);
 
-        await useApi('prescription/' + prescription_id, 'PUT', datosActualizados);
+            await useApi('prescription/' + prescriptionId, 'PUT', updatedData);
+        }
 
         Swal.fire({
             title: 'Éxito!',
-            text: 'Prescripción editada correctamente!',
+            text: '¡Prescripciones editadas correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!',
         }).then(() => {
@@ -670,9 +662,10 @@ const EditPrescription = async (prescription_id) => {
             window.location.reload();
         });
     } catch (error) {
-        console.error('Error al actualizar la Prescripción:', error);
+        console.error('Error al actualizar las Prescripciones:', error);
     }
 };
+
 
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
