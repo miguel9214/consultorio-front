@@ -632,10 +632,11 @@ const viewPrescription = async (prescriptionId) => {
 const EditPrescription = async (prescriptionIds) => {
     try {
         for (const prescriptionId of prescriptionIds) {
+            const prescriptionDataForId = prescriptionDataEdit.value.filter(item => item.prescription_id === prescriptionId);
 
             const updatedData = {
                 date_prescription: paramsPrescription.value.date_prescription,
-                medicines: prescriptionDataEdit.value.map(item => ({
+                medicines: prescriptionDataForId.map(item => ( {
                     dose: item.dose,
                     treatment: item.treatment,
                     additional_instructions: item.additional_instructions,
@@ -644,7 +645,7 @@ const EditPrescription = async (prescriptionIds) => {
                 }))
             };
 
-            console.log("Datos actualizados:", updatedData);
+            console.log("Datos actualizados para la ID", prescriptionId + ":", updatedData);
 
             await useApi('prescription/' + prescriptionId, 'PUT', updatedData);
         }
@@ -665,7 +666,6 @@ const EditPrescription = async (prescriptionIds) => {
         console.error('Error al actualizar las Prescripciones:', error);
     }
 };
-
 
 const openEditModal = (prescriptionId) => {
     viewPrescription(prescriptionId);
