@@ -222,15 +222,15 @@
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-primary btn-send"
-                                                @click="CreateInvoices">Enviar Factura</a>
+                                                @click="CreateInvoices">Crear Factura</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print"
                                                 @click="print()">Imprimir</a>
                                         </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                        <!-- <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-success btn-download">Descargar</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
