@@ -311,7 +311,7 @@
                                                                                 class="form-control form-control-sm"
                                                                                 id="invoiceDate"
                                                                                 placeholder="Invoice Date">
-                                                                            </div>
+                                                                        </div>
                                                                         <template
                                                                             v-if="errors.date_prescription.length > 0">
                                                                             <b :key="e"
@@ -378,10 +378,20 @@
                                                                                             placeholder="AB1" />
                                                                                     </td>
                                                                                     <td class="description">
-                                                                                        <input type="text"
+                                                                                        <!-- <input type="text"
                                                                                             v-model="item.medicine_name"
                                                                                             class="form-control form-control-sm"
-                                                                                            placeholder="Descripción del Medicamento">
+                                                                                            placeholder="Descripción del Medicamento"> -->                                                                                          
+                                                                                            <select v-model="item.medicine" class="form-select w-100">
+                                                                                                <option style="margin: 1px" disabled selected>Medicamentos</option>
+                                                                                                <option v-for="medicine in medicineList" 
+                                                                                                :value="{ id: medicine.id, name: medicine.name, code: medicine.code }" 
+                                                                                                :key="medicine.id" 
+                                                                                                :disabled="isMedicineSelected(medicine)" 
+                                                                                                :selected="item.medicine_name === medicine.name">
+                                                                                                    {{ medicine.name }}
+                                                                                                </option>
+                                                                                            </select>
                                                                                         <textarea
                                                                                             v-model="item.treatment"
                                                                                             class="form-control"
@@ -610,12 +620,12 @@ const remove_item = (index) => {
 
 //EDITAR PRESCRIPCION
 const prescriptionDataEdit = ref([]);
-const prescriptionIds = ref([]); 
+const prescriptionIds = ref([]);
 
 const viewPrescription = async (prescriptionId) => {
     try {
         const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
-        if(message == 'Prescription found - viewPrescription' ){
+        if (message == 'Prescription found - viewPrescription') {
             prescriptionDataEdit.value = data;
             console.log("El valor de DATA es:", data);
 
@@ -636,7 +646,7 @@ const EditPrescription = async (prescriptionIds) => {
 
             const updatedData = {
                 date_prescription: paramsPrescription.value.date_prescription,
-                medicines: prescriptionDataForId.map(item => ( {
+                medicines: prescriptionDataForId.map(item => ({
                     dose: item.dose,
                     treatment: item.treatment,
                     additional_instructions: item.additional_instructions,
@@ -685,7 +695,7 @@ const remove_item_Edit = async (prescription_id) => {
     if (result.isConfirmed) {
         try {
             await useApi('prescription/' + prescription_id, 'DELETE');
-            
+
             prescriptionDataEdit.value = prescriptionDataEdit.value.filter(item => item.prescription_id !== prescription_id);
 
             Swal.fire('Eliminado!', 'Tu registro ha sido eliminado!', 'success');
