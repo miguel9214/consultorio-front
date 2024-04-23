@@ -76,7 +76,7 @@
                                                         <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
                                                             <p class="inv-street-addr"
                                                                 style="font-weight: 800; color: #0e1726">{{
-                                                                        params.pacient }}</p>
+                                                                    params.pacient }}</p>
                                                             <p class="inv-street-addr">{{ params.address }}</p>
                                                             <p class="inv-email-address">{{ params.email }}</p>
                                                             <p class="inv-email-address">{{ params.phone }}</p>
@@ -135,154 +135,6 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal fade" id="modalPrescripcion" tabindex="-1"
-                                                    role="dialog" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Crear
-                                                                    Prescripción</h5>
-                                                                <button type="button" data-dismiss="modal"
-                                                                    data-bs-dismiss="modal" aria-label="Close"
-                                                                    class="btn-close" @click="resetFormData"></button>
-                                                            </div>
-                                                            <div class="invoice-detail-items">
-                                                                <div class="modal-body">
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group d-flex">
-                                                                            <label for="date"
-                                                                                class="m-2 text-black">Fecha:
-                                                                            </label>
-                                                                            <input
-                                                                                v-model="paramsPrescription.date_prescription"
-                                                                                type="date"
-                                                                                class="form-control form-control-sm"
-                                                                                id="invoiceDate"
-                                                                                placeholder="Invoice Date">
-                                                                        </div>
-                                                                        <template
-                                                                            v-if="errors.date_prescription.length > 0">
-                                                                            <b :key="e"
-                                                                                v-for="e in errors.date_prescription"
-                                                                                class="text-danger">
-                                                                                {{ e }}
-                                                                            </b>
-                                                                        </template>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-bordered item-table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th class=""></th>
-                                                                                    <th class="">Codigo</th>
-                                                                                    <th>Description Medicamento</th>
-                                                                                    <th class="">Dosis</th>
-                                                                                    <th class="text-end w-25">
-                                                                                        Instrucciones Adicionales</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr v-for="(item, index) in selectedMedicine"
-                                                                                    :key="index">
-                                                                                    <td class="delete-item-row">
-                                                                                        <ul class="table-controls">
-                                                                                            <li>
-                                                                                                <a href="javascript:void(0);"
-                                                                                                    class="delete-item"
-                                                                                                    @click="remove_item(index)">
-                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                        width="24"
-                                                                                                        height="24"
-                                                                                                        viewBox="0 0 24 24"
-                                                                                                        fill="none"
-                                                                                                        stroke="currentColor"
-                                                                                                        stroke-width="2"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round"
-                                                                                                        class="feather feather-x-circle">
-                                                                                                        <circle cx="12"
-                                                                                                            cy="12"
-                                                                                                            r="10">
-                                                                                                        </circle>
-                                                                                                        <line x1="15"
-                                                                                                            y1="9"
-                                                                                                            x2="9"
-                                                                                                            y2="15">
-                                                                                                        </line>
-                                                                                                        <line x1="9"
-                                                                                                            y1="9"
-                                                                                                            x2="15"
-                                                                                                            y2="15">
-                                                                                                        </line>
-                                                                                                    </svg>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </td>
-                                                                                    <td class="codigo">
-                                                                                        <input type="text"
-                                                                                            v-model="paramsPrescription.medicines[index].medicine.code"
-                                                                                            class="form-control form-control-sm"
-                                                                                            placeholder="AB1" />
-                                                                                    </td>
-                                                                                    <td class="description">
-                                                                                        <select
-                                                                                            v-model="paramsPrescription.medicines[index].medicine"
-                                                                                            class="form-select w-100">
-                                                                                            <option style="margin: 1px"
-                                                                                                disabled selected>
-                                                                                                Medicamentos</option>
-                                                                                            <option
-                                                                                                v-for="medicine in medicineList"
-                                                                                                :value="{ id: medicine.id, name: medicine.name, code: medicine.code }"
-                                                                                                :key="medicine.id"
-                                                                                                :disabled="isMedicineSelected(medicine)">
-                                                                                                {{ medicine.name }}
-                                                                                            </option>
-                                                                                        </select>
-                                                                                        <textarea
-                                                                                            v-model="paramsPrescription.medicines[index].treatment"
-                                                                                            class="form-control"
-                                                                                            placeholder="Tratamiento">
-                                                                                        </textarea>
-                                                                                    </td>
-                                                                                    <td class="dosis">
-                                                                                        <input type="text"
-                                                                                            v-model="paramsPrescription.medicines[index].dose"
-                                                                                            class="form-control form-control-sm"
-                                                                                            placeholder="mg, mm, ml..." />
-                                                                                    </td>
-                                                                                    <td class="text-end qty">
-                                                                                        <textarea
-                                                                                            v-model="paramsPrescription.medicines[index].additional_instructions"
-                                                                                            class="form-control m-0"
-                                                                                            placeholder="..."></textarea>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                    <button type="button"
-                                                                        class="btn btn-secondary additem btn-sm"
-                                                                        @click="add_item()">Agregar</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <a href="javascript:void(0)" ref="discardButton"
-                                                                    data-bs-dismiss="modal">
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        @click="resetFormData">Descartar</button>
-                                                                </a>
-                                                                <a href="javascript:void(0)" data-bs-dismiss="modal">
-                                                                    <button type="button" class="btn btn-success"
-                                                                        @click="createPrescripcion">Crear</button>
-                                                                </a>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -377,14 +229,21 @@
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="AB1" />
                                                                                     </td>
-                                                                                    <td class="description">                                                                                         
-                                                                                            <select v-model="item.medicine_id" class="form-select w-100">
-                                                                                                <option style="margin: 1px" disabled selected>Medicamentos</option>
-                                                                                                <option v-for="medicine in prescriptionDataEdit" :value="medicine.medicine_id" :key="medicine.medicine_id"
-                                                                                                        :disabled="isMedicineIDSelected(medicine)">
-                                                                                                    {{ medicine.medicine_name }}
-                                                                                                </option>
-                                                                                            </select>                                                                                            
+                                                                                    <td class="description">
+                                                                                        <select
+                                                                                            v-model="item.medicine_id" @change="selectCodeMedi(index)"
+                                                                                            class="form-select w-100">
+                                                                                            <option style="margin: 1px"
+                                                                                                disabled selected>
+                                                                                                Medicamentos</option>
+                                                                                            <option
+                                                                                                v-for="medicine in medicineList"
+                                                                                                :value="medicine.id"
+                                                                                                :key="medicine.id"
+                                                                                                :disabled="isMedicineSelected(medicine)">
+                                                                                                {{ medicine.name }}
+                                                                                            </option>
+                                                                                        </select>
                                                                                         <textarea
                                                                                             v-model="item.treatment"
                                                                                             class="form-control"
@@ -408,6 +267,9 @@
                                                                         </table>
                                                                     </div>
                                                                 </div>
+                                                                <button type="button"
+                                                                    class="btn btn-secondary additem btn-sm"
+                                                                    @click="add_item()">Agregar</button>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <a href="javascript:void(0)" ref="discardButton"
@@ -444,14 +306,9 @@
                                 <div class="invoice-action-btn">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-success btn-send"
-                                                data-bs-toggle="modal" data-bs-target="#modalPrescripcion">Crear
-                                                Prescripcion</a>
-                                        </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-primary btn-send"
                                                 data-bs-toggle="modal" data-bs-target="#modalEditarPrescripcion"
-                                                @click="openEditModal(id)">Editar
+                                                @click="openEditModal(id)">Guardar
                                                 Prescripción</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
@@ -593,18 +450,29 @@ const createPrescripcion = async () => {
 const selectedMedicine = ref([]);
 
 const add_item = () => {
-    paramsPrescription.value.medicines.push({
-        medicine: {
-            id: "",
-            code: "",
-            name: "",
+    prescriptionDataEdit.value.push(
+        {
+            prescription_id: "",
+            medicine_id: "",
+            medicine_name: "",
+            medicine_code: "",
+            dose: "",
+            treatment: "",
+            additional_instructions: "",
+            date_prescription: "",
         },
-        dose: "",
-        treatment: "",
-        additional_instructions: "",
-    });
+    );
     selectedMedicine.value.push('');
 };
+
+const selectCodeMedi = (index) =>{
+    const id = prescriptionDataEdit.value[index].medicine_id;
+    const result = medicineList.value.filter((medicine)=>medicine.id === id)
+
+    prescriptionDataEdit.value[index].medicine_code = result[0].code;
+    prescriptionDataEdit.value[index].dose = result[0].dosage;
+}
+
 
 const remove_item = (index) => {
     paramsPrescription.value.medicines.splice(index, 1);
@@ -620,12 +488,10 @@ const viewPrescription = async (prescriptionId) => {
         const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
         if (message == 'Prescription found - viewPrescription') {
             prescriptionDataEdit.value = data;
-            console.log("El valor de DATA es:", data);
 
             paramsPrescription.value.date_prescription = data[0].date_prescription;
 
             prescriptionIds.value = data.map(item => item.prescription_id);
-            console.log("Que contiene?", prescriptionIds.value)
         }
     } catch (error) {
         console.error('Error:', error);
@@ -725,11 +591,7 @@ const showPrescription = async (id) => {
 
 //MEDICINA SELECCIONADA
 const isMedicineSelected = (medicine) => {
-    return paramsPrescription.value.medicines.some(selectedMedicine => selectedMedicine.medicine.id === medicine.id);
-};
-
-const isMedicineIDSelected = (medicine) => {
-    return paramsPrescription.value.medicines.some(selectedMedicine => selectedMedicine.medicine.id === medicine.id);
+    return prescriptionDataEdit.value.some(selectedMedicine => selectedMedicine.medicine_id === medicine.id);
 };
 
 //FECHA ACTUAL
