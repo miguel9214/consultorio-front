@@ -377,21 +377,14 @@
                                                                                             class="form-control form-control-sm"
                                                                                             placeholder="AB1" />
                                                                                     </td>
-                                                                                    <td class="description">
-                                                                                        <!-- <input type="text"
-                                                                                            v-model="item.medicine_name"
-                                                                                            class="form-control form-control-sm"
-                                                                                            placeholder="Descripción del Medicamento"> -->                                                                                          
-                                                                                            <select v-model="item.medicine" class="form-select w-100">
+                                                                                    <td class="description">                                                                                         
+                                                                                            <select v-model="item.medicine_id" class="form-select w-100">
                                                                                                 <option style="margin: 1px" disabled selected>Medicamentos</option>
-                                                                                                <option v-for="medicine in medicineList" 
-                                                                                                :value="{ id: medicine.id, name: medicine.name, code: medicine.code }" 
-                                                                                                :key="medicine.id" 
-                                                                                                :disabled="isMedicineSelected(medicine)" 
-                                                                                                :selected="item.medicine_name === medicine.name">
-                                                                                                    {{ medicine.name }}
+                                                                                                <option v-for="medicine in prescriptionDataEdit" :value="medicine.medicine_id" :key="medicine.medicine_id"
+                                                                                                        :disabled="isMedicineIDSelected(medicine)">
+                                                                                                    {{ medicine.medicine_name }}
                                                                                                 </option>
-                                                                                            </select>
+                                                                                            </select>                                                                                            
                                                                                         <textarea
                                                                                             v-model="item.treatment"
                                                                                             class="form-control"
@@ -732,6 +725,10 @@ const showPrescription = async (id) => {
 
 //MEDICINA SELECCIONADA
 const isMedicineSelected = (medicine) => {
+    return paramsPrescription.value.medicines.some(selectedMedicine => selectedMedicine.medicine.id === medicine.id);
+};
+
+const isMedicineIDSelected = (medicine) => {
     return paramsPrescription.value.medicines.some(selectedMedicine => selectedMedicine.medicine.id === medicine.id);
 };
 
