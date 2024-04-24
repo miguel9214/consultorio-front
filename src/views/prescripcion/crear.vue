@@ -471,6 +471,8 @@ const selectCodeMedi = (index) =>{
 
     prescriptionDataEdit.value[index].medicine_code = result[0].code;
     prescriptionDataEdit.value[index].dose = result[0].dosage;
+    prescriptionDataEdit.value[index].medicine_name = result[0].name;
+
 }
 
 
