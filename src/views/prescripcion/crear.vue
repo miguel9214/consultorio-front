@@ -279,7 +279,7 @@
                                                                 </a>
                                                                 <a href="javascript:void(0)" data-bs-dismiss="modal">
                                                                     <button type="button" class="btn btn-success"
-                                                                        @click="EditPrescription(prescriptionIds)">Editar</button>
+                                                                        @click="CreatPrescription()">Guardar</button>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -401,52 +401,6 @@ const resetFormData = () => {
 //CREAR PRESCRIPCION
 const discardButton = ref(null);
 
-const createPrescripcion = async () => {
-    errorsClear();
-
-    let has_error = false;
-    Object.entries(paramsPrescription.value).forEach((f) => {
-        const elemento = f[0];
-        const value = f[1];
-        if (value === '') {
-            has_error = true;
-            errors.value[elemento] = 'Este campo es obligatorio';
-        }
-    });
-
-    if (has_error) return;
-
-    try {
-        const prescriptionData = {
-            date_prescription: paramsPrescription.value.date_prescription,
-            medicines: paramsPrescription.value.medicines.map(medicine => ({
-                medicine_id: medicine.medicine.id,
-                dose: medicine.dose,
-                treatment: medicine.treatment,
-                additional_instructions: medicine.additional_instructions
-            })),
-            consultation_id: id.value,
-        };
-
-        await useApi('prescription', 'POST', prescriptionData);
-
-        Swal.fire({
-            title: 'Éxito!',
-            text: 'Prescripción creada correctamente!',
-            icon: 'success',
-            confirmButtonText: '¡Entendido!',
-        }).then((result) => {
-            if (discardButton.value) {
-                discardButton.value.click();
-            }
-            resetFormData();
-            window.location.reload();
-        });
-    } catch (error) {
-        Swal.fire('Error!', 'El medicamento ya ha sido prescrito para esta consulta.', 'error');
-    }
-};
-
 const selectedMedicine = ref([]);
 
 const add_item = () => {
@@ -475,7 +429,6 @@ const selectCodeMedi = (index) =>{
 
 }
 
-
 const remove_item = (index) => {
     paramsPrescription.value.medicines.splice(index, 1);
     selectedMedicine.value.splice(index, 1);
@@ -500,41 +453,38 @@ const viewPrescription = async (prescriptionId) => {
     }
 };
 
-const EditPrescription = async (prescriptionIds) => {
+const CreatPrescription = async () => {
     try {
-        for (const prescriptionId of prescriptionIds) {
-            const prescriptionDataForId = prescriptionDataEdit.value.filter(item => item.prescription_id === prescriptionId);
+        const prescriptionData = {
+            date_prescription: paramsPrescription.value.date_prescription,
+            medicines: prescriptionDataEdit.value.map(item => ({
+                medicine_id: item.medicine_id,
+                dose: item.dose,
+                treatment: item.treatment,
+                additional_instructions: item.additional_instructions
+            })),
+            consultation_id: id.value,
+        };
 
-            const updatedData = {
-                date_prescription: paramsPrescription.value.date_prescription,
-                medicines: prescriptionDataForId.map(item => ({
-                    dose: item.dose,
-                    treatment: item.treatment,
-                    additional_instructions: item.additional_instructions,
-                    prescription_id: item.prescription_id,
-                    consultation_id: item.consultation_id
-                }))
-            };
+        console.log(prescriptionData);
 
-            console.log("Datos actualizados para la ID", prescriptionId + ":", updatedData);
-
-            await useApi('prescription/' + prescriptionId, 'PUT', updatedData);
-        }
+        await useApi('prescription', 'POST', prescriptionData);
 
         Swal.fire({
             title: 'Éxito!',
-            text: '¡Prescripciones editadas correctamente!',
+            text: 'Prescripción creada correctamente!',
             icon: 'success',
             confirmButtonText: '¡Entendido!',
-        }).then(() => {
-            if (discardButton.value) {
-                discardButton.value.click();
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('[data-bs-dismiss="modal"]').click();
+                resetFormData();
+                window.location.reload();
             }
-            resetFormData();
-            window.location.reload();
         });
     } catch (error) {
-        console.error('Error al actualizar las Prescripciones:', error);
+        console.log(error);
+        Swal.fire('Error!', 'El medicamento ya ha sido prescrito para esta consulta.', 'error');
     }
 };
 
