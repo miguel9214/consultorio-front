@@ -35,6 +35,7 @@
     "jspdf-autotable": "^3.5.25",
     "maska": "^1.5.0",
     "path": "^0.12.7",
+    "primevue": "^3.52.0",
     "sweetalert2": "^11.4.17",
     "v-tables-3": "^0.4.7",
     "vue": "^3.2.13",
