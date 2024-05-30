@@ -443,7 +443,6 @@ const viewPrescription = async (prescriptionId) => {
         const { data, message } = await useApi('prescriptionConsultation/' + prescriptionId);
         if (message == 'Prescription found - viewPrescription') {
             prescriptionDataEdit.value = data;
-
             paramsPrescription.value.date_prescription = data[0].date_prescription;
 
             prescriptionIds.value = data.map(item => item.prescription_id);
